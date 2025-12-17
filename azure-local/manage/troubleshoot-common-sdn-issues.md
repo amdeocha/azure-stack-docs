@@ -101,10 +101,9 @@ After you have collected the above information, refer to one of the following sc
 The following command can be used to collect end-to-end trace files for troubleshooting related to a network interface. This command will configure the tracing on the appropriate Gateways, Hosts, and LoadBalancerMuxes that the traffic can be flowing based on your current configuration. Follow the prompts and instructions displayed on screen.
 
 ```powershell
-Get-SdnEnvironmentInfo -NetworkController 'nc01.contoso.com'
-$networkInterface = -NcUri $Global:SdnDiagnostics.EnvironmentInfo.NcUrl -ResourceRef '/networkInterfaces/{NAME}'
+$networkInterface = -NcUri -NcUri 'https://nc.contoso.com' -ResourceRef '/networkInterfaces/{NAME}'
 if ($networkInterface) {
-    $networkInterface | Enable-SdnNetworkInterfaceTrace -NcUri $Global:SdnDiagnostics.EnvironmentInfo.NcUrl
+    $networkInterface | Enable-SdnNetworkInterfaceTrace -NcUri 'https://nc.contoso.com'
 }
 ```
 
@@ -120,10 +119,9 @@ This section addresses scenarios where you encounter the following issues:
 Run the following command to collect trace files for troubleshooting Virtual Gateway:
 
 ```powershell
-Get-SdnEnvironmentInfo -NetworkController 'nc01.contoso.com'
-$networkConnection = Get-SdnResource -NcUri $Global:SdnDiagnostics.EnvironmentInfo.NcUrl -ResourceRef '/virtualGateways/{NAME}/networkConnections/{NAME}'
+$networkConnection = Get-SdnResource -NcUri 'https://nc.contoso.com' -ResourceRef '/virtualGateways/{NAME}/networkConnections/{NAME}'
 if ($networkConnection) {
-    $networkConnection | Enable-SdnNetworkConnectionTrace -NcUri $Global:SdnDiagnostics.EnvironmentInfo.NcUrl
+    $networkConnection | Enable-SdnNetworkConnectionTrace -NcUri -NcUri 'https://nc.contoso.com'
 }
 ```
 
