@@ -54,7 +54,7 @@ If you can access the app, follow the instructions in [Run diagnostic tests](#
 
 ## Investigate a running system from the cloud
 
-If Azure portal shows ready to connect in edge machine, select **Json view**:
+If the Azure portal shows that the edge machine has reached the `Ready to connect` stage, select **Json view**:
 
 :::image type="content" source="media/simplified-machine-provisioning/troubleshooting-investigate-running-system-from-cloud-1.png" alt-text="Screenshot 1 showing how to investigate a running system from the cloud." border="false" lightbox="media/simplified-machine-provisioning/troubleshooting-investigate-running-system-from-cloud-1.png":::
 
@@ -64,17 +64,17 @@ Open the URL in `arcMachineResourceId`, then select **Json view**:
 
 If the client public key is present, it means TO1 is present, but Arc isn't connecting:
 
-1. If Azure portal shows the Arc connection is done and waiting for extension installation, and you want to see the status of the extension installation, you can either:
+1. If the Azure portal shows the Arc connection is done and waiting for extension installation, and you want to see the status of the extension installation, you can either:
 
     - Select the edge machine and select **Json view**.
 
     - Select **Arc** and then the **Extension** tab.
 
-1. If Azure portal shows that extension installation succeeded, you can see the status of OS provisioning with the following URL. Replace the `<PLACEHOLDERS>` with your values.
+1. If the Azure portal shows that the extension installation succeeded, you can see the status of OS provisioning with the following URL. Replace the `<PLACEHOLDERS>` with your values.
 
     `/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/<RESOURCE_GROUP>/providers/Microsoft.AzureStackHCI/edgeMachines/<EDGE_MACHINE_ARM_ID>/jobs/ProvisionOs?api-version=2025-12-01-preview`
 
-1. If the Azure portal shows that provisioning has reached the downloading OS stage, select the edge machine and look at the target Arc resource to see the same behaviors as in the previous steps.
+1. If the Azure portal shows that provisioning has reached the `Downloading OS` stage, select the edge machine and look at the target Arc resource to see the same behaviors as in the previous steps.
 
 ## Maintenance environment known issues
 
@@ -217,4 +217,4 @@ Deleting an edge machine is only blocked when:
 
 In the resource group where you run simplified machine provisioning, there are two hidden resources: a configuration resource, and a resource called the `MOBO broker`. You can't delete the `MOBO broker` resource directly. If you delete the resource group, the `MOBO broker` resource is deleted with it. Also, if you delete the configuration resource, the `MOBO broker` resource is deleted with it.
 
-Be careful when deleting the configuration resource. Deleting the configuration resource brings down devices that haven't yet reached the "ready to cluster" stage. Deleting the configuration resource might also bring down running devices.
+Be careful when deleting the configuration resource. Deleting the configuration resource brings down devices that haven't yet reached the `Ready to cluster` stage. Deleting the configuration resource might also bring down running devices.
