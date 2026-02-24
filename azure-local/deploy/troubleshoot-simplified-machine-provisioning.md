@@ -62,9 +62,9 @@ Open the URL in `arcMachineResourceId`, then select **Json view**:
 
 :::image type="content" source="media/simplified-machine-provisioning/troubleshooting-investigate-running-system-from-cloud-2.png" alt-text="Screenshot 2 showing how to investigate a running system from the cloud." border="false" lightbox="media/simplified-machine-provisioning/troubleshooting-investigate-running-system-from-cloud-2.png":::
 
-If the client public key is present, it means TO1 is present, but Arc isn't connecting:
+If the client public key is present, it means TO1 is present. If Arc isn't connecting:
 
-1. If the Azure portal shows the Arc connection is done and waiting for extension installation, and you want to see the status of the extension installation, you can either:
+1. If the Azure portal shows the Arc connection is done and waiting for extension installation, you can see the status of the extension installation with one of the following methods:
 
     - Select the edge machine and select **Json view**.
 
