@@ -23,7 +23,7 @@ This article describes how to troubleshoot simplified machine provisioning. You 
 
 To diagnose and troubleshoot any device issues related to hardware, time server, and network, you can run the diagnostics tests. Follow these steps to run the diagnostic tests from the app:
 
-1. Select the help icon in the top-right corner of the app to open the **Support + troubleshooting** pane.
+1. Select the help icon in the top-right corner of the app to open **Support + troubleshooting**.
 
 1. Select **Run diagnostic tests**. The diagnostic tests check the health of the server hardware, time server, and the network connectivity. The tests also check the status of the Azure Arc agent and the extensions.
 
@@ -33,7 +33,7 @@ To diagnose and troubleshoot any device issues related to hardware, time server,
 
 A log package is composed of all the relevant logs that can help Microsoft Support troubleshoot any device issues. You can generate a log package via the local web UI. Follow these steps to collect a support package from the app:
 
-1. Select the help icon in the top-right corner of the app to open the **Support + troubleshooting** pane.
+1. Select the help icon in the top-right corner of the app to open **Support + troubleshooting**.
 
 1. Select **Create** to begin support package collection. The package collection could take several minutes.
 
@@ -41,7 +41,7 @@ A log package is composed of all the relevant logs that can help Microsoft Suppo
 
 ## Collect logs from your Azure subscription
 
-If you can't access the machine using Configurator App, you can get the app logs from the server. Access the logs by connecting with SSH for Azure Linux or PowerShell for Azure Stack HCI.
+If you can't access the machine using the Configurator app, you can get the app logs from the server. Access the logs by connecting with SSH for Azure Linux or PowerShell for Azure Stack HCI.
 
 The logs are stored in the following locations:
 
@@ -49,8 +49,6 @@ The logs are stored in the following locations:
 |--|--|
 | Azure Stack HCI | `C:\Windows\System32\Bootstrap\Logs` |
 | Maintenance environment | `/var/log/bootstrap`<br>`/var/log/provisioningextension`<br>`/var/log/trident-full.log`<br>`/var/log/messages`<br>`/var/log/bootstraprestservice` |
-
-If you can access the app, follow the instructions in [Run diagnostic tests](#run-diagnostic-tests-from-the-configurator-app) to troubleshoot the issue and then [Collect a support package](#collect-a-support-package-from-the-app) if needed.
 
 ## Investigate a running system from the cloud
 
@@ -62,7 +60,8 @@ Open the URL in `arcMachineResourceId`, then select **Json view**:
 
 :::image type="content" source="media/simplified-machine-provisioning/troubleshooting-investigate-running-system-from-cloud-2.png" alt-text="Screenshot 2 showing how to investigate a running system from the cloud." border="false" lightbox="media/simplified-machine-provisioning/troubleshooting-investigate-running-system-from-cloud-2.png":::
 
-If the client public key is present, it means TO1 is present. If Arc isn't connecting:
+TODO1: What is TO1? What should the user do if the client public key isn't present?
+If the client public key is present, it means TO1 is present. If Arc still isn't connecting:
 
 1. If the Azure portal shows the Arc connection is done and waiting for extension installation, you can see the status of the extension installation with one of the following methods:
 
@@ -80,7 +79,7 @@ If the client public key is present, it means TO1 is present. If Arc isn't conne
 
 **Problem:** The USB Boot enters an infinite USB boot sequence if the BIOS Settings `Boot USB Devices First` is set on the Next Unit of Computing (NUC).
 
-### Cause
+**Cause:**
 
 When the BIOS setting `Boot USB Devices First` is enabled on the NUC, the system enters an infinite USB boot cycle.
 This setting overrides the configured boot order and always prioritizes booting from any connected USB device. As a result, even after the remote operations environment (ROE) is successfully installed, subsequent reboots continue to boot from the USB media instead of the internal disk.
@@ -93,7 +92,7 @@ This behavior causes a continuous boot loop in which the device repeatedly:
 
 From the customer’s perspective, the device appears to be in an infinite cycle of installation and reboot, which occurs approximately every 10 minutes.
 
-### Recommendation
+**Recommendation:**
 
 Disable the `Boot USB Devices First` BIOS option (or the equivalent setting, depending on the hardware model and BIOS version).
 
@@ -151,17 +150,23 @@ If the policy concerns resource groups having tags or being created in a specifi
 
 ## Edge machine creation fails
 
-**Error:** `StorageAccountForbidden`
-**Cause:** Your storage account creation policy doesn't support simplified machine provisioning, or you didn't register the `Microsoft.Storage` resource provider.
-**Recommendation:** Register the resource provider as described in the [prerequisites](simplified-machine-provisioning#azure-prerequisites).
+- **Error:** `StorageAccountForbidden`
 
-**Error:** `DeviceOnboardingConflict`
-**Cause:** The feature registration is missing, or you didn't register the `Microsoft.OnboardingService` resource provider.
-**Recommendation:** Register the resource provider as described in the [prerequisites](simplified-machine-provisioning#azure-prerequisites).
+  **Cause:** Your storage account creation policy doesn't support simplified machine provisioning, or you didn't register the `Microsoft.Storage` resource provider.
 
-**Error:** `UpdateArcSettingDataFailed`
-**Cause:** You didn't register the `Microsoft.HybridCompute` resource provider.
-**Recommendation:** Register the resource provider as described in the [prerequisites](simplified-machine-provisioning#azure-prerequisites).
+  **Recommendation:** Register the resource provider as described in the [prerequisites](simplified-machine-provisioning#azure-prerequisites).
+
+- **Error:** `DeviceOnboardingConflict`
+
+  **Cause:** The feature registration is missing, or you didn't register the `Microsoft.OnboardingService` resource provider.
+
+  **Recommendation:** Register the resource provider as described in the [prerequisites](simplified-machine-provisioning#azure-prerequisites).
+
+- **Error:** `UpdateArcSettingDataFailed`
+
+  **Cause:** You didn't register the `Microsoft.HybridCompute` resource provider.
+
+  **Recommendation:** Register the resource provider as described in the [prerequisites](simplified-machine-provisioning#azure-prerequisites).
 
 For any of the previously described errors, or for other errors, delete the edge machine and try to create it again. If that doesn't work, contact support. When you contact support, please provide the activity log of the edge machine resource group and the managed resource group if possible. For more information, see [Run diagnostic tests](#run-diagnostic-tests-from-the-configurator-app), [Collect a support package from the app](#collect-a-support-package-from-the-app) and [Collect logs from your Azure subscription](#collect-logs-from-your-azure-subscription).
 
@@ -179,35 +184,35 @@ To retry OS provisioning:
 
 1. Open **Json view** and record the Json.
 
-:::image type="content" source="media/simplified-machine-provisioning/troubleshooting-reattempt-failed-os-provisioning.png" alt-text="Screenshot showing how to reattempt a failed OS provisioning." border="false" lightbox="media/simplified-machine-provisioning/troubleshooting-reattempt-failed-os-provisioning.png":::
+    :::image type="content" source="media/simplified-machine-provisioning/troubleshooting-reattempt-failed-os-provisioning.png" alt-text="Screenshot showing how to reattempt a failed OS provisioning." border="false" lightbox="media/simplified-machine-provisioning/troubleshooting-reattempt-failed-os-provisioning.png":::
 
 1. Make a `PUT` request with the modified URL. Replace the `<PLACEHOLDERS>` with your values.
 
-`PUT /subscriptions/<SUBSCRIPTION_ID>/resourceGroups/<RESOURCE_GROUP>/providers/Microsoft.AzureStackHCI/edgeMachines/<MACHINE_NAME>/jobs/ProvisionOs?api-version=2025-12-01-preview`
+    `PUT /subscriptions/<SUBSCRIPTION_ID>/resourceGroups/<RESOURCE_GROUP>/providers/Microsoft.AzureStackHCI/edgeMachines/<MACHINE_NAME>/jobs/ProvisionOs?api-version=2025-12-01-preview`
 
-In the content, copy only the `osProfile` and `userDetails` objects.
+    In the content, copy only the `osProfile` and `userDetails` objects.
 
-```json
-{
-  "properties": {
-    "provisioningRequest": {
-      "osProfile": {
-        "osName": "AzureLinux",
-        "osType": "AzureLinux",
-        "osVersion": "3.0",
-        "osImageLocation": "https://aka.ms/aep/sff/azurelinux/2602a",
-        "operationType": "Provision"
-      },
-      "userDetails": [
-        {
-          "userName": "clouduser",
-          "secretType": "SshPubKey",
-          "sshPubKey": ["ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDmMokuQD0b4USnkLA9baVQftdpMKYDunqYiom6qeeNF6Ch2bdw458wKv7qIq4BWFJ5TVBSc2CRhQ2BC0WvokWMvEnOrsi1BLkX0toGBo+P7xTGPxZQrR8iFBkQqa0m1N/wCDMoaghDIdBQmGC6CVuheM5ZF3GDJ9GLzVXwTbhw4/bi9AhGyVyibL+9KjgXzZZOi4OpAxeZyu82ergbxK0Zxqj5dUdV9UeIb8BNEbl6gNP75Y9sysvfbSuomFyIUYb8gD1dCsDBZM54hLolQVF8EzAot1B+pNkDq51Dgos8Tyya94XFd6prCX+wAbRgDHIGN3OgpntQCxR5jseC5ZEBlRUUigl+XOcefAD/6ILc1V4/RV5hAdkK7dHh1IyfQM5sm3hrr/QloZ4a+5RHuuj5U/9sbKv5vLCLi0vcZjm3XrQOpsnvSVLuvpXjZV3LHiuL4W/1ATY+pncTOrwI1q0z5ccEAz1aFRUfjz9heLjBD2v4Ye/O7Lmalspt8lBNTA0= generated-by-azure"]
+    ```json
+    {
+      "properties": {
+        "provisioningRequest": {
+          "osProfile": {
+            "osName": "AzureLinux",
+            "osType": "AzureLinux",
+            "osVersion": "3.0",
+            "osImageLocation": "https://aka.ms/aep/sff/azurelinux/2602a",
+            "operationType": "Provision"
+          },
+          "userDetails": [
+            {
+              "userName": "clouduser",
+              "secretType": "SshPubKey",
+              "sshPubKey": ["ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDmMokuQD0b4USnkLA9baVQftdpMKYDunqYiom6qeeNF6Ch2bdw458wKv7qIq4BWFJ5TVBSc2CRhQ2BC0WvokWMvEnOrsi1BLkX0toGBo+P7xTGPxZQrR8iFBkQqa0m1N/wCDMoaghDIdBQmGC6CVuheM5ZF3GDJ9GLzVXwTbhw4/bi9AhGyVyibL+9KjgXzZZOi4OpAxeZyu82ergbxK0Zxqj5dUdV9UeIb8BNEbl6gNP75Y9sysvfbSuomFyIUYb8gD1dCsDBZM54hLolQVF8EzAot1B+pNkDq51Dgos8Tyya94XFd6prCX+wAbRgDHIGN3OgpntQCxR5jseC5ZEBlRUUigl+XOcefAD/6ILc1V4/RV5hAdkK7dHh1IyfQM5sm3hrr/QloZ4a+5RHuuj5U/9sbKv5vLCLi0vcZjm3XrQOpsnvSVLuvpXjZV3LHiuL4W/1ATY+pncTOrwI1q0z5ccEAz1aFRUfjz9heLjBD2v4Ye/O7Lmalspt8lBNTA0= generated-by-azure"]
+            }
+          ],
         }
-      ],
     }
-}
-```
+    ```
 
 ## Clean up resources
 
