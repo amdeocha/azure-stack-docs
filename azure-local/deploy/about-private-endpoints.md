@@ -18,7 +18,9 @@ A private endpoint for Azure Local is a network interface that uses a private IP
 
 ## Supported private endpoint scenarios
 
-Azure Local infrastructure (including the nodes and the Arc resource bridge VM) supports many [Azure private endpoint types](/azure/private-link/private-endpoint-overview), but Azure Arc Private Link is not supported. Because of this, Azure Local always registers with Azure Arc using public Arc endpoints. For more information, see [Use Azure Private Link to Connect Servers to Azure Arc by Using a private endpoint](/azure/azure-arc/servers/private-link-security) and [Troubleshoot Azure Arc resource bridge issues]().
+Azure Local infrastructure (including the nodes and the Arc resource bridge VM) supports many [Azure private endpoint types](/azure/private-link/private-endpoint-overview), but Azure Arc Private Link is not supported. Because of this, Azure Local always registers with Azure Arc using public Arc endpoints. 
+
+For more information, see [Use Azure Private Link to Connect Servers to Azure Arc by Using a private endpoint](/azure/azure-arc/servers/private-link-security) and [Troubleshoot Azure Arc resource bridge issues]().
 
 The following table summarizes key points for using supported private endpoints with Azure Local.
 
@@ -31,11 +33,22 @@ The following table summarizes key points for using supported private endpoints 
 
 ### DNS requirements
 
-If you're already using Azure Arc private link scope for Arc for servers and your corporate DNS is already resolving Arc private endpoints, you must use a different DNS server for Azure Local infrastructure to ensure it always resolves public Arc endpoints.
+Azure Local infrastructure must always resolve Azure Arc endpoints to public IP addresses. Azure Arc Private Link is not supported for Azure Local nodes or the Arc resource bridge VM.
 
-For example, if name resolution for these two endpoints (**gbl.his.arc.azure.com** and **agentserviceapi.guestconfiguration.azure.com**) returns a private IP address from any of these ranges (10.x.x.x, 192.168.x.x, or 172.16.x.x) on the Azure Local nodes or the enterprise proxy, it means Azure Arc Private Link DNS resolution is enabled and isn't supported.
+- If your organization uses Azure Arc Private Link elsewhere, Azure Local must use separate DNS servers that do not resolve Arc endpoints to private IPs.
 
-If you intend to use private endpoints for services such as Key Vaults, Storage Accounts, SQL, Azure Container Registry, or other PaaS offerings alongside Azure Local, make sure that your DNS infrastructure resolves the PaaS FQDN to an internal IP address, and your network correctly routes traffic. Traffic is directed either to the public internet for public endpoints or through Azure ExpressRoute/Site-to-Site (S2S) VPN for private endpoints, according to its destination.
+    - **Required public DNS resolution**: The following Azure Arc endpoints must resolve to public IP addresses on Azure Local nodes and any enterprise proxy:
+
+        - `gbl.his.arc.azure.com`
+        - `agentserviceapi.guestconfiguration.azure.com`
+
+    - **Resolution to private IP ranges**: Private IP ranges (10.x.x.x, 192.168.x.x, 172.16.x.x) aren't supported.
+
+- **DNS for Azure PaaS services** - Private endpoints for services such as Key Vaults, Storage Accounts, SQL, Azure Container Registry, or other PaaS offerings alongside Azure Local are supported.
+    - DNS infrastructure must resolve the PaaS service FQDN to an internal IP address.
+    - Network routing must correctly direct traffic as per the destination:
+        -  To the public internet for public endpoints.
+        -  Through Azure ExpressRoute/Site-to-Site (S2S) VPN for private endpoints.
 
 ### Support for Azure Local VMs and Arc Private Link
 
