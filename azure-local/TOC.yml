@@ -105,7 +105,17 @@ items:
     - name: Review Azure Arc gateway for Azure Local
       href: deploy/deployment-azure-arc-gateway-overview.md
     - name: Review Azure Private Endpoints for Azure Local
-      href: deploy/about-private-endpoints.md
+      items:
+      - name: About private endpoint scenarios
+        href: deploy/about-private-endpoints.md
+      - name: Private endpoints - no proxy, no gateway
+        href: deploy/deployment-private-endpoints-no-proxy-no-gateway.md
+      - name: Private endpoints - no proxy, with gateway
+        href: deploy/deployment-private-endpoints-no-proxy-with-gateway.md
+      - name: Private endpoints - with proxy, no gateway
+        href: deploy/deployment-private-endpoints-with-proxy-no-gateway.md
+      - name: Private endpoints - with proxy, with gateway
+        href: deploy/deployment-private-endpoints-with-proxy-with-gateway.md
     - name: Review cloud deployment network considerations
       href: plan/cloud-deployment-network-considerations.md
     - name: Review security
