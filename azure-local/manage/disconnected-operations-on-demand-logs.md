@@ -4,7 +4,7 @@ description: Learn how to use the PowerShell module to collect logs on-demand wi
 ms.topic: how-to
 author: ronmiab
 ms.author: robess
-ms.date: 02/23/2026
+ms.date: 03/02/2026
 ai-usage: ai-assisted
 ms.service: azure-local
 ms.subservice: hyperconverged
@@ -305,6 +305,8 @@ Before you collect logs in a disconnected operations scenario, make sure you:
 
 1. After collection, review the logs locally or upload them to Microsoft with the [`Send-DiagnosticData`](#send-diagnosticdata) cmdlet.
 
+1. Optional. If the `Send-DiagnosticData` command fails or is interrupted, use the [`Clear-DiagnosticPipeline`](#clear-diagnosticpipeline) cmdlet.
+
 ## Log collection methods
 
 ### Direct collection (connected to Azure)
@@ -356,6 +358,7 @@ This cmdlet requires:
 
 - Subscription details: *ResourceGroupName*, *SubscriptionId*, *TenantId*, and *RegistrationRegion*.
 - Credentials: Either through manual sign-in or by providing the appropriate *service principal* and *password*.
+- Automatically performs uninstallation and artifact cleanup upon success.
 
 Review the [Set up observability for diagnostics and support](#set-up-observability-for-diagnostics-and-support) section for steps to create the *resource group* and *service principal* required to upload logs.
 
@@ -400,6 +403,39 @@ Here are some examples of how to use the `Send-DiagnosticData` cmdlet.
     ```PowerShell
     Send-DiagnosticData -ResourceGroupName <String> -SubscriptionId <String> -TenantId <String> -RegistrationWithCredential <PSCredential> -RegistrationRegion <String> [-Cloud <String>] -DiagnosticLogPath <String> [-ObsRootFolderPath <String>] [-StampId <Guid>] [<CommonParameters>]
     ```
+
+#### Clear-DiagnosticPipeline
+
+If `Send-DiagnosticData` execution fails or is interrupted due to a partial installation, unclean setup, or Ctrl+C cancellation, use the `Clear-DiagnosticPipeline` cmdlet to clean up or remove the pipeline.
+
+This cmdlet:
+
+- Is required only when the automatic cleanup fails or is interrupted.
+- Uses the same authentication method as the original `Send-DiagnosticData` call for uninstallation.
+
+> [!NOTE]
+> If you have an Arc for Server agent connected before running `Send-DiagnosticData`, use the `-SkipArcForServer` parameter to preserve your pre-existing Arc connection.
+
+#### Clear-DiagnosticPipeline cmdlet examples
+
+- To import the module, run this command:
+
+    ```PowerShell
+    # Import-Module ApplianceFallbackLogging
+    Clear-DiagnosticPipeline `
+        -SubscriptionId "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" `
+        -TenantId "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    ```
+
+- To preserve a pre-existing Arc agent connection, run this command:
+
+    ```PowerShell
+    # Import-Module ApplianceFallbackLogging
+    Clear-DiagnosticPipeline `
+        -SubscriptionId "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" `
+        -TenantId "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" `
+        -SkipArcForServer
+
 
 ## Monitor log collection
 
