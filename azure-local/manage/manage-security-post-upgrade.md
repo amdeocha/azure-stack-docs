@@ -84,40 +84,13 @@ A new deployment of Azure Local introduces two baselines documents injected by t
     > [!NOTE]
     > Microsoft tests and vaildates the Azure Local security settings. We strongly recommend that you keep these settings. Use of custom settings can potentially lead to system instability, incompatibility with new product scenarios, and could require extensive testing and troubleshooting on your part.
 
-1. Run the following commands.
+1. When running the following commands, you'll find the documents aren't in place. These cmdlets won't return any output.
 
     ```powershell
     Get-ASOSConfigSecuredCoreDoc
     Get-ASOSConfigSecuritySettingsDoc
     Get-AzSOSConfigDefenderAVDoc
     ```
-
-    These commands return the OS configuration documents for `DefenderAntivirus`, `SecuredCore`, and `SecurityBaseline`, in 24H2 format. If there are no configuration documents, these commands return empty values.
-
-    The following table shows a partial example output from `Get-AzSOSConfigSecuritySettingsDoc`.
-
-    |Name|Value|
-    |--|--|
-    |AfdDisableAddressSharing|`1`|
-    |AllowAnonymousSIDOrNameTranslation|`0`|
-    |AllowCustomSSPAPIntoLSASS|`1`|
-    |AllowedToFormatAndEjectRemovableMedia|`0`|
-
-    The following table shows a partial example output from `Get-AzSOSConfigSecuredCoreDoc`.
-
-    |Name|Value|
-    |--|--|
-    |ConfigureSystemGuardLaunch|`2`|
-    |EnableVirtualizationBasedSecurity|`1`|
-    |HypervisorEnforcedCodeIntegrity|`0`|
-
-    The following table shows a partial example output from `Get-AzSOSConfigDefenderAVDoc`.
-
-    |Name|Value|
-    |--|--|
-    |AllowDatagramProcessingOnWinServer|`0`|
-    |AllowNetworkProtectionOnWinServer|`1`|
-    |ASRBlockAbuseOfExploitedVulnerableSignedDrivers|`1`|
 
 1. To enable the baselines, go to each of the nodes you upgraded. Run the following commands locally or remotely using a privileged administrator account:
 
@@ -134,6 +107,8 @@ A new deployment of Azure Local introduces two baselines documents injected by t
 ### Confirm the status of the security baselines
 
 After rebooting, rerun the following cmdlets to confirm the status of security baselines:
+
+# [Version 23H2](#tab/23h2)
 
 ```powershell
 Get-ASOSConfigSecuredCoreDoc
@@ -152,6 +127,43 @@ OsConfiguration": {
 "context": "device",
 "scenario": "ApplianceSecurityBaselineConfig"
 ```
+
+# [Version 24H2](#tab/24h2)
+
+```powershell
+Get-ASOSConfigSecuredCoreDoc
+Get-ASOSConfigSecuritySettingsDoc
+Get-AzSOSConfigDefenderAVDoc
+```
+
+You get an output for each cmdlet with baseline information.
+
+The following table shows a partial example output from `Get-AzSOSConfigSecuritySettingsDoc`:
+
+|Name|Value|
+|--|--|
+|AfdDisableAddressSharing|`1`|
+|AllowAnonymousSIDOrNameTranslation|`0`|
+|AllowCustomSSPAPIntoLSASS|`1`|
+|AllowedToFormatAndEjectRemovableMedia|`0`|
+
+The following table shows a partial example output from `Get-AzSOSConfigSecuredCoreDoc`:
+
+|Name|Value|
+|--|--|
+|ConfigureSystemGuardLaunch|`2`|
+|EnableVirtualizationBasedSecurity|`1`|
+|HypervisorEnforcedCodeIntegrity|`0`|
+
+The following table shows a partial example output from `Get-AzSOSConfigDefenderAVDoc`:
+
+|Name|Value|
+|--|--|
+|AllowDatagramProcessingOnWinServer|`0`|
+|AllowNetworkProtectionOnWinServer|`1`|
+|ASRBlockAbuseOfExploitedVulnerableSignedDrivers|`1`|
+
+---
 
 ### Enable encryption at-rest
 
