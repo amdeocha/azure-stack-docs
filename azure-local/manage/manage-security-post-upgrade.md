@@ -194,7 +194,7 @@ For new deployments, Application Control is enabled in *Enforced* mode (blocking
     > [!WARNING]
     > Failure to create the necessary AppControl policies to enable non-Microsoft software may prevent that software from running.
 
-For instructions to enable in *Enforced* mode, see [Manage Windows Defender Application Control for Azure Local](./manage-wdac.md#switch-application-control-policy-modes).
+For instructions to enable in *Enforced* mode, see [Manage Application Control for Azure Local](./manage-wdac.md#switch-application-control-policy-modes).
 
 ## Next steps
 
