@@ -80,7 +80,7 @@ TODO1: Engineering: The BIOS screenshot provided in the engineering TSG is for S
 
 **Cause:** The resource provider registration for `Microsoft.AzureStackHCI` is missing.
 
-**Recommendation:** Register the resource provider as described in the [prerequisites](simplified-machine-provisioning#azure-prerequisites).
+**Recommendation:** Register the resource provider as described in the [prerequisites](simplified-machine-provisioning.md#azure-prerequisites).
 
 ## When you provision new machines, ARM template validation fails
 
@@ -124,7 +124,7 @@ TODO1: Engineering: Can you please provide more details on the potential issues 
 
 **Recommendation:**
 
-1. Register the resource provider as described in the [prerequisites](simplified-machine-provisioning#azure-prerequisites).
+1. Register the resource provider as described in the [prerequisites](simplified-machine-provisioning.md#azure-prerequisites).
 
 1. Delete the provisioned machine and create it again.
 
@@ -134,7 +134,7 @@ TODO1: Engineering: Can you please provide more details on the potential issues 
 
 **Recommendation:**
 
-1. Register the `MachineProvision` feature and required resource providers as described in the [prerequisites](simplified-machine-provisioning#azure-prerequisites).
+1. Register the `MachineProvision` feature and required resource providers as described in the [prerequisites](simplified-machine-provisioning.md#azure-prerequisites).
 
 1. Delete the provisioned machine and create it again.
 
@@ -144,7 +144,7 @@ TODO1: Engineering: Can you please provide more details on the potential issues 
 
 **Recommendation:**
 
-1. Register the resource provider as described in the [prerequisites](simplified-machine-provisioning#azure-prerequisites).
+1. Register the resource provider as described in the [prerequisites](simplified-machine-provisioning.md#azure-prerequisites).
 
 1. Delete the provisioned machine and create it again.
 
