@@ -298,7 +298,7 @@ Before you collect logs in a disconnected operations scenario, make sure you:
 
     After you save logs from both the appliance and host nodes to a shared location, upload them with the standalone observability tool. There are product specific wrappers around **Microsoft.AzureStack.Observability.Standalone**.
 
-    - Appliance logs: Upload logs collected from the appliance VM by using the `Send-DiagnosticData` cmdlet from the disconnected operations for Azure Local PowerShell module. 
+    - Appliance logs: Upload logs collected from the appliance VM by using the `Send-DiagnosticData` cmdlet from the disconnected operations for Azure Local PowerShell module.
     - Host node logs: Upload logs collected from the Azure Local host nodes by using the `Send-AzStackHciDiagnosticData` cmdlet. For more information, see [Get support for Azure Local deployment issues](../manage/get-support-for-deployment-issues.md).
 
 1. After collection, review the logs locally or upload them to Microsoft with the [`Send-DiagnosticData`](#send-diagnosticdata) cmdlet.
@@ -347,6 +347,15 @@ Capabilities:
 - Saves logs locally only when you use the `-SaveToPath` parameter.
   - Appliance logs are saved to `<SaveToPath>\ALDO`.
   - Host node logs are saved to `<SaveToPath>\AzureLocal`.
+  
+    Example of the log output structure:
+
+    ```console
+    <SaveToPath>\
+    ├── AzureLocal\    # Logs from Azure Local cluster nodes
+    └── ALDO\          # Logs from ALDO disconnected operations infrastructure
+    ```
+
 - Uses the `SkipAldoLogCollection` parameter to collect logs only from Azure Local host nodes and skip the disconnected operations control plane.
 - Supports secure credentials to save logs to a network share.
 
