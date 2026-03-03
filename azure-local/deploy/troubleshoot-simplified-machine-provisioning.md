@@ -70,7 +70,7 @@ From the customer’s perspective, the device appears to be in an infinite cycle
 
 Disable the `Boot USB Devices First` BIOS option (or the equivalent setting, depending on the hardware model and BIOS version).
 
-TODO1: Engineering: The BIOS screenshot provided in the engineering TSG is for SFF devices; can we please get one for supported Azure Local hardware? dsarkar is working on this.
+TODO1: dsarkar is working on getting a BIOS screenshot for supported Azure Local hardware. For now, leave screenshot out.
 
 ## Operating system image drop down is empty
 
@@ -118,7 +118,7 @@ TODO1: anbacker: I reworded these but please feel free to reword further.
 
 ## Provisioned machine creation fails with the error message "StorageAccountForbidden"
 
-TODO1: Engineering: Can you please provide more details on the potential issues with storage account creation policies? anbacker is working on this.
+TODO1: anbarker will provide more details on the potential issues with storage account creation policies.
 
 **Cause:** Your storage account creation policy doesn't support simplified machine provisioning, or you didn't register the `Microsoft.Storage` resource provider.
 
@@ -159,8 +159,6 @@ To retry OS provisioning:
 1. Browse to [Azure Cloud shell](https://shell.azure.com).
 
 1. Azure prompts you to choose Bash or PowerShell if you haven’t selected a default yet. It might also prompt you to create or select a storage account to persist your Cloud Shell files.
-
-TODO1: Engineering: Does the typical customer know to open a text editor like nano, paste this in, edit it, save the file, and run it with `bash` or else set execute permissions on it? Also note we don't actually take command line arguments like that usage string implies, so we might want to instead say "please set these variables"?
 
 1. Create and run the following Bash script. Replace the `<PLACEHOLDERS>` with your values.
 
