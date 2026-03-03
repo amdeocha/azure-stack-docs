@@ -5,7 +5,7 @@ author: alkohli
 ms.author: alkohli
 ms.topic: how-to
 ms.service: azure-local
-ms.date: 02/19/2025
+ms.date: 03/03/2025
 ms.subservice: hyperconverged
 ---
 
@@ -56,12 +56,14 @@ A new deployment of Azure Local introduces two baselines documents injected by t
     > [!NOTE]
     > Microsoft tests and vaildates the Azure Local security settings. We strongly recommend that you keep these settings. Use of custom settings can potentially lead to system instability, incompatibility with new product scenarios, and could require extensive testing and troubleshooting on your part.
 
-1. When running the following commands, you'll find the documents aren't in place. These cmdlets won't return any output.
+1. When running the following commands, you'll find the documents aren't in place. These cmdlets don't return any output.
 
     ```powershell
     Get-ASOSConfigSecuredCoreDoc
     Get-ASOSConfigSecuritySettingsDoc
     ```
+
+    If the cmdlets do return output, the documents are already in place and you can stop here.
 
 1. To enable the baselines, go to each of the nodes you upgraded. Run the following commands locally or remotely using a privileged administrator account:
 
@@ -70,7 +72,7 @@ A new deployment of Azure Local introduces two baselines documents injected by t
     Start-AzSSecuredCoreConfiguration
     ```
 
-1. Reboot the nodes in a proper sequence for the new settings to become effective.
+1. Reboot the nodes in a proper sequence for the new settings to become effective. For more information, see [Suspend and resume Azure Local machines for maintenance](/azure/azure-local/manage/suspend-resume-cluster-maintenance).
 
 # [Version 24H2](#tab/24h2)
 
@@ -84,13 +86,15 @@ A new deployment of Azure Local introduces two baselines documents injected by t
     > [!NOTE]
     > Microsoft tests and vaildates the Azure Local security settings. We strongly recommend that you keep these settings. Use of custom settings can potentially lead to system instability, incompatibility with new product scenarios, and could require extensive testing and troubleshooting on your part.
 
-1. When running the following commands, you'll find the documents aren't in place. These cmdlets won't return any output.
+1. When running the following commands, you'll find the documents aren't in place. These cmdlets don't return any output.
 
     ```powershell
     Get-ASOSConfigSecuredCoreDoc
     Get-ASOSConfigSecuritySettingsDoc
     Get-AzSOSConfigDefenderAVDoc
     ```
+
+    If the cmdlets do return output, the documents are already in place and you can stop here.
 
 1. To enable the baselines, go to each of the nodes you upgraded. Run the following commands locally or remotely using a privileged administrator account:
 
@@ -100,7 +104,7 @@ A new deployment of Azure Local introduces two baselines documents injected by t
     Start-AzSDefenderAntivirusConfiguration
     ```
 
-1. Reboot the nodes in a proper sequence for the new settings to become effective.
+1. Reboot the nodes in a proper sequence for the new settings to become effective. For more information, see [Suspend and resume Azure Local machines for maintenance](/azure/azure-local/manage/suspend-resume-cluster-maintenance).
 
 ---
 
