@@ -223,7 +223,7 @@ Before you collect logs in a disconnected operations scenario, make sure you:
     # Replace with your actual values
     $certPassword = Read-Host -AsSecureString "Management endpoint client certificate password"
     $context = Set-DisconnectedOperationsClientContext -ManagementEndpointClientCertificatePath "<Management Endpoint Client Cert Path>" -ManagementEndpointClientCertificatePassword $certPassword -ManagementEndpointIpAddress "<Management Endpoint IP address>"
-        ```
+    ```
 
 1. Create a share. Run this command:
 
