@@ -98,7 +98,7 @@ TODO1: dsarkar is working on getting a BIOS screenshot for supported Azure Local
 
 :::image type="content" source="media/simplified-machine-provisioning/troubleshooting-initial-creation-failure-4.png" alt-text="Screenshot showing an internal server error on site default." border="false" lightbox="media/simplified-machine-provisioning/troubleshooting-initial-creation-failure-4.png":::
 
-TODO1: anbacker: I reworded these but please feel free to reword further.
+TODO1: anbacker: I reworded these but please feel free to reword further when you have time.
 
 **Causes:** This can have one of the following causes:
 
@@ -118,7 +118,7 @@ TODO1: anbacker: I reworded these but please feel free to reword further.
 
 ## Provisioned machine creation fails with the error message "StorageAccountForbidden"
 
-TODO1: anbarker will provide more details on the potential issues with storage account creation policies.
+TODO1: anbarker will provide more details on the potential issues with storage account creation policies when time permits.
 
 **Cause:** Your storage account creation policy doesn't support simplified machine provisioning, or you didn't register the `Microsoft.Storage` resource provider.
 
@@ -253,7 +253,7 @@ To retry OS provisioning:
 
 You can attempt to delete the provisioned machine resource at any time. Deleting the resource also deletes related objects, such as resources under the managed resource group.
 
-TODO1: Engineering: Can you please review this section? Is this useful to customers? If not, I'll remove it.
+TODO1: Engineering: Can you please review this section? Is this useful to customers? If not, I'll remove it. For now I could just remove it and we could revise later.
 
 In the resource group where you run simplified machine provisioning, there are two hidden resources: a configuration resource, and a resource called the `MOBO broker`. You can't delete the `MOBO broker` resource directly. If you delete the resource group, the `MOBO broker` resource is deleted with it. Also, if you delete the configuration resource, the `MOBO broker` resource is deleted with it.
 
