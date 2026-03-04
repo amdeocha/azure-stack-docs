@@ -97,7 +97,36 @@ To view the properties of a specific snapshot, run the following command:
 ```azurecli
 az stack-hci-vm snapshot show --resource-group <resource-group> --name <snapshot-name>
 ```
-
+Sample output:
+```bash
+{
+  "extendedLocation": {
+    "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/app-snapshots-HostedResources/providers/Microsoft.ExtendedLocation/customLocations/app-snapshots-cstm-loc",
+    "type": "CustomLocation"
+  },
+  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/app-snapshots/providers/Microsoft.AzureStackHCI/snapshots/staticweb01",
+  "location": "eastus",
+  "name": "staticweb01",
+  "properties": {
+    "creationData": {
+      "createOption": "Copy",
+      "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/app-snapshots/providers/Microsoft.AzureStackHCI/virtualHardDisks/staticweb01-osdisk"
+    },
+    "provisioningState": "Succeeded"
+  },
+  "systemData": {
+    "createdAt": "2026-02-24T23:13:07.6240709Z",
+    "createdBy": "user@contoso.com",
+    "createdByType": "User",
+    "lastModifiedAt": "2026-02-26T18:58:48.0421777Z",
+    "lastModifiedBy": "user@contoso.com",
+    "lastModifiedByType": "User"
+  },
+  "tags": {
+    "test": "copilot-tag"
+  },
+  "type": "microsoft.azurestackhci/snapshots"
+}
 ## Update snapshot tags
 
 After a snapshot is created, only its tags can be updated. Use tags to organize and categorize your snapshots.
