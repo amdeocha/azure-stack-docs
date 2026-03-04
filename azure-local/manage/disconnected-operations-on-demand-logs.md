@@ -112,7 +112,7 @@ Before you collect logs in a disconnected operations scenario, make sure you:
 1. Install the Azure Local module required for log collection.
 
     ```PowerShell
-    Import-Module "<disconnected operations module folder path>\AzureLocal.Orchestration.psd1" -Force
+    Import-Module "<Azure Local module folder path>\AzureLocal.Orchestration.psd1" -Force
     ```
 
     Example output:
@@ -234,7 +234,7 @@ Before you collect logs in a disconnected operations scenario, make sure you:
 1. Install the Azure Local module required for log collection.
 
     ```PowerShell
-    Import-Module "<disconnected operations module folder path>\AzureLocal.Orchestration.psd1" -Force
+    Import-Module "<Azure Local module folder path>\AzureLocal.Orchestration.psd1" -Force
     ```
 
     Example output:
