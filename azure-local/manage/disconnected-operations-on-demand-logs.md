@@ -118,8 +118,8 @@ Before you collect logs in a disconnected operations scenario, make sure you:
     Example output:
 
     ```console
-    PS C:\Users\administrator.s46r2004\Documents> Import-Module     
-    "Q:\AzureLocalVHD\Azurelocal.Orchestration\AzureLocal.Orchestration.psd1" -Force
+    PS G:\azurelocal> Import-Module .\AzureLocal.Orchestration\AzureLocal.Orchestration.psd1
+    PS G:\azurelocal> get-command | ? {$_.source -match "AzureLocal.Orchestration"}
 
     CommandType        Name                                              Version        Source
     -----------        ----                                              -------        ------
@@ -240,8 +240,8 @@ Before you collect logs in a disconnected operations scenario, make sure you:
     Example output:
 
     ```console
-    PS C:\Users\administrator.s46r2004\Documents> Import-Module     
-    "Q:\AzureLocalVHD\Azurelocal.Orchestration\AzureLocal.Orchestration.psd1" -Force
+    PS G:\azurelocal> Import-Module .\AzureLocal.Orchestration\AzureLocal.Orchestration.psd1
+    PS G:\azurelocal> get-command | ? {$_.source -match "AzureLocal.Orchestration"}
 
     CommandType        Name                                              Version        Source
     -----------        ----                                              -------        ------
