@@ -109,6 +109,24 @@ Before you collect logs in a disconnected operations scenario, make sure you:
     VERBOSE: See Readme.md for directions on how to use this module.
     ```
 
+1. Install the Azure Local module required for log collection.
+
+    ```PowerShell
+    Import-Module "<disconnected operations module folder path>\AzureLocal.Orchestration.psd1" -Force
+    ```
+
+    Example output:
+
+    ```console
+    PS C:\Users\administrator.s46r2004\Documents> Import-Module     
+    "Q:\AzureLocalVHD\Azurelocal.Orchestration\AzureLocal.Orchestration.psd1" -Force
+
+    CommandType        Name                                              Version        Source
+    -----------        ----                                              -------        ------
+    Function           Invoke-AzureLocalDisconnectedLogCollection        2602.1....    AzureLocal.Orchestration
+    Function           Invoke-AzureLocalEnvironmentValidation            2602.1....    AzureLocal.Orchestration
+    ```
+
 1. Use [Deploy disconnected operations for Azure Local](disconnected-operations-deploy.md) for your management endpoint.
 
     - Identify your management endpoint IP address.
@@ -211,6 +229,24 @@ Before you collect logs in a disconnected operations scenario, make sure you:
     SerializationVersion           1.1.0.1  
       
     VERBOSE: See Readme.md for directions on how to use this module.
+    ```
+
+1. Install the Azure Local module required for log collection.
+
+    ```PowerShell
+    Import-Module "<disconnected operations module folder path>\AzureLocal.Orchestration.psd1" -Force
+    ```
+
+    Example output:
+
+    ```console
+    PS C:\Users\administrator.s46r2004\Documents> Import-Module     
+    "Q:\AzureLocalVHD\Azurelocal.Orchestration\AzureLocal.Orchestration.psd1" -Force
+
+    CommandType        Name                                              Version        Source
+    -----------        ----                                              -------        ------
+    Function           Invoke-AzureLocalDisconnectedLogCollection        2602.1....    AzureLocal.Orchestration
+    Function           Invoke-AzureLocalEnvironmentValidation            2602.1....    AzureLocal.Orchestration
     ```
 
 1. Use [Deploy disconnected operations for Azure Local](disconnected-operations-deploy.md) for your management endpoint.
