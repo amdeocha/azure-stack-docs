@@ -141,21 +141,23 @@ az stack-hci-vm snapshot update --resource-group <resource-group> --name <snapsh
 ## Restore a new data disk from a snapshot
 
 To restore a disk from a snapshot, create a new disk by specifying the snapshot ARM ID in `--source-resource-id`.
+
 > [!IMPORTANT]
-> Due to a known issue, you must include the `--size-gb` parameter when restoring a disk from a snapshot, even though the parameter is listed as optional. The value must be equal to or greater than the original snapshot size. If `--size-gb` is omitted, the disk creation may fail.
->
-> To determine the minimum size in GB, query the snapshot's `diskSizeBytes` property and round up:
->
-> ```azurecli
-> az stack-hci-vm snapshot show \
->   --name <snapshot-name> \
->   --resource-group <resource-group> \
->   --query "properties.diskSizeBytes" -o tsv
-> ```
->
-> Then convert bytes to GB (round up to the nearest whole number). For example, if the snapshot reports `30,000,000,000` bytes (~28 GB), use `--size-gb 28` or larger.
+> Due to a known issue, you must include the `--size-gb` parameter when restoring a disk from a snapshot, even though the parameter is listed as optional. The value must be equal to or greater than the original snapshot size. If `--size-gb` is omitted, the disk creation could fail.
+
+
+To determine the minimum size in GB, query the snapshot's `diskSizeBytes` property and round up:
+
 ```azurecli
-az stack-hci-vm disk create --resource-group <resource-group> --custom-location <custom-location-arm-id> --location <location> --name <new-disk-name> --source-resource-id </subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.AzureStackHCI/snapshots/{snapshotName}>
+az stack-hci-vm snapshot show --name <snapshot-name> --resource-group <resource-group> --query "properties.diskSizeBytes" -o tsv
+```
+
+Then convert bytes to GB (round up to the nearest whole number). For example, if the snapshot reports `30,000,000,000` bytes (~28 GB), use `--size-gb 28` or larger.
+
+To restore a disk from a snapshot, run the following command:
+
+```azurecli
+az stack-hci-vm disk create --resource-group <resource-group> --custom-location <custom-location-arm-id> --location <location> --name <new-disk-name> --source-resource-id </subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.AzureStackHCI/snapshots/{snapshotName}> --size-gb <size-in-gb>
 ```
 
 ## Validate the restored disk
