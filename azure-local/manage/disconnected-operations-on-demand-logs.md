@@ -432,24 +432,44 @@ This cmdlet:
 
 #### Clear-DiagnosticPipeline cmdlet examples
 
-- To import the module, run this command:
+Here are some supported authentication methods:
+
+- Device code authentication:
 
     ```PowerShell
-    # Import-Module ApplianceFallbackLogging
     Clear-DiagnosticPipeline `
         -SubscriptionId "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" `
         -TenantId "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
     ```
 
-- To preserve a pre-existing Arc agent connection, run this command:
+- PassThrough using existing Azure context:
 
     ```PowerShell
-    # Import-Module ApplianceFallbackLogging
+    Clear-DiagnosticPipeline -PassThrough
+    ```
+
+- Service Principal Credentials:
+
+    ```PowerShell
+    Clear-DiagnosticPipeline -RegistrationWithCredential $credential
+    ```
+
+Here are some available options:
+
+- Preserve pre-existing Arc agent connection:
+
+    ```PowerShell
     Clear-DiagnosticPipeline `
         -SubscriptionId "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" `
         -TenantId "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" `
         -SkipArcForServer
+    ```
 
+- Skip uninstall and remove leftover artifacts. Authentication isn't needed because no uninstall is initiated:
+
+    ```powershell
+    Clear-DiagnosticPipeline -SkipUninstall
+    ```
 
 ## Monitor log collection
 
