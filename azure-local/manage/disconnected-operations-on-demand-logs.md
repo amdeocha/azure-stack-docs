@@ -16,9 +16,11 @@ ms.subservice: hyperconverged
 
 This article explains how to collect logs on-demand for disconnected operations for Azure Local by using the PowerShell module. You learn how to provide logs for troubleshooting and support when Azure Local operates in disconnected mode.
 
-## Overview
+## About on-demand log collection
 
-Log collection helps you diagnose and troubleshoot issues in disconnected operations for Azure Local. Use this feature to send logs to Microsoft support. Logs include information about the disconnected operations environment, like the management endpoint, integrated runtime, and other components. During log collection, you might see errors because of different environmental or tool limitations.
+On-demand log collection involves manually gathering and sending diagnostic logs to Microsoft. These logs are stored in a database accessible to Microsoft Support to help resolve your reported issues. The collected diagnostic data is retained for up to 30 days and managed according to Microsoft's [standard privacy practices](https://www.microsoft.com/en-us/privacy).
+
+Log collection helps diagnose and troubleshoot issues in disconnected operations for Azure Local. Use this feature to send logs to Microsoft Support. Logs include details about the disconnected operations environment, such as the management endpoint, integrated runtime, and other components. During log collection, errors might occur due to environmental or tool limitations.
 
 > [!IMPORTANT]
 > Before you use on-demand direct log collection, complete the prerequisites and set up observability with the `Set-ApplianceObservabilityConfiguration` cmdlet. If you skip these steps, you might see an error.
@@ -293,7 +295,10 @@ Before you collect logs in a disconnected operations scenario, make sure you:
 
 1. After collection, review the logs locally or upload them to Microsoft by using the **standalone observability tool**. There are product specific wrappers around **Microsoft.AzureStack.Observability.Standalone**.
 
-    When you collect logs using `Invoke-AzureLocalDisconnectedLogCollection`, logs from the host nodes and appliance are saved to separate subfolders under the same `<SaveToPath>` location. These cmdlets must be uploaded using different cmdlets.
+    When you collect logs using `Invoke-AzureLocalDisconnectedLogCollection`, logs from the host nodes and appliance are saved to separate subfolders under the same `<SaveToPath>` location.
+
+    > [!NOTE]
+    > These cmdlets must be uploaded using different cmdlets.
 
     Log locations and upload commands:
 
