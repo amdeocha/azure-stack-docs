@@ -255,11 +255,11 @@ Before you collect logs in a disconnected operations scenario, make sure you:
     - Identify the management client certificate used to authenticate with the disconnected operations for Azure Local management endpoint.
     - Set up the management endpoint client context. Run this script:
 
-    ```PowerShell
-    # Replace with your actual values
-    $certPassword = Read-Host -AsSecureString "Management endpoint client certificate password"
-    $context = Set-DisconnectedOperationsClientContext -ManagementEndpointClientCertificatePath "<Management Endpoint Client Cert Path>" -ManagementEndpointClientCertificatePassword $certPassword -ManagementEndpointIpAddress "<Management Endpoint IP address>"
-    ```
+        ```PowerShell
+        # Replace with your actual values
+        $certPassword = Read-Host -AsSecureString "Management endpoint client certificate password"
+        $context = Set-DisconnectedOperationsClientContext -ManagementEndpointClientCertificatePath "<Management Endpoint Client Cert Path>" -ManagementEndpointClientCertificatePassword $certPassword -ManagementEndpointIpAddress "<Management Endpoint IP address>"
+        ```
 
 1. Create a share. Run this command:
 
@@ -304,23 +304,23 @@ Before you collect logs in a disconnected operations scenario, make sure you:
 
     - Appliance logs:
 
-    ```
-    # Logs from disconnected operations appliance for Azure Local infrastructure
+        ```
+        # Logs from disconnected operations appliance for Azure Local infrastructure
+    
+        <SaveToPath>\ALDO
+        ```
 
-    <SaveToPath>\ALDO
-    ```
-
-    Upload logs collected from the appliance VM by using the [`Send-DiagnosticData`](#send-diagnosticdata) cmdlet from the disconnected operations for Azure Local PowerShell module.
-
+        Upload logs collected from the appliance VM by using the [`Send-DiagnosticData`](#send-diagnosticdata) cmdlet from the disconnected operations for Azure Local PowerShell module.
+    
     - Host node (cluster nodes) logs:
 
-    ```
-    # Logs from Azure Local host nodes
-
-    <SaveToPath>\AzureLocal
-    ```
-
-    Upload logs collected from the Azure Local host nodes by using the `Send-AzStackHciDiagnosticData` cmdlet. For more information, see [Get support for Azure Local deployment issues](../manage/get-support-for-deployment-issues.md).
+        ```
+        # Logs from Azure Local host nodes
+    
+        <SaveToPath>\AzureLocal
+        ```
+    
+        Upload logs collected from the Azure Local host nodes by using the `Send-AzStackHciDiagnosticData` cmdlet. For more information, see [Get support for Azure Local deployment issues](../manage/get-support-for-deployment-issues.md).
 
 1. Optional. If the `Send-DiagnosticData` command fails or is interrupted, use the [`Clear-DiagnosticPipeline`](#clear-diagnosticpipeline) cmdlet.
 
