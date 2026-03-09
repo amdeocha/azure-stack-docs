@@ -4,7 +4,7 @@ description: Review how Azure Private Endpoints can be used when deploying Azure
 author: alkohli
 ms.author: alkohli
 ms.reviewer: alkohli
-ms.date: 03/06/2026
+ms.date: 03/09/2026
 ms.topic: concept-article
 ---
 
