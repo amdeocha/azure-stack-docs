@@ -112,7 +112,7 @@ This proxy and bypass list configuration in Environment Variables is used to con
 
 Azure Local requires a Key Vault for deployment. You can use a Key Vault on a private endpoint, but you must allow public access until the initial deployment is complete. Azure portal and HCI RP need to configure the Key Vault secrets during deployment. Once deployment is completed, you can restrict Key Vault access to only allow private networks. You can restrict public access without any constraints for other customer Key Vaults used for workloads.
 
-#### Storage account private endpoints:(blob.core.windows.net)
+#### Storage account private endpoints: (blob.core.windows.net)
 
 Azure Local with two nodes requires a Storage Account for deployment. You can use a Storage Account on a private endpoint, but you must allow public access until the initial deployment is complete. Azure portal and HCI RP need to configure the cloud witness during deployment. Once deployment is completed, you can restrict Storage Account access to only allow private networks. You can restrict public access without any constraints for other customer Storage accounts used for workloads. If your security team wants to ensure that this storage account endpoint is specifically allowed in your firewall from your Azure Local nodes as source IP, you must add the endpoint to the proxy bypass list, so the traffic is sent directly to your firewall instead of going through the Arc gateway tunnel.
 

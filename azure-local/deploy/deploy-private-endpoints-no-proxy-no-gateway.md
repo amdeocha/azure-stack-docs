@@ -21,7 +21,7 @@ For more information about Azure private endpoints on Azure Local and the suppor
 
 ### Outbound connectivity for Azure Local hosts
 
-:::image type="content" source="media/deploy-private-endpoints-no-proxy-no-gateway/image1.png" alt-text="A diagram of a company network showing how outbound connectivity works for Azure Local hosts where there is no proxy and no Arc gateway." lightbox="media/deploy-private-endpoints-no-proxy-no-gateway/image1.png":::Outbound Connectivity for Azure Local hosts:
+:::image type="content" source="media/deploy-private-endpoints-no-proxy-no-gateway/image1.png" alt-text="A diagram of a company network showing how outbound connectivity works for Azure Local hosts where there is no proxy and no Arc gateway." lightbox="media/deploy-private-endpoints-no-proxy-no-gateway/image1.png":::
 
 **Diagram legend**:
 

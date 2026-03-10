@@ -76,7 +76,7 @@ For more information about Azure private endpoints on Azure Local and the suppor
 
 Azure Local deployment requires a key vault, which can use a private endpoint. However, you must enable public access during initial deployment so the Azure portal and Azure Local resource provider (RP) can configure secrets. After deployment, restrict access to private networks only.
 
-#### Storage account private endpoints:(blob.core.windows.net)
+#### Storage account private endpoints: (blob.core.windows.net)
 
 Azure Local with two nodes requires a Storage Account for deployment. You can use a private endpoint but keep public access open until setup is complete so that Azure portal and Azure Local RP can configure cloud witness. Restrict access to private networks once deployment finishes.
 
