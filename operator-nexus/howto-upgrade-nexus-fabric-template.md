@@ -1,6 +1,6 @@
 ---
 title: "Azure Operator Nexus: Fabric runtime upgrade template"
-description: Learn how to upgrade Fabric for Operator Nexus with a step-by-step parameterized template.
+description: Learn how to upgrade Fabric for Azure Operator Nexus with a step-by-step parameterized template.
 author: jeffreymason 
 ms.author: jeffreymason
 ms.service: azure-operator-nexus
@@ -9,13 +9,12 @@ ms.topic: how-to
 ms.custom: azure-operator-nexus, template-include
 ---
 
-# Fabric runtime upgrade template
+# Azure Operator Nexus Fabric runtime upgrade template
 
-This how-to guide provides a step-by-step template for upgrading a Nexus Fabric. Use this template to manage a reproducible end-to-end upgrade through Azure APIs and standard operating procedures. Regularly update your system to maintain integrity and access the latest product improvements.
+This how-to guide provides a step-by-step template for upgrading an Azure Operator Nexus Fabric instance. Use this template to manage a reproducible end-to-end upgrade through Azure APIs and standard operating procedures. Regularly update your system to maintain integrity and access the latest product improvements.
 
 ## Overview
 <details>
-<summary> Overview of the Fabric runtime upgrade template. </summary>
 
 ### Runtime bundle components
 
@@ -31,47 +30,44 @@ This is how runtime changes are categorized:
 
 ## Prerequisites
 <details>
-<summary> Prerequisites for using this template to upgrade a Fabric instance. </summary>
 
 - Latest version of the [Azure CLI](https://aka.ms/azcli).
 - Latest `managednetworkfabric` [CLI extension](howto-install-cli-extensions.md).
 - Latest `networkcloud` [CLI extension](howto-install-cli-extensions.md).
-- Subscription access to run the Azure Operator Nexus Network Fabric (NF) and Network Cloud (NC) CLI extension commands.
+- Subscription access to run the Azure Operator Nexus Network Fabric and Network Cloud CLI extension commands.
 - The target Fabric must be healthy and in a running state. You can find details on checking Fabric health in [Fabric Runtime Upgrade](./howto-upgrade-nexus-fabric.md#required-preupgrade-validations).
 
 </details>
 
 ## Required parameters
 <details>
-<summary> Parameters used in this document </summary>
 
 - `\<ENVIRONMENT\>`: The instance name.
 - `<AZURE_REGION>`: The Azure region of the instance.
 - `<CUSTOMER_SUB_NAME>`: The subscription name.
 - `<CUSTOMER_SUB_ID>`: The subscription ID.
-- `\<NEXUS_VERSION\>`: The Nexus release version (for example, 2504.1).
-- `<NNF_VERSION>`: The Operator Nexus Fabric release version (for example, 8.1).
-- `<NF_VERSION>`: The NF runtime version for the upgrade (for example, 5.0.0).
-- `<NFC_NAME>`: The associated Network Fabric Controller (NFC).
-- `<NFC_RG>`: The NFC Resource Group.
-- `<NFC_RID>`: The NFC ARM ID.
-- `<NFC_MRG>`: The NFC managed resource group.
+- `\<NEXUS_VERSION\>`: The Azure Operator Nexus release version (for example, `2504.1`).
+- `<NNF_VERSION>`: The Azure Operator Nexus Fabric release version (for example, `8.1`).
+- `<NF_VERSION>`: The Network Fabric runtime version for the upgrade (for example, `5.0.0`).
+- `<NFC_NAME>`: The associated Network Fabric controller.
+- `<NFC_RG>`: The Network Fabric controller resource group.
+- `<NFC_RID>`: The Network Fabric controller ARM ID.
+- `<NFC_MRG>`: The Network Fabric controller managed resource group.
 - `<NF_NAME>`: The Network Fabric instance name.
 - `<NF_RG>`: The Network Fabric resource group.
 - `<NF_RID>`: The Network Fabric ARM ID.
 - `<NF_DEVICE_NAME>`: The Network Fabric device name.
 - `<NF_DEVICE_RID>`: The Network Fabric device resource ID.
-- `<CM_NAME>`: The associated Cluster Manager (CM).
-- `<CLUSTER_NAME>`: The associated Cluster name.
-- `<MISE_CID>`: The `Microsoft.Identity.ServiceEssentials` (MISE) Correlation ID in the debug output for device updates.
-- `<CORRELATION_ID>`: The Operation Correlation ID in the debug output for device updates.
+- `<CM_NAME>`: The associated cluster manager (CM).
+- `<CLUSTER_NAME>`: The associated cluster name.
+- `<MISE_CID>`: The `Microsoft.Identity.ServiceEssentials` (MISE) correlation ID in the debug output for device updates.
+- `<CORRELATION_ID>`: The operation correlation ID in the debug output for device updates.
 - `<ASYNC_URL>`: The asynchronous (ASYNC) URL in the debug output for device updates.
 
 </details>
 
 ## Deployment data
 <details>
-<summary> Deployment data details </summary>
 
 ```
 - Nexus: `<NEXUS_VERSION>`
@@ -86,7 +82,6 @@ This is how runtime changes are categorized:
 
 ## Debug information for Azure CLI commands
 <details>
-<summary> Collect debug information for Azure CLI commands. </summary>
 
 Azure CLI deployment commands issued with the `--debug` value contain the following information in the command output:
 
@@ -112,11 +107,10 @@ If you experience any failures, open a support request. Report the values for `<
 
 </details>
 
-## Prechecks
+## Pre-checks
 <details>
-<summary> Perform the following prechecks before you start a Fabric upgrade. </summary>
 
-1. Validate the provisioning status for the Network Fabric Controller (NFC), Fabric, and Fabric Devices.
+1. Validate the provisioning status for the Network Fabric controller, Fabric, and Fabric devices.
 
    Sign in to the Azure CLI and select or set the `<CUSTOMER_SUB_ID>` value:
 
@@ -125,13 +119,13 @@ If you experience any failures, open a support request. Report the values for `<
    az account set --subscription <CUSTOMER_SUB_ID>
    ```
 
-   Make sure that the NFC is in a provisioned state:
+   Make sure that the Network Fabric controller is in a provisioned state:
 
    ```
    az networkfabric controller show -g <NFC_RG> --resource-name <NFC_NAME> --subscription <CUSTOMER_SUB_ID> -o table
    ```
 
-   Check the NF status:
+   Check the status of the Network Fabric instance:
 
    ```
    az networkfabric fabric show -g <NF_RG> --resource-name <NF_NAME> --subscription <CUSTOMER_SUB_ID> -o table
@@ -145,7 +139,7 @@ If you experience any failures, open a support request. Report the values for `<
    az networkfabric device list -g <NF_RG> -o table --subscription <CUSTOMER_SUB_ID>
    ```
 
-   >[!NOTE]
+   > [!NOTE]
    > If the `provisioningState` isn't reported as `Succeeded`, stop the upgrade until you resolve the problems.
 
 2. The minimum available disk space on each device must be more than 3.5 GB for a successful device upgrade.
@@ -158,33 +152,31 @@ If you experience any failures, open a support request. Report the values for `<
 
    Contact Microsoft support if there's not enough space to perform the upgrade. You can remove archived extensible operating system (EOS) images and support bundle files at the direction of support.
 
-3. Check the Fabric instance's network packet broker (NPB) for any orphaned network taps in the Azure portal.
+3. In the Azure portal, check the Fabric instance's network packet broker (NPB) for any orphaned network taps.
 
-   * Select **Network Fabric** under **Azure Services** and then select **<NF_NAME>**.
-   * Select the appropriate resource group for the Fabric instance.
-   * In the **Resources** list, use the **Network Packet Broker** filter.
-   * Select the appropriate **Network Packet Broker** name in the list.
-   * Select the **Network Taps** tab on the **Overview** screen.
-   * All network taps should have a status of **Succeeded** for **Configuration State** and **Provisioning State**.
-   * Look for any taps with a red X, and a status of **Not Found**, **Failed**, or **Error**.
+   1. Select **Network Fabric** under **Azure Services** and then select **<NF_NAME>**.
+   1. Select the appropriate resource group for the Fabric instance.
+   1. In the **Resources** list, use the **Network Packet Broker** filter.
+   1. Select the appropriate **Network Packet Broker** name in the list.
+   1. Select the **Network Taps** tab on the **Overview** screen.
+   1. All network taps should have a status of **Succeeded** for **Configuration State** and **Provisioning State**.
+   1. Look for any taps with a red X, and a status of **Not Found**, **Failed**, or **Error**.
 
-   >[!NOTE]
+   > [!NOTE]
    > If any Taps show a status of **Not Found**, **Failed**, or **Error**, stop the upgrade until you clear these problems. Provide this information to Microsoft Support when you open a support ticket for Tap problems.
 
 4. Run and validate the Fabric cable validation report.
-   Follow [Validate Cables for Nexus Network Fabric](how-to-validate-cables.md) to set up and run.
+   Follow [Validate cables for Azure Operator Nexus Network Fabric](how-to-validate-cables.md) to set up and run.
 
-   >[!NOTE]
+   > [!NOTE]
    > Resolve any connection and cable problems before you continue the upgrade.
 
-5. Review Operator Nexus release notes for the required checks and configuration updates that aren't included in this document.
+5. Review the Azure Operator Nexus release notes for the required checks and configuration updates that aren't included in this document.
 
 </details>
 
 ## Upgrade procedure
-
 <details>
-<summary> Fabric runtime upgrade procedure details </summary>
 
 ### Verify the current Fabric runtime version
 
@@ -213,7 +205,7 @@ After the command finishes successfully, it changes the Fabric status to **Under
 
 ### Follow the device-specific workflow
 
-Nexus Network Fabric racks include the following device types:
+Azure Operator Nexus Network Fabric racks include the following device types:
 
 - Customer edge switch (CE)
 - Management switch (MGMT)
@@ -237,7 +229,7 @@ To maintain networking service during the upgrade, upgrade the devices in the fo
 1. Compute rack MGMT switches: Upgrade together in parallel.
 1. Aggregate rack CEs: Upgrade one after the other in serial.
 
-   >[!IMPORTANT]
+   > [!IMPORTANT]
    > After each CE upgrade, wait for a duration of five minutes to ensure that the recovery process is complete before proceeding to the next CE.
    >
    > For the remaining aggregate rack devices, the order for the device upgrades isn't important as long as you upgrade them in a serial manner.
@@ -256,7 +248,7 @@ Run the following command to upgrade the version on each device:
 az networkfabric device upgrade --version <NF_VERSION> -g <NF_RG> --resource-name <NF_DEVICE_NAME> --subscription <CUSTOMER_SUB_ID> --debug
 ```
 
-As part of the upgrade, the devices enter maintenance mode. The device drains all traffic and stops advertising routes so that the traffic flow to the device stops. When the upgrade finishes, the Nexus Network Fabric service updates the device resource version property to the new version.
+As part of the upgrade, the devices enter maintenance mode. The device drains all traffic and stops advertising routes so that the traffic flow to the device stops. When the upgrade finishes, the Azure Operator Nexus Network Fabric service updates the device resource version property to the new version.
 
 Gather the **ASYNC URL** and **Correlation ID** info, so that you have it if you need to troubleshoot in the future.
 
@@ -292,15 +284,14 @@ az networkfabric fabric upgrade --action Complete --version <NF_VERSION> -g <NF_
 
 ## Post-upgrade tasks
 <details>
- <summary> Detailed steps for post-upgrade tasks </summary>
 
-### Review Operator Nexus release notes
+### Review Azure Operator Nexus release notes
 
-Review the Operator Nexus release notes for any version-specific actions that are required after the upgrade.
+Review the Azure Operator Nexus release notes for any version-specific actions that are required after the upgrade.
 
-### Validate the Nexus instance
+### Validate the Azure Operator Nexus instance
 
-Perform resource validation of all Nexus instance components by using the Azure CLI:
+Perform resource validation of all Azure Operator Nexus instance components by using the Azure CLI:
 
 ```
 # Check `ProvisioningState = Succeeded` in all resources
@@ -335,7 +326,6 @@ az networkcloud kubernetescluster list --sub <CUSTOMER_SUB_ID> --query "[?cluste
 ## Related content
 
 <details>
-<summary> Reference links for Fabric upgrade </summary>
 
 Reference links for Fabric upgrade:
 
