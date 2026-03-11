@@ -802,6 +802,8 @@ items:
         href: ./multi-rack/multi-rack-manage-arc-virtual-machine-resources.md
       - name: Manage Azure Local VM extensions
         href: ./multi-rack/multi-rack-virtual-machine-manage-extension.md
+      - name: Create and restore data disk snapshots
+        href: ./multi-rack/multi-rack-disk-snapshot.md
     - name: Deploy SDN infrastructure
       items:
       - name: Create NSGs
