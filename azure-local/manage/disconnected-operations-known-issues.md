@@ -28,6 +28,7 @@ In cases where the Certificate Revocation List (CRL) is empty or misconfigured, 
 Verify that your Certificate Authority is configured correctly and ensure that your certificates include a CRL endpoint that is accessible from the nodes.
 
 **Alternative mitigation**:
+
 If you can't reconfigure your Certificate Authority (Enterprise PKI), you can bypass CRL checks during bootstrap. Run the following steps on each Azure Local node:
 
 ```powershell
