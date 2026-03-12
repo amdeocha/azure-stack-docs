@@ -5,7 +5,7 @@ author: alkohli
 ms.author: alkohli
 ms.topic: how-to
 ms.service: azure-local
-ms.date: 03/03/2025
+ms.date: 03/12/2025
 ms.subservice: hyperconverged
 ---
 
@@ -44,7 +44,7 @@ A new deployment of Azure Local introduces two baselines documents injected by t
 > [!IMPORTANT]
 > After you apply the security baseline documents, a new mechanism is used to apply and maintain [Security baseline settings](https://aka.ms/hci-securitybase).
 
-# [Version 23H2](#tab/23h2)
+# [OS build 25398.xxxx](#tab/23h2)
 
 1. If your Azure Local machines inherit baseline settings through mechanisms such as GPO, DSC, or scripts, we recommend that you:
 
@@ -74,7 +74,7 @@ A new deployment of Azure Local introduces two baselines documents injected by t
 
 1. Reboot the nodes in a proper sequence for the new settings to become effective. For more information, see [Suspend and resume Azure Local machines for maintenance](/azure/azure-local/manage/suspend-resume-cluster-maintenance).
 
-# [Version 24H2](#tab/24h2)
+# [OS build 26100.xxxx](#tab/24h2)
 
 1. If your servers inherit baseline settings through mechanisms such as GPO, DSC, or scripts, we recommend that you:
 
@@ -112,7 +112,7 @@ A new deployment of Azure Local introduces two baselines documents injected by t
 
 After rebooting, rerun the following cmdlets to confirm the status of security baselines:
 
-# [Version 23H2](#tab/23h2)
+# [OS build 25398.xxxx](#tab/23h2)
 
 ```powershell
 Get-ASOSConfigSecuredCoreDoc
@@ -132,7 +132,7 @@ OsConfiguration": {
 "scenario": "ApplianceSecurityBaselineConfig"
 ```
 
-# [Version 24H2](#tab/24h2)
+# [OS build 26100.xxxx](#tab/24h2)
 
 ```powershell
 Get-ASOSConfigSecuredCoreDoc
