@@ -1,2 +1,44 @@
-- name: Index
+items:
+- name: Sovereign Private Cloud documentation
   href: index.yml
+- name: Overview
+  expanded: true
+  items:  
+  - name: What is Sovereign Private Cloud?
+    href: ./overview.md
+  - name: Sovereign Private Cloud use cases
+    href: ./overview.md
+
+- name: Azure Local
+  items:
+  - name: Overview
+    items:
+    - name: About multi-rack deployments
+      href: 
+    - name: Connected deployments
+      href: ./overview.md
+    - name: Disconnected deployments
+      href: ./overview.md
+    - name: Sovereign Private Cloud scenarios
+      href: ./overview.md
+
+  - name: Foundry Local on Azure Local
+    items:
+    - name: Overview of Foundry Local on Azure Local
+      href: ./overview.md
+    - name: Deploy Foundry Local on Azure Local
+      href: ./overview.md
+    - name: Overview of Azure Edge RAG on Azure Local
+      href: ./overview.md
+    - name: Overview of Azure Video Indexer on Azure Local
+      href: ./overview.md
+    
+  - name: Microsoft 365 Local
+    items:
+    - name: Overview of Microsoft 365 Local
+      href: ../azure-local/concepts/microsoft-365-local-overview.md
+
+  - name: GitHub Local
+    items:
+    - name: Overview of GitHub Local
+      href: ./overview.md
