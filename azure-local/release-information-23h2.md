@@ -5,7 +5,7 @@ author: alkohli
 ms.author: alkohli
 ms.topic: release-notes
 ms.service: azure-local
-ms.date: 03/18/2026
+ms.date: 03/17/2026
 ms.subservice: hyperconverged
 ---
 
