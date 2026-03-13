@@ -13,6 +13,36 @@ ms.subservice: hyperconverged
 
 This article lists the features and improvements that are available in hyperconverged deployments of Azure Local (*formerly Azure Stack HCI*). The latest version of Azure Local solution focuses on cloud-based deployment and updates, cloud-based monitoring, a new and simplified experience for Azure Local virtual machine (VM) management, security, and more.
 
+::: moniker range="=azloc-2603"
+
+## Features and improvements in 2603
+
+The March 2026 release of hyperconverged deployments of Azure Local is version **12.2603.1002.15**. For more information, see [Release information summary](./release-information-23h2.md).
+
+This release includes various reliability improvements and bug fixes.
+
+- **OS changes**:
+
+    - In 2603 release, all the new and existing deployments of Azure Local run the new OS version **26100.32520** (download from the Azure portal).
+
+    - You also need a driver that's compatible with OS version **26100.32520** or Windows Server 2025.
+
+    - For Integrated System or Premier solution hardware from the [Azure Local Catalog](https://aka.ms/AzureStackHCICatalog), the OS is preinstalled. Work with your Original Equipment Manufacturer (OEM) to get a compatible OS image and a compatible driver.
+
+- **.NET updates**: This build uses .NET version **8.0.25** for both .NET Runtime and ASP.NET Core. For more information, see [Download .NET 8.0](https://dotnet.microsoft.com/download/dotnet/8.0).
+
+- **AKS enabled by Azure Arc changes**:
+
+    - This release supports the following Kubernetes versions: 1.30.13, 1.30.14, 1.31.9, 1.31.10, 1.32.5, 1.32.6.
+    - KMS v1 will be deprecated soon. KMS v2 is included in this Azure Local release. Plan on redeploying your clusters by using KMS v2.
+    - Support for [Windows Server 2019 SKU for node pools](https://techcommunity.microsoft.com/blog/containers/announcing-the-3-year-retirement-of-windows-server-2019-on-azure-kubernetes-serv/3777341) ends in March 2026.
+
+    Ensure your AKS clusters are on a supported Kubernetes version before upgrading Azure Local. For more information, see [What's new in AKS enabled by Azure Arc on Azure Local](/azure/aks/aksarc/aks-whats-new-local#release-2510).
+
+- **Support for NVIDIA RTX PRO 6000 Blackwell Server Edition GPU on Azure Local**: Starting with this release, NVIDIA RTX PRO 6000 GPU is supported on Azure Local VMs and Azure Kubernetes Service (AKS) enabled by Azure Arc. This feature allows you to run GPU-accelerated workloads on Azure Local using NVIDIA RTX PRO 6000 GPUs. For more information, see [Prepare GPUs for Azure Local instance](./manage/gpu-preparation.md).
+
+::: moniker-end
+
 ::: moniker range="=azloc-2602"
 
 ## Features and improvements in 2602
