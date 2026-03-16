@@ -808,6 +808,8 @@ items:
         href: ./multi-rack/multi-rack-create-arc-virtual-machines.md
       - name: Connect to Azure Local VMs via SSH
         href: ./multi-rack/multi-rack-connect-arc-vm-using-ssh.md
+      - name: Connect to Azure Local VMs via serial console
+        href: ./multi-rack/multi-rack-serial-console.md
       - name: Manage Azure Local VMs
         href: ./multi-rack/multi-rack-manage-arc-virtual-machines.md
       - name: Manage Azure Local VM resources
