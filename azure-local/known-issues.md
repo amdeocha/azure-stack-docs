@@ -26,8 +26,8 @@ For more information about new features in this release, see [What's new for Azu
 
 For the 2603 release of Azure Local, Microsoft released the following update:
 
-| Solution version  | OS build  |
-|---------|---------|---------|
+| Solution version | OS build |
+|--|--|
 | 12.2603.1002.15 | 26100.32522 |
 
 > [!IMPORTANT]
