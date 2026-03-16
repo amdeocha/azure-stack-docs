@@ -85,7 +85,7 @@ If your cluster supports [Solution Builder Extension software updates](./update/
 The following tables summarize the release information for Azure Local across all supported versions. All dates are listed in ISO 8601 format: *YYYY-MM-DD*. After you upgrade your solution, you might see 10.x versions. These versions are supported.
 
 > [!IMPORTANT]
-> The new deployments of this software use the **12.2602.1002.7** build. You can also update an existing deployment from **12.2601.1002.503** to **12.2602.1002.7**.
+> The new deployments of this software use the **12.2603.1002.15** build. You can also update an existing deployment from **12.2602.1002.501** to **12.2603.1002.15**.
 
 #### [OS build 26100.xxxx](#tab/OS-build-26100-xxxx)
 
