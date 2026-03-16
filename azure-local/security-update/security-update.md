@@ -3,7 +3,7 @@ title:  Security updates for Azure Local
 description: Security updates for Azure Local.
 author: alkohli
 ms.topic: release-notes
-ms.date: 03/05/2026
+ms.date: 03/16/2026
 ms.author: alkohli
 ms.reviewer: alkohli
 ms.subservice: hyperconverged
@@ -17,15 +17,15 @@ This article lists the various security updates that are available for Azure Loc
 
 ## March OS security update (KB5078740) for Azure Local
 
-This section provides the 2603 security updates associated with OS build **26100.32520** released on March 10, 2026 ([KB5078740](https://support.microsoft.com/en-us/topic/february-10-2026-kb5075899-os-build-26100-32370-ffae9df3-05c5-439c-9087-e034985c1b2e?preview=true)). It also includes key notifications, announcements, change logs, and end-of-support notices.
+This section provides the 2603 security updates associated with OS build **26100.32522** released on March 10, 2026 ([KB5078740](https://support.microsoft.com/en-us/topic/march-10-2026-kb5078740-os-build-26100-32522-fea85758-f53d-4e3e-bbbf-62d9998f92bd)). It also includes key notifications, announcements, change logs, and end-of-support notices.
 
 To learn more about Windows update terminology, see [Types of Windows updates](https://docs.microsoft.com/troubleshoot/windows-client/deployment/standard-terminology-software-updates) and the [monthly quality update types](https://techcommunity.microsoft.com/t5/windows-it-pro-blog/windows-monthly-updates-explained/ba-p/3773544). For an overview, see the update history page for Azure Stack HCI, version 24H2.  
 
 ## Improvements
 
-This security update contains fixes and quality improvements from KB5075899 (released March 10, 2026). The following summary outlines key issues addressed by this update. Also, included are available new features. The bold text within the brackets indicates the item or area of the change. ​​​
+This security update contains fixes and quality improvements from [KB5078740](https://support.microsoft.com/en-us/topic/march-10-2026-kb5078740-os-build-26100-32522-fea85758-f53d-4e3e-bbbf-62d9998f92bd) (released March 10, 2026). The following summary outlines key issues addressed by this update. Also, included are available new features. The bold text within the brackets indicates the item or area of the change. ​​​
 
-- **[Secure Boot]** With this update, Windows quality updates include additional high confidence device targeting data, increasing coverage of devices eligible to automatically receive new Secure Boot certificates. Devices receive the new certificates only after demonstrating sufficient successful update signals, maintaining a controlled and phased rollout.
+- This update makes miscellaneous security improvements to internal OS functionality.
 
 If you've already installed previous updates, your device will download and install only the new updates included in this package.
 
@@ -49,7 +49,7 @@ To install the LCU on your Azure Local instance, see [Update Azure Local](../upd
 
 ## File Information
 
-For a list of the files provided in this update, download the file information for [cumulative update 5078740](TODO1).
+For a list of the files provided in this update, download the file information for [cumulative update 5078740](https://go.microsoft.com/fwlink/?linkid=2355918).
 
 ::: moniker-end
 
