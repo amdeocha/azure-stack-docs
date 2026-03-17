@@ -41,6 +41,8 @@ This release includes various reliability improvements and bug fixes.
 
 - **Support for NVIDIA RTX PRO 6000 Blackwell Server Edition GPU on Azure Local**: Starting with this release, NVIDIA RTX PRO 6000 GPU is supported on Azure Local VMs and Azure Kubernetes Service (AKS) enabled by Azure Arc. This feature allows you to run GPU-accelerated workloads on Azure Local using NVIDIA RTX PRO 6000 GPUs. For more information, see [Prepare GPUs for Azure Local instance](./manage/gpu-preparation.md).
 
+- **Improved Secure Boot Certificate readiness**: Starting with this release, built‑in orchestration deploys the new Secure Boot 2023 certificates, helping customers prepare for upcoming Secure Boot changes while minimizing risk during updates.
+
 ::: moniker-end
 
 ::: moniker range="=azloc-2602"
