@@ -31,7 +31,7 @@ For more information, see [how the Azure Arc gateway works](/azure/azure-local/d
 
 ## Required network endpoints
 
-For the complete list of required URLs and endpoints that must be allowed through your enterprise firewall when using Arc gateway with AKS on Azure Local, see [Azure Local endpoints not redirected through Arc gateway](/azure/azure-local/deploy/deployment-azure-arc-gateway-overview?view=azloc-2603&tabs=portal#azure-local-endpoints-not-redirected).
+For the complete list of required URLs and endpoints that must be allowed through your enterprise firewall when using Arc gateway with AKS on Azure Local, see [Azure Local endpoints not redirected through Arc gateway](/azure/azure-local/deploy/deployment-azure-arc-gateway-overview#azure-local-endpoints-not-redirected).
 
 ## Using Arc gateway with AKS clusters
 
