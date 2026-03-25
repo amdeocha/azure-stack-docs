@@ -52,7 +52,7 @@ To browse for available system updates using Azure Update Manager, follow these 
 2. Under the **Resources** dropdown, select **Azure Local**.
    - Filter by Subscription, Resource group, Location, Status, Update readiness, Current version, and/or Azure connection to view a list of systems.
 
-3. In the systems list, view the update Status, Update readiness, Current version, and the date and time of the Last successful update.
+3. In the systems list, view the update Status, Update readiness, Current version, the date and time of the Last successful update, and the Azure connection status.
 
     > [!NOTE]
     > It can take up to 15 minutes for system values to update in the Azure portal.
