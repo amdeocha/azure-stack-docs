@@ -88,7 +88,7 @@ az networkcloud baremetalmachine run-data-extract --name "<machine-name>"  \
 
 You can specify multiple commands by using JSON format in the `--commands` option. Each `command` value specifies the command and arguments. For a command with multiple arguments, provide the arguments as a list in the `arguments` parameter. For instructions on how to construct the `--commands` structure, see [Azure CLI shorthand](https://github.com/Azure/azure-cli/blob/dev/doc/shorthand_syntax.md).
 
-These commands can take a long time to run, so we recommend that you set the `--limit-time-seconds` value to at least 600 seconds (10 minutes). When you use the `Debug` option or run multiple extracts, it might take longer than 10 minutes.
+These commands can take a long time to run, so we recommend that you set the `--limit-time-seconds` value to at least 1000 seconds (15+ minutes).
 
 In the response, the operation performs asynchronously and returns an HTTP status code of `202`. To learn how to track command completion and view the output file, go to [How to view the full output of a command in the associated storage account](#how-to-view-the-full-output-of-a-command-in-the-associated-storage-account).
 
@@ -100,8 +100,8 @@ The following example runs the `hardware-support-data-collection` command and ge
 az networkcloud baremetalmachine run-data-extract --name "bareMetalMachineName" \
   --resource-group "cluster_MRG" \
   --subscription "subscription" \
-  --commands '[{"arguments":["SysInfo", "TTYLog","Debug"],"command":"hardware-support-data-collection"}]' --limit-time-seconds 1000 \
-  --limit-time-seconds 600
+  --commands '[{"arguments":["SysInfo", "TTYLog","Debug"],"command":"hardware-support-data-collection"}]' \
+  --limit-time-seconds 1000
 ```
 
 #### Output from the `hardware-support-data-collection` command
