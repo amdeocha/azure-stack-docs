@@ -78,20 +78,28 @@ To install system updates using Azure Update Manager, follow these steps:
 
 2. Under the **Resources** dropdown, select **Azure Local**.
 
-3. Select one or more systems from the list, then select **One-time Update**.
+3. Select one or more systems from the list, then select **Install now**.
 
     [:::image type="content" source="./media/azure-update-manager/install-update.png" alt-text="Screenshot to install system updates in Azure Update Manager.":::](media/azure-update-manager/install-update.png#lightbox)
 
-
 4. On the **Check readiness** page, review the list of readiness checks and their results.
 
-    - You can select the links under **Affected systems** to view more details and individual system results. For information on the check types, see [About readiness checks](#about-readiness-checks).
-    - For failed readiness checks, review the details and remediation messages via the **View details** links. To further troubleshoot, see [Troubleshoot updates](./update-troubleshooting-23h2.md) before proceeding.
+    - You can select the links under **Details** to view more details and individual system results. For information on the check types, see [About readiness checks](#about-readiness-checks).
+    - For failed readiness checks, review the details and remediation messages via the links under **Details**. To further troubleshoot, see [Troubleshoot updates](./update-troubleshooting-23h2.md) before proceeding.
 
     [:::image type="content" source="./media/azure-update-manager/check-readiness.png" alt-text="Screenshot on the check readiness of updates in Azure Update Manager.":::](media/azure-update-manager/check-readiness.png#lightbox)
 
+5. Select **Next**.
 
-[!INCLUDE[azure-portal-install-updates](../includes/azure-portal-install-updates.md)]
+6. On the **Select updates** page, specify the updates you want to include in the deployment.
+    1. View and select the available updates to install on your Azure Local machines.
+    2. Select the **Version** link to view the update components, versions, and update release notes.
+
+7. Select **Next**.
+
+    [:::image type="content" source="./media/azure-update-manager/select-updates.png" alt-text="Screenshot to specify system updates in Azure Update Manager.":::](./media/azure-update-manager/select-updates.png#lightbox)
+
+<!--[!INCLUDE[azure-portal-install-updates](../includes/azure-portal-install-updates.md)]-->
 
 8. On the **Review + install** page, verify your update deployment options, and then select **Install**.
 
@@ -113,17 +121,16 @@ To install updates on a single system from the resource page, follow these steps
 
 2. Under the **Resources** dropdown, select **Azure Local**.
 
-3. Select the system name from the list, the update, and then select **One-time update**.
+3. Select the system name from the list, the update, and then select **Install now**.
 
     [:::image type="content" source="./media/azure-update-manager/update-single-cluster.png" alt-text="Screenshot of a one-time system update in Azure Update Manager.":::](./media/azure-update-manager/update-single-cluster.png#lightbox)
 
-
 4. On the **Check readiness** page, review the list of readiness checks and their results.
-    - You can select the links under **Affected systems** to view more details and individual system results. For information on the check types, see [About readiness checks](azure-update-manager-23h2.md#about-readiness-checks).
+    - You can select the links under **Details** to view more details and individual system results. For information on the check types, see [About readiness checks](azure-update-manager-23h2.md#about-readiness-checks).
 
-[!INCLUDE[azure-portal-install-updates](../includes/azure-portal-install-updates.md)]
+<!--[!INCLUDE[azure-portal-install-updates](../includes/azure-portal-install-updates.md)]-->
 
-8. On the **Review + install** page, verify your update deployment options, and then select **Install**.
+5. On the **Review + install** page, verify your update deployment options, and then select **Install**.
 
     [:::image type="content" source="./media/azure-update-manager/review-plus-install-single-system.png" alt-text="Screenshot to review and install updates for a single system in Azure Update Manager.":::](./media/azure-update-manager/review-plus-install-single-system.png#lightbox)
 
@@ -154,15 +161,13 @@ To view the progress of your update installation, and completion results, follow
     [:::image type="content" source="./media/azure-update-manager/update-progress.png" alt-text="Screenshot to view progress about system updates in Azure Update Manager.":::](media/azure-update-manager/update-progress.png#lightbox)
 
 
-4. On the **Download updates** page, review the progress of the download and preparation, and then select **Next**.
+4. On the **Download updates** tab, review the progress of the download and preparation, and then select **Next**.
 
-5. On the **Check readiness** page, review the list of readiness checks and their results.
-    - You can select the links under **Affected systems** to view more details and individual system results. For information on the check types, see [About readiness checks](#about-readiness-checks).
-    - For failed readiness checks, review the details and remediation messages via the **View details** links. To further troubleshoot, see [Troubleshoot updates](./update-troubleshooting-23h2.md#resume-an-update) before proceeding.
+5. On the **Check readiness** tab, review the list of readiness checks and their results.
+    - You can select the links under **Details** to view more details and individual system results. For information on the check types, see [About readiness checks](#about-readiness-checks).
+    - For failed readiness checks, review the details and remediation messages via the links under **Details**. To further troubleshoot, see [Troubleshoot updates](./update-troubleshooting-23h2.md#resume-an-update) before proceeding.
 
-6. Select **Next**.
-
-7. On the **Install** page, review the progress of the update installation.
+6. On the **Install** tab, review the progress of the update installation.
 
     [:::image type="content" source="./media/azure-update-manager/update-install-progress.png" alt-text="Screenshot to view update progress in Azure Update Manager.":::](media/azure-update-manager/update-install-progress.png#lightbox)
 
