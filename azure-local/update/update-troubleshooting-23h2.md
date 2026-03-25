@@ -59,7 +59,7 @@ This scenario occurs when installing and tracking system updates in Azure Update
 
 1. In **History**, select the failed update run from the list.
 
-1. On the **Check readiness** tab, review the list of readiness checks and their results.
+1. On the **Validate that the system is ready** tab, review the list of readiness checks and their results.
 
     1. Select the **View details** links under **Details**.
 
