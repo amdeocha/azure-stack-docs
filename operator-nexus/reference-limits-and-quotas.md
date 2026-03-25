@@ -43,6 +43,27 @@ The creation of the Network Fabric related resources is subject to the following
 | Route policies              | 400 route policies per Nexus instance |
 | Isolation domain MTU | 1500 - 9200 |
 
+#### Resource Requirements for a the NFC Deployment
+This section provides a detailed breakdown of the compute resources required for a complete NFC (Network Fabric Controller) deployment.  Below is the detailed breakdown of the total vCPU capacity of 228 vCPUs needed to support NFC zone‑redundant operations and to ensure seamless AKS cluster upgrade cycles.
+-   **NFC AKS Cluster**
+    -   VM SKU: _Standard D8s v3_
+    -   Total vCPUs Required: **144**
+-   **Infrastructure (Infra) AKS Cluster**
+    -   VM SKU: _Standard D8s v3_
+    -   Total vCPUs Required: **40**
+-   **Tenant AKS Cluster**
+    -   VM SKU: _Standard D8s v3_
+    -   Total vCPUs Required: **40**
+
+##### **SAW (Secure Access Workstation) Requirements**
+
+-   **Infrastructure SAW VM**
+    -   VM SKU: _Standard D2s v3_
+    -   vCPUs: **2**
+-   **Tenant SAW VM**
+    -   VM SKU: _Standard D2s v3_
+    -   vCPUs: **2**
+
 
 ### Network Cloud
 The creation of the Network Cloud specific resources is subject to the following resource limits:
