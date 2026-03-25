@@ -51,7 +51,7 @@ To manually assign the required permissions for Active Directory, create an OU, 
 The Lifecycle Manager (LCM) deployment user account must meet the following Active Directory requirements for Azure Local deployment and lifecycle management.
 
 - Interactive logon. The deployment user must be allowed to sign in interactively.
-- Log on as a batch job. The deployment user must have the [*Log on as a batch job*](/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/log-on-as-a-batch-job) user rights. Ensure that the default domain policy does not deny this right, or explicitly grant it to the deployment user account.
+- Log on as a batch job. The deployment user must have the [*Log on as a batch job*](/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/log-on-as-a-batch-job) user rights. Ensure that the default domain policy doesn't deny this right, or explicitly grant it to the deployment user account.
 
 ## Active Directory preparation module
 
