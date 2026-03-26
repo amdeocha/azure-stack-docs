@@ -73,8 +73,7 @@ This article details how to register Azure Local using Azure Arc gateway and wit
 
     #Optional: Define the Azure Resource Manager access token.
     # If omitted, device code authentication is prompted by the script.
-    # Example ARM endpoint (Azure public cloud): https://management.azure.com/
-    $armTokenResponse = Get-AzAccessToken -ResourceUrl "<ARM endpoint for your cloud>"
+    $armTokenResponse = Get-AzAccessToken
     
     # Convert token to string for use in initialization
     # Required because Get-AzAccessToken returns SecureString
@@ -356,8 +355,7 @@ $ArcgwId = "/subscriptions/yourarcgatewayid/resourceGroups/yourresourcegroupname
 
 #Optional: Define the Azure Resource Manager access token.
 # If omitted, device code authentication is prompted by the script.
-# Example ARM endpoint (Azure public cloud): https://management.azure.com/
-$armTokenResponse = Get-AzAccessToken -ResourceUrl "<ARM endpoint for your cloud>"
+$armTokenResponse = Get-AzAccessToken -ResourceUrl
    
 # Convert token to string for use in initialization
 # Required because Get-AzAccessToken returns SecureString

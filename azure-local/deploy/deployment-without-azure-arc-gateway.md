@@ -78,8 +78,7 @@ $ProxyServer = "http://proxyaddress:port"
 
 #Optional: Define the Azure Resource Manager access token.
 # If omitted, device code authentication is prompted by the script.
-# Example ARM endpoint (Azure public cloud): https://management.azure.com/
-$armTokenResponse = Get-AzAccessToken -ResourceUrl "<ARM endpoint for your cloud>"
+$armTokenResponse = Get-AzAccessToken
     
 # Convert token to string for use in initialization
 # Required because Get-AzAccessToken returns SecureString
@@ -367,8 +366,7 @@ $Region = "eastus"
 
 #Optional: Define the Azure Resource Manager access token.
 # If omitted, device code authentication is prompted by the script.
-# Example ARM endpoint (Azure public cloud): https://management.azure.com/
-$armTokenResponse = Get-AzAccessToken -ResourceUrl "<ARM endpoint for your cloud>"
+$armTokenResponse = Get-AzAccessToken
     
 # Convert token to string for use in initialization
 # Required because Get-AzAccessToken returns SecureString
