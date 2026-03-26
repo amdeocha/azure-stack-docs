@@ -53,7 +53,7 @@ For more information on Azure subscriptions and roles, see [Azure roles, Azure A
 
 |Level|Permissions|
 |-|-|
-|Tenant|[Application Developer](https://learn.microsoft.com/entra/identity/role-based-access-control/permissions-reference#application-developer)|
+|Tenant|[Application Developer](/entra/identity/role-based-access-control/permissions-reference#application-developer)|
 |Subscription|Contributor, User Access Administrator|
 
 For any subscriptions hosting resources used in migration, such as Azure Migrate project subscriptions and target Azure Local instance subscriptions, the **Microsoft.DataReplication** resource provider must be registered. For more information, see [register resource provider](/azure/azure-resource-manager/management/resource-providers-and-types).
