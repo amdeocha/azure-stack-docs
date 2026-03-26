@@ -11,7 +11,7 @@ ms.custom: azure-operator-nexus, template-include
 
 # Azure Operator Nexus Fabric runtime upgrade template
 
-This how-to guide provides a step-by-step template for upgrading an Azure Operator Nexus Fabric instance. Use this template to manage a reproducible end-to-end upgrade through Azure APIs and standard operating procedures. Regularly update your system to maintain integrity and access the latest product improvements. 
+This how-to guide provides a step-by-step template for upgrading an Azure Operator Nexus Fabric instance. Use this template to manage a reproducible end-to-end upgrade through Azure APIs and standard operating procedures. Regularly update your system to maintain integrity and access the latest product improvements.
 
 ## Overview
 <details>
@@ -20,7 +20,7 @@ This how-to guide provides a step-by-step template for upgrading an Azure Operat
 
 These components require operator consent for upgrades that might affect traffic behavior or necessitate device reboots. The network fabric's design allows you to apply updates while maintaining continuous data traffic flow.
 
-This is how runtime changes are categorized:
+Runtime changes are divided into the following categories:
 
 - **Operating system updates**: Necessary to support new features or resolve issues.
 - **Base configuration updates**: Initial settings applied during device bootstrapping.
