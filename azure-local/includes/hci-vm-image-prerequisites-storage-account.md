@@ -10,7 +10,7 @@ ms.date: 07/08/2025
 - Make sure to review and [complete the prerequisites](../manage/azure-arc-vm-management-prerequisites.md).
 
 - For custom images in Azure Storage account, you have the following extra prerequisites:
-  - Your image uses an operating system that is supported by the [Azure Arc connected machine agent](/azure/azure-arc/servers/prerequisites#supported-operating-systems).
+  - Your image uses an operating system that the [Azure Arc connected machine agent](/azure/azure-arc/servers/prerequisites#supported-operating-systems) supports.
     > [!NOTE]
     > Not all operating systems listed on the Azure Arc-enabled servers supported OS page are supported for Arc enablement (guest management) on Azure Local. Guest management requires Hyper-V socket (HV socket) support, which limits the supported OS set further.
   - You should have a VHD loaded in your Azure Storage account. See how to [Upload a VHD image in your Azure Storage account](/azure/databox-online/azure-stack-edge-gpu-create-virtual-machine-image?tabs=windows#copy-vhd-to-storage-account-using-azcopy).
