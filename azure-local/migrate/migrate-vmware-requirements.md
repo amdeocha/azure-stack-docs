@@ -98,7 +98,7 @@ For any subscriptions hosting resources used in migration, such as Azure Migrate
 
 - Azure Migrate will retain the boot type of the VM during migration. If the source VMware VM is using BIOS, the migrated VM on Azure Local will also use BIOS. If the source VMware VM is using UEFI, the migrated VM on Azure Local will also use UEFI.
 
-- This means that BIOS VMs will be created as Hyper-V Generation 1 VMs on Azure Local, and UEFI VMs will be created as Hyper-V Generation 2 VMs on Azure Local. For more information on Generation 1 VM limitations, see [Azure Local VM management](https://learn.microsoft.com/azure/azure-local/manage/azure-arc-vm-management-overview).
+- This means that BIOS VMs will be created as Hyper-V Generation 1 VMs on Azure Local, and UEFI VMs will be created as Hyper-V Generation 2 VMs on Azure Local. For more information on Generation 1 VM limitations, see [Azure Local VM management](../manage/azure-arc-vm-management-overview.md).
 
 ## Next steps
 
