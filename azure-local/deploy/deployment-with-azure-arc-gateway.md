@@ -1,9 +1,9 @@
 --- 
-title: Register Azure Local using Arc gateway and with and without proxy setup.
+title: Register Azure Local with Azure Arc using Arc Gateway
 description: Learn how to register Azure Local using Azure Arc gateway Arc proxy. Both scenarios with and without proxy are configured. 
 author: alkohli
 ms.topic: how-to
-ms.date: 02/17/2026
+ms.date: 03/26/2026
 ms.author: alkohli
 ms.service: azure-local
 zone_pivot_groups: register-arc-options
@@ -69,7 +69,16 @@ This article details how to register Azure Local using Azure Arc gateway and wit
     $Region = "eastus"
     
     #Define the proxy address for your Azure Local deployment to access the internet via proxy.
-    $ProxyServer = "http://proxyaddress:port"    
+    $ProxyServer = "http://proxyaddress:port"
+
+    #Optional: Define the Azure Resource Manager access token.
+    # If omitted, device code authentication is prompted by the script.
+    # Example ARM endpoint (Azure public cloud): https://management.azure.com/
+    $armTokenResponse = Get-AzAccessToken -ResourceUrl "<ARM endpoint for your cloud>"
+    
+    # Convert token to string for use in initialization
+    # Required because Get-AzAccessToken returns SecureString
+    $ArmAccessToken = [System.Net.NetworkCredential]::new("", $armTokenResponse.Token).Password    
    
     #Define the bypass list for the proxy. Use comma to separate each item from the list.  
     # Parameters must be separated with a comma `,`.
@@ -104,7 +113,7 @@ This article details how to register Azure Local using Azure Arc gateway and wit
 
     ```Powershell
     #Invoke the registration script with Proxy and ArcgatewayID 
-    Invoke-AzStackHciArcInitialization -TenantID $Tenant -SubscriptionID $Subscription -ResourceGroup $RG -Region $Region -Cloud "AzureCloud" -Proxy $ProxyServer -ArcGatewayID $ArcgwId -ProxyBypass $ProxyBypassList -TargetSolutionVersion $TargetSolutionVersion
+    Invoke-AzStackHciArcInitialization -TenantID $Tenant -SubscriptionID $Subscription -ResourceGroup $RG -Region $Region -Cloud "AzureCloud" -Proxy $ProxyServer -ArmAccessToken $ArmAccessToken -ArcGatewayID $ArcgwId -ProxyBypass $ProxyBypassList -TargetSolutionVersion $TargetSolutionVersion
     ```
 
 1. During the Arc registration process, you must authenticate with your Azure account. The console window displays a code that you must enter in the URL, displayed in the app, in order to authenticate. Follow the instructions to complete the authentication process.
@@ -344,6 +353,16 @@ $RG = "yourresourcegroupname"
 #Define the Arc gateway resource ID from Azure. 
 $ArcgwId = "/subscriptions/yourarcgatewayid/resourceGroups/yourresourcegroupname/providers/Microsoft.HybridCompute/gateways/yourarcgatewayname"
 
+
+#Optional: Define the Azure Resource Manager access token.
+# If omitted, device code authentication is prompted by the script.
+# Example ARM endpoint (Azure public cloud): https://management.azure.com/
+$armTokenResponse = Get-AzAccessToken -ResourceUrl "<ARM endpoint for your cloud>"
+   
+# Convert token to string for use in initialization
+# Required because Get-AzAccessToken returns SecureString
+$ArmAccessToken = [System.Net.NetworkCredential]::new("", $armTokenResponse.Token).Password   
+
 # Define the target Azure Local solution version that the node must match when registering with Azure Arc.
 # Example: "12.2602.1002.10"
 $TargetSolutionVersion = "<solution-version>"
@@ -360,7 +379,7 @@ To use the Arc gateway feature for Azure Local systems without a proxy, only use
 
     ```powershell
     #Invoke the registration script with ArcgatewayID 
-    Invoke-AzStackHciArcInitialization -TenantID $Tenant -SubscriptionID $Subscription -ResourceGroup $RG -Region $Region -Cloud "AzureCloud" -ArcGatewayID $ArcgwId -TargetSolutionVersion $TargetSolutionVersion
+    Invoke-AzStackHciArcInitialization -TenantID $Tenant -SubscriptionID $Subscription -ResourceGroup $RG -Region $Region -Cloud "AzureCloud" -ArcGatewayID $ArcgwId -ArmAccessToken $ArmAccessToken -TargetSolutionVersion $TargetSolutionVersion
     ```
 
 1. During the Arc registration process, you must authenticate with your Azure account. The console window displays a code that you must enter in the URL, in order to authenticate. Follow the instructions to complete the authentication process.
