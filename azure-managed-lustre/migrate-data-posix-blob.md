@@ -2,10 +2,10 @@
 title: Migrate Data from On-Premises POSIX File Systems to Azure Managed Lustre
 description: Learn how to migrate data from an on-premises POSIX file system to Azure Managed Lustre by using AzCopy and Azure Blob Storage as an intermediary.
 ms.topic: how-to
-ms.date: 03/25/2026
+ms.date: 03/27/2026
 author: wolfgang-desalvador
-ms.author: wolfgang-desalvador
-ms.reviewer: ronhogue
+ms.author: wdesalvador
+ms.reviewer: rohogue
 
 # Intent: As an IT Pro, I want to migrate data from my on-premises POSIX file system to Azure Managed Lustre while preserving POSIX attributes.
 # Keyword: Lustre data migration POSIX AzCopy
@@ -14,17 +14,17 @@ ms.reviewer: ronhogue
 
 # Migrate data from an on-premises POSIX file system to Azure Managed Lustre
 
-In this article, you learn how to migrate data from an on-premises POSIX file system to Azure Managed Lustre by using Azure Blob Storage as an intermediary. This approach uses AzCopy to upload data to a blob container while preserving POSIX properties, and then imports the data from the blob container into your Azure Managed Lustre file system.
+In this article, you'll learn how to migrate data from an on-premises POSIX file system to Azure Managed Lustre by using Azure Blob Storage as an intermediary. This approach uses AzCopy to upload data to a blob container while preserving POSIX properties, and then imports the data from the blob container into your Azure Managed Lustre file system.
 
 ## Overview
 
 Azure Managed Lustre integrates with Azure Blob Storage, which makes Blob Storage useful as a staging area when migrating data from on-premises environments.
 
-### Why use Azure Blob Storage as an intermediary?
+### Use Azure Blob Storage as an intermediary
 
 Using Azure Blob Storage as an intermediary for data migration offers several advantages over copying data directly to a file system using traditional POSIX protocols such as NFS or SMB:
 
-- **REST API-based access from outside Azure**: Azure Blob Storage exposes REST APIs that are accessible from any network with internet connectivity. This simplifies data transfers from on-premises environments without requiring VPN or ExpressRoute connectivity for the initial data upload, and provides fine-grained access control through shared access signatures (SAS) tokens or Microsoft Entra ID. If your security requirements don't allow public internet access, you can also configure [private endpoints](/azure/storage/common/storage-private-endpoints) and use VPN or Azure ExpressRoute to keep all traffic on a private network.
+- **REST API-based access from outside Azure**: Azure Blob Storage exposes REST APIs that are accessible from any network with internet connectivity. This simplifies data transfers from on-premises environments without requiring VPN or ExpressRoute connectivity for the initial data upload, and provides fine-grained access control through shared access signatures (SAS) tokens or Microsoft Entra ID. If your security requirements don't allow public internet access, you can also configure [private endpoints](/azure/storage/common/storage-private-endpoints) and use a VPN or Azure ExpressRoute to keep all traffic on a private network.
 - **Better performance under high-latency conditions**: AzCopy is optimized for transferring data over high-latency connections. It uses parallel connections, automatic retries, and resumable transfers that significantly outperform traditional POSIX-based protocols like NFS or SMB, which are sensitive to network latency and can experience severe throughput degradation over long distances.
 - **Decoupled staging and import**: Uploading data to Blob Storage first allows you to stage data independently of the Azure Managed Lustre file system, validate the transfer, and then import at a convenient time.
 
@@ -41,7 +41,7 @@ Before you start the migration, make sure you have the following resources and c
 
 - **Azure Managed Lustre file system**: An existing file system with blob integration configured. Blob integration must be configured at file system creation time and can't be added later. If you don't have a file system yet, see [Create an Azure Managed Lustre file system](create-file-system-portal.md) and make sure to enable blob integration during the creation process. For more information, see [Azure Blob Storage integration](amlfs-overview.md#azure-blob-storage-integration).
 - **Azure Blob Storage account**: A storage account with a blob container configured for use with Azure Managed Lustre. For more information, see [Blob integration prerequisites](amlfs-prerequisites.md#blob-integration-prerequisites).
-- **AzCopy**: Version 10.32.2 or later installed on your on-premises system. To download and install AzCopy, see [Get started with AzCopy](/azure/storage/common/storage-use-azcopy-v10).
+- **AzCopy**: Install version 10.32.2 or later on your on-premises system. To download and install AzCopy, see [Get started with AzCopy](/azure/storage/common/storage-use-azcopy-v10).
 - **Authentication**: AzCopy must be authorized to access the storage account. You can use Microsoft Entra ID or a shared access signature (SAS) token. For more information, see [Authorize AzCopy](/azure/storage/common/storage-use-azcopy-v10#authorize-azcopy).
 
 ## Step 1: Upload data to Azure Blob Storage with POSIX properties
@@ -52,7 +52,7 @@ The `--preserve-posix-properties` flag instructs AzCopy to preserve POSIX proper
 
 ### Use azcopy copy
 
-The `azcopy copy` command copies data from a source to a destination. Use this command to perform a full data transfer from your on-premises file system to the blob container.
+The `azcopy copy` command copies data from a source to a destination. Use `azcopy` 10.32.2 or later to perform a full data transfer from your on-premises file system to the blob container.
 
 ```bash
 azcopy copy '/path/to/local/directory' 'https://<storage-account>.blob.core.windows.net/<container>/<path>' \
@@ -80,7 +80,7 @@ azcopy copy '/data/hpc-workload' 'https://mystorageaccount.blob.core.windows.net
 ```
 
 > [!IMPORTANT]
-> By default, AzCopy `copy` creates the source directory name as a subdirectory at the destination. In the previous example, the data is uploaded to `lustre-data/hpc-workload/`. You can control this behavior in two ways:
+> By default, `azcopy copy` creates the source directory name as a subdirectory at the destination. In the previous example, the data is uploaded to `lustre-data/hpc-workload/`. You can control this behavior in two ways:
 >
 > - **Use the `--as-subdir=false` flag**: This flag tells AzCopy to copy only the *contents* of the source directory to the destination without creating the parent directory. For example:
 >
@@ -97,7 +97,7 @@ azcopy copy '/data/hpc-workload' 'https://mystorageaccount.blob.core.windows.net
 >
 > - **Use a wildcard as source** (for example, `/data/hpc-workload/*`): AzCopy copies only the *contents* of the directory without creating the parent directory at the destination, similar to using `--as-subdir=false`.
 >
-> Choose the appropriate approach based on the directory structure you want in the blob container, because this structure is replicated when you import the data into Azure Managed Lustre.
+> Choose the appropriate approach based on the directory structure you want in the blob container. This structure is replicated when you import the data into Azure Managed Lustre.
 
 ### Use azcopy sync
 
@@ -123,7 +123,7 @@ azcopy sync '/data/hpc-workload' 'https://mystorageaccount.blob.core.windows.net
 > The `azcopy sync` command compares file names and last modified timestamps to determine which files need to be transferred. Only new or updated files are transferred, which makes sync operations faster for incremental updates.
 
 > [!IMPORTANT]
-> Unlike `azcopy copy`, the `azcopy sync` command always synchronizes the *contents* of the source directory to the destination without creating a parent directory. For example, `azcopy sync '/data/hpc-workload' 'https://...blob.core.windows.net/lustre-data/'` uploads the contents of `hpc-workload` directly into `lustre-data/`, not into `lustre-data/hpc-workload/`. Make sure the destination path in the blob container reflects the directory structure you want in Azure Managed Lustre.
+> Unlike `azcopy copy`, the `azcopy sync` command always synchronizes the *contents* of the source directory to the destination without creating a parent directory. For example, `azcopy sync '/data/hpc-workload' 'https://...blob.core.windows.net/lustre-data/'` uploads the contents of `hpc-workload` directly into `lustre-data/`, not into `lustre-data/hpc-workload/`. Make sure the destination path in the blob container reflects the directory structure you want in Azure Managed Lustre. For more information, see [Synchronize with Azure Blob storage by using AzCopy](/azure/storage/common/storage-use-azcopy-blobs-synchronize).
 
 ### Verify the upload
 
@@ -143,7 +143,7 @@ For automated and continuous data synchronization from Blob Storage into Azure M
 
 ## Limitations
 
-- **Symbolic links aren't preserved**: Azure Blob Storage doesn't support symbolic links (symlinks). Any symlinks in the source POSIX file system are skipped during the AzCopy transfer and aren't migrated to the blob container or to Azure Managed Lustre. If your data relies on symlinks, you must restructure the data before migration or re-create the symlinks manually after the data is imported into the Azure Managed Lustre file system. For more information, see [Use Azure Blob Storage with Azure Managed Lustre](blob-integration.md).
+- **Symbolic links aren't preserved**: Azure Blob Storage doesn't support symbolic links (symlinks). Symlinks in the source POSIX file system are skipped during the AzCopy transfer and aren't migrated to the blob container or to Azure Managed Lustre. If your data relies on symlinks, you must restructure the data before migration or re-create the symlinks manually after the data is imported into the Azure Managed Lustre file system. For more information, see [Use Azure Blob Storage with Azure Managed Lustre](blob-integration.md).
 
 ## Tips and best practices
 
