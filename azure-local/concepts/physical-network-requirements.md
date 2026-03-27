@@ -380,6 +380,7 @@ This section lists industry standards that are mandatory for the specific roles 
 > Network adapters used for compute, storage, and management traffic require Ethernet. For more information, see [Host network requirements](host-network-requirements.md).
 
 Here are the mandatory IEEE standards and specifications:
+
 # [24H2](#tab/24H2reqs)
 
 ### 24H2 role requirements
@@ -390,7 +391,7 @@ Here are the mandatory IEEE standards and specifications:
 | Priority Flow Control|| &check;| | |
 | Enhanced Transmission Selection|| &check;| | |
 | LLDP Port VLAN ID |&check;| | | |
-| LLDP VLAN Name|| &check;| &check;|&check; |
+| LLDP VLAN Name|| &check;| & check;|&check; |
 | LLDP Link Aggregation|&check;| &check;| &check;|&check; |
 | LLDP ETS Configuration||&check; | | |
 | LLDP ETS Recommendation || &check;|| |
@@ -399,8 +400,10 @@ Here are the mandatory IEEE standards and specifications:
 | Maximum Transmission Unit || | |&check; |
 | Border Gateway Protocol || | |&check; |
 | DHCP Relay Agent |&check;| | | |
+
 > [!NOTE]
 > Guest RDMA requires both Compute (Standard) and Storage.
+
 ### Standard: IEEE 802.1Q
 
 Ethernet switches must comply with the IEEE 802.1Q specification that defines VLANs. Azure Local requires VLANs for several aspects and requires them in all scenarios.
@@ -449,7 +452,7 @@ Ethernet switches used for Azure Local management traffic must support DHCP rela
 
 # [23H2](#tab/23H2reqs)
 
-### 23H2 Role Requirements
+### 23H2 role requirements
 
 |Requirement |Management | Storage | Compute (Standard)| Compute (SDN)|
 |-----  | :-:  | :-:  | :-:   | :-:   |
@@ -466,8 +469,10 @@ Ethernet switches used for Azure Local management traffic must support DHCP rela
 | Maximum Transmission Unit || | |&check; |
 | Border Gateway Protocol || | |&check; |
 | DHCP Relay Agent |&check;| | | |
+
 > [!NOTE]
 > Guest RDMA requires both Compute (Standard) and Storage.
+
 ### Standard: IEEE 802.1Q
 
 Ethernet switches must comply with the IEEE 802.1Q specification that defines VLANs. Azure Local requires VLANs for several aspects and requires them in all scenarios.
