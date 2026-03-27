@@ -422,7 +422,7 @@ $TargetSolutionVersion = "<solution-version>"
 
 ```
 
-## Step 3: Run the registration script
+## Step 4: Run the registration script
 
 > [!NOTE]
 > If your Azure Local system is preinstalled with an Original Equipment Manufacturer (OEM) image that's outdated or unsupported, or if it was installed with an older ISO, see [Handle preinstalled or outdated OS images during Azure Arc registration](#handle-preinstalled-or-outdated-os-images-during-azure-arc-registration).
@@ -456,7 +456,7 @@ To use the Arc gateway feature for Azure Local systems without a proxy, only use
 
 [!INCLUDE [handle-os-image-updates](../includes/azure-local-handle-os-image-update-during-arc-registration.md)]
 
-## Step 4: Verify the setup is successful
+## Step 5: Verify the setup is successful
 
 Once the registration is complete, follow these steps to verify that Azure Arc gateway setup is successful.
 
