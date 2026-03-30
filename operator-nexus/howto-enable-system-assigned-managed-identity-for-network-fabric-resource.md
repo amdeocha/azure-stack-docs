@@ -53,7 +53,7 @@ az networkfabric fabric create \
 ```
 
 For the full create command argument set, refer to the public documentation:
-> See [Create a Network Fabric](https://learn.microsoft.com/en-us/azure/operator-nexus/howto-configure-network-fabric#create-a-network-fabric) for the complete create-command arguments.
+> See [Create a Network Fabric](./operator-nexus/howto-configure-network-fabric.md#create-a-network-fabric) for the complete create-command arguments.
 
 This guide shows the minimum arguments relevant to SAMI enablement, not the complete set of arguments for resource creation.
 
@@ -83,7 +83,7 @@ az networkfabric fabric create \
 > ```bash
 > --storage-account-config "{storageAccountId:'<storage-account-resource-id>',storageAccountIdentity:{identityType:'UserAssignedIdentity',userAssignedIdentityResourceId:'<uami-resource-id>'}}"
 > ```
-> See [Bring Your Own Storage for Network Fabric](https://learn.microsoft.com/en-us/azure/operator-nexus/howto-configure-bring-your-own-storage-network-fabric) for full BYoS guidance.
+> See [Bring Your Own Storage for Network Fabric](operator-nexus/howto-configure-bring-your-own-storage-network-fabric.md) for full BYoS guidance.
 
 ### 3) Create Network Fabric Resource with SAMI + UAMI
 
