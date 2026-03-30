@@ -69,4 +69,4 @@ To implement the functionality for CP-TP ACL:
 
 ## Related content
 
-- [Create ACL management for NNI and layer 3 isolation domain external networks](howto-create-access-control-list-for-network-to-network-interconnects.md)
+- [Create ACL management for NNI and layer 3 isolation domain external networks](howto-create-access-control-list.md)

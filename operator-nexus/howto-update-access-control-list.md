@@ -1,8 +1,8 @@
 ---
 title: Updating ACLs associated with resources
 description: Learn the process of updating ACLs associated with resources
-author: sushantjrao 
-ms.author: sushrao
+author: rbhupatiraju 
+ms.author: rbhupatiraju
 ms.service: azure-operator-nexus
 ms.topic: how-to
 ms.date: 04/18/2024
@@ -115,4 +115,4 @@ az networkfabric fabric commit-configuration --resource-group "<resource-group>"
 
 ## Next Steps
 
-[Deleting ACLs associated with Network-to-Network Interconnects (NNI)](howto-delete-access-control-list-network-to-network-interconnect.md)
+[Deleting ACLs associated with Network-to-Network Interconnects (NNI)](howto-delete-access-control-list.md)

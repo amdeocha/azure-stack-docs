@@ -213,4 +213,4 @@ police rate 1000 kbps burst-size 10 kbytes
 > Burst size is mandatory when a Police Rate is defined on NNI ACLs.
 ## Next Steps
 
-[Applying Access Control Lists (ACLs) to NNI in Azure Fabric](howto-apply-access-control-list-to-network-to-network-interconnects.md)
+[Applying Access Control Lists (ACLs) to NNI in Azure Fabric](howto-apply-access-control-list.md)

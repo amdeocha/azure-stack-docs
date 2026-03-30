@@ -1,8 +1,8 @@
 ---
 title: 'Azure Operator Nexus: Apply ACLs to Resources'
 description: Learn how to apply access control lists (ACLs) to network-to-network interconnects (NNIs), layer 3 External Networks, and Network Fabrics within Azure Operator Nexus Network Fabric.
-author: sushantjrao
-ms.author: sushrao
+author: rbhupatiraju
+ms.author: rbhupatiraju
 ms.service: azure-operator-nexus
 ms.topic: how-to
 ms.date: 04/23/2024
@@ -107,4 +107,4 @@ az networkfabric externalnetwork update --resource-group "<resource-group-name>"
 
 ## Related content
 
-- [Update ACLs on NNIs or an external network](howto-update-access-control-list-for-network-to-network-interconnects.md)
+- [Update ACLs on NNIs or an external network](howto-update-access-control-list.md)
