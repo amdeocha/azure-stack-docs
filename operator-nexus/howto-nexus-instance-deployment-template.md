@@ -504,5 +504,5 @@ Reference links for deploying a Nexus Instance:
 - [Troubleshoot BMM warning](troubleshoot-bare-metal-machine-warning.md)
 - Reference the [Nexus Telco Input Template](concepts-telco-input-template.md)
 - Reference the [Nexus Platform Prerequisites](howto-platform-prerequisites.md)
-- Create a [Network Fabric ACL](howto-create-access-control-list-for-network-to-network-interconnects.md)
+- Create a [Network Fabric ACL](howto-create-access-control-list.md)
 </details>
