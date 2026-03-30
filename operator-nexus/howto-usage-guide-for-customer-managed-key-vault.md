@@ -1,5 +1,5 @@
 ---
-title: How-to usage guide for Customer Managed Key Vault
+title: How to usage guide for Customer Managed Key Vault
 description: How-to usage guide for Customer Managed Key Vault
 ms.service: azure-operator-nexus
 ms.custom: template-how-to
@@ -9,11 +9,11 @@ author: RaghvendraMandawale
 ms.author: rmandawale
 ---
 
-# How-to usage guide for Customer Managed Key Vault
+# How to usage guide for Customer Managed Key Vault
 
 Network Fabrics use secrets (passwords) to access the Terminal Server and Network Devices and these secrets are stored in a Key Vault in the Network Fabric Controller Managed Resource Group.
 
-In some regions (currently `West US3` and `Brazil South`), Key Vaults do not have automatic cross‑region (paired‑region) replication.  As a workaround to protect against a region outage, a customer may define a _Customer Managed Key Vault_ may be defined.  Once configured, secrets that are exposed to customers are duplicated to this Customer Managed Key Vault each time a password rotation occurs.
+In some regions (currently `West US3` and `Brazil South`), Key Vaults don't have automatic cross‑region (paired‑region) replication. As a workaround to protect against a region outage, a customer may define a _Customer Managed Key Vault_. Once configured, secrets that are exposed to customers are duplicated to this Customer Managed Key Vault each time a password rotation occurs.
 
  
 ## Secret Archive Settings Configuration
@@ -21,30 +21,23 @@ In some regions (currently `West US3` and `Brazil South`), Key Vaults do not hav
 The following steps are required to enable a Customer Managed Key Vault.
 
 1. The customer creates a Key Vault in a different region
-
-2. The customer uses the `Settings, Networkworking` menu to ensure that `Enable trusted Microsoft services to bypass this firewall` is enabled for the Customer Managed Key Vault.  This is required to ensure that Network Fabric has a route to the customer Key Vault when making password write requests.
-
+2. The customer uses the `Settings, Networkworking` menu to ensure that `Enable trusted Microsoft services to bypass this firewall` is enabled for the Customer Managed Key Vault. This is required to ensure that Network Fabric has a route to the Customer Key Vault when making password write requests.
 3. The customer associates the User Assigned Managed Identity with the Network Fabric
-
 4. The customer assigns the User Assigned Managed Identity `Operator Nexus Key Vault Writer Service Role (Preview)` permission for the Customer Managed Key Vault.
-
 5. The customer uses the `2026-01-15-preview` ARM API to configure Customer Key Vault settings; in the ARM API these settings are known as the `Secret Archive Settings`.  The customer must configure:
 
    - The URI of the Customer Managed Key Vault
    - The type of Managed Identity (`UserAssignedIdentity` is preferred but `SystemAssignedIdentity` is possible)
-   - The resource ID of the User Assigned Managed Identity (do not provide a resource ID if using `SystemAssignedIdentity`).
-
+   - The resource ID of the User Assigned Managed Identity (don't provide a resource ID if using `SystemAssignedIdentity`).
 6. The `Secret Archive Settings` configuration must then be committed by locking the Network Fabric and committing the configuration.
 
- 
-
-Once this has been achieved, future Password Rotation operations will duplicate customer accessible secrets to the Customer Managed Key Vault and customer visible secret references in the Network Fabric and Network Device configuration will indicate the secret and secret version in the Customer Managed Key Vault.
+Once this has been achieved, future Password Rotation operations duplicate customer accessible secrets to the Customer Managed Key Vault and customer visible secret references in the Network Fabric and Network Device configuration will indicate the secret and secret version in the Customer Managed Key Vault.
 
  
 
 ### Examples
 
-It is assumed that the customer has created a Customer Managed Key Vault, a User Assigned Managed Identity, and has given the User Assigned Managed Identity the `Operator Nexus Key Vault Writer Service Role (Preview)` permission for the Customer Managed Key Vault
+It's assumed that the customer has created a Customer Managed Key Vault, a User Assigned Managed Identity, and has given the User Assigned Managed Identity the `Operator Nexus Key Vault Writer Service Role (Preview)` permission for the Customer Managed Key Vault
 
 - Associate the User assigned Managed Identity with the Network Fabric.
 
@@ -193,11 +186,11 @@ $ az networkfabric fabric rotate-password --resource-group <my-nf-rg> --resource
 
 ### Removing Secret Archive Settings Configuration
 
-Removing Secret Archive Settings configuration will means that future Password Rotations **do not** copy secrets to the Customer Managed Key Vault and after a Password Rotation, **all** secret references in the Network Fabric and Network Device configuration wil reference the Key Vault in the NetworkFabric Controller Managed Resource Group.
+Removing Secret Archive Settings configuration will means that future Password Rotations **do not** copy secrets to the Customer Managed Key Vault and after a Password Rotation, **all** secret references in the Network Fabric and Network Device configuration will reference the Key Vault in the NetworkFabric Controller Managed Resource Group.
 
  
 
-1. The customer use `az rest...` and the `2026-01-15-preview` ARM API to remove Customer Key Vault settings; in the ARM API these settings are known as the `Secret Archive Settings`.  The customer should set the `Secret Archive Settings` to `null`.
+1. The customer use `az rest...` and the `2026-01-15-preview` ARM API to remove Customer Key Vault settings; in the ARM API these settings are known as the `Secret Archive Settings`.The customer should set the `Secret Archive Settings` to `null`.
 
  
 
@@ -218,11 +211,7 @@ Removing Secret Archive Settings configuration will means that future Password R
  
 
 2. The `Secret Archive Settings` removal must then be committed by locking the Network Fabric and committing the configuration.
-
 3. The customer removes the `Operator Nexus Key Vault Writer Service Role (Preview)` permissions for the Customer Managed Key Vault from the User Assigned Managed Identity.
-
 4. The customer disassociates the User assigned Managed Identity from the Network Fabric using the `az network fabric update...` command as above
-
 5. (Optional) The customer deletes the User Assigned Managed Identity
-
 6. (Optional) The customer deletes the Customer Managed Key Vault.
