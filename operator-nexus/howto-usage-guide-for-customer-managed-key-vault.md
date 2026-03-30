@@ -1,6 +1,6 @@
 ---
 title: How to usage guide for Customer Managed Key Vault
-description: How-to usage guide for Customer Managed Key Vault
+description: Howto usage guide for Customer Managed Key Vault
 ms.service: azure-operator-nexus
 ms.custom: template-how-to
 ms.topic: how-to
