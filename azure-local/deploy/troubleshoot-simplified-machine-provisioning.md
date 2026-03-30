@@ -112,7 +112,7 @@ You only need to boot from a USB device once to install the maintenance environm
 
 **Recommendations:**
 
-1. In Azure portal, browse to the resource group where you're trying to provision new machines and select **Monitor** > **Activity log**. You can use the activity log to investigate the provisioning error and determine which Azure Policy is restricting resource creation. For more information, see [Activity log in Azure Monitor](/azure/azure-monitor/platform/activity-log.md).
+1. In Azure portal, browse to the resource group where you're trying to provision new machines and select **Monitor** > **Activity log**. You can use the activity log to investigate the provisioning error and determine which Azure Policy is restricting resource creation. For more information, see [Activity log in Azure Monitor](/azure/azure-monitor/platform/activity-log).
 
 1. Add an [Azure Policy exemption](/azure/governance/policy/concepts/exemption-structure) for the policy that conflicts with simplified machine provisioning.
 
@@ -134,7 +134,7 @@ This error has the following possible causes.
 
 **Recommendation:**
 
-1. In Azure portal, browse to the resource group where you're trying to provision new machines and select **Monitor** > **Activity log**. You can use the activity log to investigate the provisioning error and determine which Azure Policy is restricting resource creation. For more information, see [Activity log in Azure Monitor](/azure/azure-monitor/platform/activity-log.md).
+1. In Azure portal, browse to the resource group where you're trying to provision new machines and select **Monitor** > **Activity log**. You can use the activity log to investigate the provisioning error and determine which Azure Policy is restricting resource creation. For more information, see [Activity log in Azure Monitor](/azure/azure-monitor/platform/activity-log).
 
 1. Add an [Azure Policy exemption](/azure/governance/policy/concepts/exemption-structure) for the policy that conflicts with simplified machine provisioning.
 
