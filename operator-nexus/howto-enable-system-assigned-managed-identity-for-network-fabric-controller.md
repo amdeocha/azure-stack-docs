@@ -46,7 +46,7 @@ az networkfabric controller create \
 ```
 
 For the full create command argument set, refer to the public documentation:
-> See [Create a Network Fabric Controller](https://learn.microsoft.com/en-us/azure/operator-nexus/howto-configure-network-fabric-controller#create-a-network-fabric-controller) for the complete create-command arguments.
+> See [Create a Network Fabric Controller](./howto-configure-network-fabric-controller#create-a-network-fabric-controller.md) for the complete create-command arguments.
 
 This guide shows the minimum arguments relevant to SAMI enablement, not the complete set of arguments for resource creation.
 
