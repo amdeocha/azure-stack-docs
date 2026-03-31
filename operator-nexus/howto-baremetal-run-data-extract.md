@@ -842,7 +842,7 @@ az storage blob download --blob-url https://simdev4704108vm1sa.blob.core.windows
 ```
 
   > [!WARNING]
-  > To run `get-kernel-crashdump`, go to [Run a run-data-extracts-restricted command](#executing-a-run-data-extracts-restricted-command). This is only supported from NC4.10 and the `v20250701preview` API version.
+  > To run `list-kernel-crashdump`, go to [Run a run-data-extracts-restricted command](#executing-a-run-data-extracts-restricted-command). The minimum requirements for executing this command are NC4.10 and the `v20250701preview` API version.
 
 [!INCLUDE [command-output-view](./includes/run-commands/command-output-view.md)]
 
