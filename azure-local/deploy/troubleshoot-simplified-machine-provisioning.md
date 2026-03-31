@@ -19,6 +19,8 @@ This article describes how to troubleshoot simplified machine provisioning. You 
 - Collect a support package.
 - Collect logs from your Azure Subscription.
 
+
+
 ## Run diagnostic tests from the Configurator app
 
 To diagnose and troubleshoot any device issues related to hardware, time server, and network, you can run the diagnostics tests. Follow these steps to run the diagnostic tests from the app:
@@ -115,6 +117,8 @@ You only need to boot from a USB device once to install the maintenance environm
 1. In Azure portal, browse to the resource group where you're trying to provision new machines and select **Monitor** > **Activity log**. You can use the activity log to investigate the provisioning error and determine which Azure Policy is restricting resource creation. For more information, see [Activity log in Azure Monitor](/azure/azure-monitor/platform/activity-log).
 
 1. Add an [Azure Policy exemption](/azure/governance/policy/concepts/exemption-structure) for the policy that conflicts with simplified machine provisioning.
+
+1. If the error is due to the name of the Managed Resource Group (MRG), you can resolve it by setting the MRG name during the provisioning. After you select the site, select **Configure** and then set the MRG name to adhere to the customer's Azure Policy. In this preview release, only the `eastus` region supports MRGs.
 
 1. Delete the provisioned machine. Select **Azure Arc** > **Operations** > **Machine provisioning (preview)** > **Provisioned machines**. Select the machine and then select **Delete**.
 
