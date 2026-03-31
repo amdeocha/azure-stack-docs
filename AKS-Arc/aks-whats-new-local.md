@@ -37,7 +37,7 @@ The Kubernetes versions included in the 2602 release are: 1.31.12, 1.31.13, 1.32
 #### Announcements for 2510
 
 - Kubernetes version 1.29 is no longer supported.
-- KMS v2 is enabled by default for all new clusters created on Azure Local. While KMS v1 remains supported, it was deprecated with Kubernetes v1.28. Support for migrating existing clusters from KMS v1 to KMS v2 will be available soon. We recommend using KMS v2 for encryption at rest, for more information, [see the instructions here](encrypt-etcd-secrets.md).
+- KMS v2 is enabled by default for all new clusters created on Azure Local 2510 and later. KMS v1 was deprecated with [Kubernetes v1.28](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) but it has not been removed by Kubernetes. KMS v1 is still supported and you can continue using it on existing clusters. In-place migration from KMS v1 to KMS v2 is currently not supported. We recommend using KMS v2 for encryption at rest, for more information, [see the instructions here](encrypt-etcd-secrets.md).
 - Support for [Windows Server 2019 SKU](https://techcommunity.microsoft.com/blog/containers/announcing-the-3-year-retirement-of-windows-server-2019-on-azure-kubernetes-serv/3777341) for node pools ends in March 2026.
 
 #### Kubernetes versions in 2510
