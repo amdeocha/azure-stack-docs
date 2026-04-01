@@ -29,7 +29,16 @@ Azure Managed Lustre accepts only IPv4 addresses. IPv6 isn't supported.
 
 ### Network size requirements
 
-The size of subnet that you need depends on the size of the file system you create. The following table gives a rough estimate of the minimum subnet size for Azure Managed Lustre file systems of different sizes.
+The size of the subnet you need depends on the size of the Azure Managed Lustre file system you create. The following table provides a rough estimate of the minimum subnet size required for Azure Managed Lustre file systems of different storage capacities.
+
+> [!IMPORTANT]
+> The subnet must be large enough to assign an IP address to all Azure Managed Lustre storage nodes, including:
+>
+> – All Object Storage Servers (OSSs)
+> – All Metadata Servers (MDSs)
+> – Any service or agent nodes required for data movement, such as those used for integration with Azure Blob Storage.
+>
+> The CIDR values shown below represent minimum guidance only. The exact number of required IP addresses depends on the specific configuration of the file system and enabled features.
 
 | Storage capacity     | Recommended CIDR prefix value |
 |----------------------|-------------------------------|
@@ -38,6 +47,12 @@ The size of subnet that you need depends on the size of the file system you crea
 | 44 TiB to 92 TiB     | /25 or larger                 |
 | 96 TiB to 196 TiB    | /24 or larger                 |
 | 200 TiB to 400 TiB   | /23 or larger                 |
+
+To determine the exact subnet size required for a specific Azure Managed Lustre configuration, you can query the service directly using standard Azure interfaces such as REST APIs or the Azure CLI. For example, you can calculate the required subnet size for your precise file system SKU and capacity by running the command:
+
+```bash
+az amlfs get-subnets-size --sku [SKU] --storage-capacity [capacity]
+```
 
 #### Other network size considerations
 
