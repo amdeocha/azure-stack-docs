@@ -81,7 +81,7 @@ To install system updates using Azure Update Manager, follow these steps:
 
 1. Select **Next**.
 
-    [:::image type="content" source="./media/azure-update-manager/select-updates.png" alt-text="Screenshot to specify system updates in Azure Update Manager." lightbox="./media/azure-update-manager/select-updates.png":::](./media/azure-update-manager/select-updates.png#lightbox)
+    [:::image type="content" source="./media/azure-update-manager/select-updates.png" alt-text="Screenshot to specify system updates in Azure Update Manager." lightbox="./media/azure-update-manager/select-updates.png":::](media/azure-update-manager/select-updates.png#lightbox)
 
 1. On the **Review + install** page, verify your update options, and then select **Install**.
 
@@ -155,6 +155,6 @@ Follow these steps to find the solution version of your Azure Local instance:
 
 ## Next steps
 
-Learn more about the update phases, see [Understand update phases](./update-phases-23h2.md).
+- For more information about update phases, see [Understand update phases](./update-phases-23h2.md).
 
-Learn more about how to troubleshoot updates, see [Troubleshoot updates](./update-troubleshooting-23h2.md) and [Azure Local update troubleshooting guides](https://github.com/Azure/AzureLocal-Supportability/tree/main/TSG/Update).
+- For troubleshooting guidance, see [Troubleshoot updates](./update-troubleshooting-23h2.md) and [Azure Local update troubleshooting guides](https://github.com/Azure/AzureLocal-Supportability/tree/main/TSG/Update).
