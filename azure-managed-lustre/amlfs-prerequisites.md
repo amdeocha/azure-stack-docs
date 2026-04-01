@@ -29,7 +29,9 @@ Azure Managed Lustre accepts only IPv4 addresses. IPv6 isn't supported.
 
 ### Network size requirements
 
-The size of the subnet you need depends on the size of the Azure Managed Lustre file system you create. The following table provides a rough estimate of the minimum subnet size required for Azure Managed Lustre file systems of different storage capacities.
+The size of the subnet you need depends on the size of the Azure Managed Lustre file system you create. To support future expansion or multiple clusters, size the subnet accordingly. Azure reserves five IP addresses per subnet for its own use such as DNS, gateway, and broadcast. Read [Private IP addresses](/azure/virtual-network/ip-services/private-ip-addresses) to learn more.
+
+The following table provides a rough estimate of the minimum subnet size required for Azure Managed Lustre file systems of different storage capacities.
 
 > [!IMPORTANT]
 > The subnet must be large enough to assign an IP address to all Azure Managed Lustre storage nodes, including:
