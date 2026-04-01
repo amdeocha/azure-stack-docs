@@ -10,7 +10,7 @@ ms.date: 05/20/2025
 
 # Password by Key Vault reference
 
-This guide details how to configure a Cluster for deployment using a Key Vault Uniform Resource Identifier (URI) instead of a plaintext password. This credential is used when creating or updating an Azure Operator cluster and should be stored in a separate key vault from the one configured in `--secret-archive-settings`. The key vault URI is used for deploying the cluster. Once the cluster is deployed, automatic credential rotation handles the rotation of the password.
+This guide details how to configure a Cluster for deployment using a Key Vault Uniform Resource Identifier (URI) instead of a plaintext password. This credential is used when creating or updating an Azure Operator cluster and should be stored in a separate key vault from the one configured in `--secret-archive-settings`. This separation helps ensure least-privileged access to the secrets in the `secret-archive-settings` Key Vault. The key vault URI is used for deploying the cluster. Once the cluster is deployed, automatic credential rotation handles the rotation of the password.
 
 This Key Vault URI is used to retrieve the password value from the specified Key Vault as a one-time operation. Once this password value is retrieved, the URI is no longer used and the password is securely stored in the cluster.
 
