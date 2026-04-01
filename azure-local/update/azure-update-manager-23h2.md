@@ -39,7 +39,7 @@ Here are some benefits of the Azure Update Manager:
 ## Prerequisites
 
 - An Azure Local system deployed and registered with Azure.
-- Make sure to apply updates via supported navigation paths in Azure portal. Microsoft only supports updates applied from the **Azure Local** resource page or via the **Azure Update Manager > Resources > Azure Local**. Additionally, use of 3rd party tools to install updates isn't supported.
+- Make sure to apply updates via supported navigation paths in Azure portal. Microsoft supports updates only when applied through the **Azure Local resource page** or **Azure Update Manager > Resources > Azure Local**. Updates installed using third‑party tools are not supported.
 
 For Azure Local, Azure Update Manager is supported only in the regions where Azure Local is supported. For more information, see [List of supported Azure Local regions](../concepts/system-requirements-23h2.md#azure-requirements).
 
