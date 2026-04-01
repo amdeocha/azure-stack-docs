@@ -4,7 +4,7 @@ description: Understand the various phases of solution updates applied to Azure 
 author: alkohli
 ms.author: alkohli
 ms.topic: concept-article
-ms.date: 12/30/2025
+ms.date: 04/01/2026
 ms.subservice: hyperconverged
 ---
 
@@ -12,64 +12,166 @@ ms.subservice: hyperconverged
 
 [!INCLUDE [applies-to](../includes/hci-applies-to-23h2.md)]
 
-This article explains the different phases of solution updates that you apply to Azure Local to keep it up to date.
+This article describes the preparation and installation phases of the Azure Local update workflow, including how updates are downloaded, validated, health-checked, and installed. It also explains how update progress is reported at various stages.
 
-The procedure in this article applies to both single node and multi-node systems that are running the latest version of Azure Local with the orchestrator installed.
+For more detailed information on progress reporting, see [Use Azure Update Manager to update Azure Local](azure-update-manager-23h2.md) and [Update Azure Local via PowerShell](update-via-powershell-23h2.md).
 
-## About update phases
+## Overview
 
-The Azure Local solution updates can consist of OS, agents and service, and solution extension updates. For more information on these solution updates, see [About updates for Azure Local](about-updates-23h2.md).
+An Azure Local update follows a two-stage lifecycle:
 
-The new update feature automates the update process for agents, services, operating system content, and Solution Extension content, with the goal of maintaining availability by shifting workloads around throughout the update process when needed.
+1. **Preparation**: Download content, validate and extract packages, and run health checks to confirm the cluster is ready.
+1. **Installation**: Apply the update across the cluster via an orchestrated action plan.
 
-The AzureStack Update component retrieves the node sequence from `(Get-ClusterNode).Name` and passes it to Cluster-Aware Updating (CAU). For more information on updates through CAU, see [Cluster-Aware Updating overview](/windows-server/failover-clustering/cluster-aware-updating#BKMK_OVER).
+Each stage produces an `UpdateRun` resource that records step-by-step progress, timing, and any errors encountered. You can query the details of this run on the **Update Progress** page in Azure Update Manager or by using the `Get-SolutionUpdateRun` cmdlet in PowerShell.
 
-The updates can be of the following types:
+:::image type="content" source="media/update-phases-23h2/update-phases-actions.png" alt-text="Diagram of update process with Preparation phase and Installation phase steps." lightbox="media/update-phases-23h2/update-phases-actions.png":::
 
-- **Updates not requiring reboots** - The updates that can be applied to your Azure Local without any reboots.
+## Preparation phases
 
-- **Updates that require reboots** - The updates that might need a reboot in your Azure Local. Cluster-Aware Updating is used to reboot machines in the system one by one, ensuring the availability of the system during the update process.
+You can trigger preparation independently using `Start-SolutionUpdate -PrepareOnly`, which downloads and validates update content and runs health checks without starting installation. This allows you to pre-stage updates before a maintenance window or verify cluster readiness in advance.
 
-The updates consist of several phases: discovering the update, staging the content, deploying the update, and reviewing the installation. Each phase might not require your input but distinct actions occur in each phase.
+Before preparation, the update might be in an `AdditionalContentRequired` state. This state indicates that the update package (either an SBE update or a combined Solution plus SBE update) requires partner content, and the installed SBE package from the partner doesn't support automatic download of the content.
 
-You can apply these updates via PowerShell or the Azure portal. Regardless of the interface you choose, the subsequent sections summarize what happens within each phase of an update. The following diagram shows what actions you might need to take during each phase and what actions Azure Local takes through the update operation.
+If the update is in the `AdditionalContentRequired` state, you must import the content before you can begin preparation or installation. For more information, see [Update via PowerShell](update-via-powershell-23h2.md).
 
-[![A screenshot indicating the various phases of an update with actions you need to perform in each phase.](./media/update-phases/updates-phases-actions-23h2.png)](./media/update-phases/updates-phases-actions-23h2.png#lightbox)
+The preparation workflow moves through the following phases in order.
 
-## Phase 1: Discovery and acquisition
+### Download
 
-Before Microsoft releases a new update package, the package is validated as a collection of components. After the validation is complete, the content is released along with the release notes.
+The download phase retrieves the update package from the configured update source.
 
-The release notes include the update contents, changes, known issues, and links to any external downloads that might be required (for example, drivers and firmware). For more information, see the [Latest release notes](../known-issues.md).
+- **Standard download**: The Update Service downloads the main solution update package (NuGet bundles) directly from the update catalog.
+- **Progress tracking**: The `ProgressPercentage` field on the `UpdateStateProperties` property on the Update reports download progress as a value from 0 to 100.
 
-After Microsoft releases the update, your Azure Local update platform will automatically detect the update. Though you don't need to scan for updates, you must go to the **Updates** page in your management surface to see the new update’s details.
+During this phase, the Update object transitions to the `Downloading` state. On failure, the state becomes `DownloadFailed`.
 
-Depending on the hardware in your system and the scope of an update bundle, you might need to acquire and sideload extra content to proceed with an update. The **operating system** and **agents and services** content are provided by Microsoft, while depending on your specific solution and the OEM, the **Solution Extension** might require an extra download from the hardware OEM. If more is required, the installation flow prompts you for the content.
+### SBE download connector (if applicable)
 
-## Phase 2: Readiness checks and staging
+SBE updates and some Solution updates require additional content from the hardware vendor's Solution Builder Extension (SBE). When the SBE provides a download connector, the Update Service delegates part of the download to the OEM-supplied logic:
 
-There are a series of prechecks before installing a solution update. The prechecks are related to the storage systems, failover cluster requirements, remote management of the system, and solution extensions. These prechecks help to confirm that your Azure Local is safe to update and ensures updates go more smoothly.
+- The Update Service checks whether the installed SBE supports a download connector.
+- If supported, an Orchestrator action plan invokes the SBE download action to retrieve OEM-specific packages such as firmware and drivers.
+- The hardware vendor typically includes a download connectivity health check that must pass before the download starts.
 
-A subset of these checks can be initiated outside the update process. Because new checks can be included in each update, these readiness checks are executed *after* the update content is downloaded and *before* it begins installing.
+If download fails while using the SBE download connector, the update state becomes `DownloadFailed`. To see the detailed failure message, examine the preparation details in Azure Update Manager in the portal, or using the `UpdateRun` object from `Get-SolutionUpdateRun`.
 
-Readiness checks can also result in blocking conditions or warnings.
+### Validate and extract
 
-- If the readiness checks detect a blocking condition, the issues must be remediated before the update can proceed.
+After all content is downloaded, the Update Service validates the hashes of the downloaded files and extracts the contents.
 
-- If the readiness checks result in warnings the updates, it could introduce longer update times or affect the workloads. You might need to acknowledge the potential impact and bypass the warning before the update can proceed.
+If validation or extraction fails, the `UpdateRun` records the error and the Update state becomes `PreparationFailed`.
+
+### Health check
+
+Before an update can be installed, a set of pre-update health checks validates that the cluster is in a healthy state and checks for issues that could interfere with successful update installation.
+
+Each health check has an assigned severity:
+
+| Severity | Effect |
+| --- | --- |
+| **Critical** | Blocks the update. You must remediate this before installation can proceed. |
+| **Warning** | Blocks the update by default. You can override this with `Start-SolutionUpdate -IgnoreWarnings`. |
+| **Informational** | Advisory only. Doesn't block installation. |
+
+If the update was started in **prepare-only** mode, the Update transitions to the `ReadyToInstall` state on health check success. If critical or warning failures are detected (when `-IgnoreWarnings` isn't specified), the status becomes `HealthCheckFailed`.
+
+You can inspect health check results on the update object using:
+
+```powershell
+# View health check results
+(Get-SolutionUpdate).HealthCheckResult |
+Where-Object { ($_.Status -ne "Success") -and ($_.Severity -ne "Informational") } |
+Format-List Title, Status, Severity, Description, Remediation
+```
+
+For help troubleshooting health check failures, see [Troubleshoot updates](update-troubleshooting-23h2.md).
+
+## Monitor preparation using Get-SolutionUpdateRun
+
+Every call to `Start-SolutionUpdate` (with or without `-PrepareOnly`) creates an `UpdateRun` resource. You can retrieve the specific step details of preparation using:
+
+```powershell
+# Get the most recent update run for an update
+Get-SolutionUpdate -Id <UpdateResourceId> | Get-SolutionUpdateRun | % Progress | % Steps
+```
+
+When a preparation run fails, the `UpdateRun` `State` property is set to `Failed` and the Progress step tree contains error details at the step that encountered the problem.
+
+## Installation phase
+
+After preparation completes, or when `Start-SolutionUpdate` is called without `-PrepareOnly`, the update enters the installation phase.
+
+### Start installation
+
+To start a full update that includes both preparation and installation, use:
+
+```powershell
+# Start a full update (preparation + installation)
+Get-SolutionUpdate -Id <UpdateResourceId> | Start-SolutionUpdate
+```
+
+When the installation begins, the **Update state** transitions to **Installing** and a new `UpdateRun` is created that represents the progress of the installation, replacing the `UpdateRun` that previously represented preparation.
+
+### `UpdateRun` installation progress
+
+During installation, the `UpdateRun`'s `Progress` property contains the full action plan execution tree. This is a hierarchical structure of `Step` objects where each step represents a stage, role, or individual task in the update.
+
+Each step in the progress tree exposes the following properties:
+
+| Property | Type | Description |
+| --- | --- | --- |
+| Name | string | Name of the step or task. |
+| Description | string | Human-readable description. |
+| Status | string | `InProgress`, `Success`, or `Error`. |
+| StartTimeUtc | DateTime | When the step started executing. |
+| EndTimeUtc | DateTime | When the step completed or failed. |
+| ErrorMessage | string | Error details if the step failed. |
+| ExpectedExecutionTime | TimeSpan | Estimated duration for progress calculation. |
+| Steps | Step[] | Child steps forming the execution tree. |
+
+### Monitor installation progress
+
+Due to the complex structure of the `UpdateRun` object, monitor update installation status via the Azure portal.
+
+:::image type="content" source="media/update-phases-23h2/update-run-structure.png" alt-text="Screenshot of the UpdateRun structure." lightbox="media/update-phases-23h2/update-run-structure.png":::
+
+If you need to monitor the update using PowerShell, directly monitor the state of the underlying action plan.
 
 > [!NOTE]
-> In this release, you can only initiate immediate install of the updates. Scheduling of updates isn't supported.
+> The `Start-MonitoringActionplanInstanceToComplete` cmdlet should only be used after the system has installed the 2503 update. Before 2503, using this cmdlet to monitor update progress can introduce failures in the orchestration.
 
-## Phase 3: Installation progress and monitoring
+```powershell
+# Get the action plan instance ID from the update run, then monitor
+$run = Get-SolutionUpdate | where State -eq "Installing" | Get-SolutionUpdateRun | where State -eq "InProgress"
+$id = ($run.ResourceId -split '/')[-1]
+Start-MonitoringActionplanInstanceToComplete -actionPlanInstanceID $id
+```
 
-While the update installs, you can monitor the progress via your chosen interface. Steps within the update are shown within a hierarchy and correspond to the actions taken throughout the workflow. Steps might be dynamically generated throughout the workflow, so the list of steps could change. For more information, see examples of [Monitoring progress via PowerShell](../update/update-via-powershell-23h2.md).
+This provides real-time console output that refreshes automatically. Press **Ctrl+C** to exit the monitor without stopping the update.
 
- The new update solution includes retry and remediation logic. It attempts to fix update issues automatically and in a nondisruptive way, but sometimes manual intervention is required. For more information, see [Troubleshooting updates](update-troubleshooting-23h2.md).
+### Installation state transitions
 
-> [!NOTE]
-> Once you remediate the issue, you need to rerun the checks to confirm the update readiness before proceeding.
+The Update moves through these states during installation:
 
-## Next step
+| State | Meaning |
+| --- | --- |
+| Installing | Installation is actively running. |
+| Installed | The update finished installing successfully. |
+| InstallationFailed | One or more steps failed. |
+
+### Diagnose and resume after installation failure
+
+When installation fails, review the failure details in the Azure portal or via `Get-SolutionUpdateRun`. For troubleshooting guidance, see [Troubleshoot updates](update-troubleshooting-23h2.md).
+
+After you review and mitigate the failure, or determine it's transient, resume the update from the Azure portal or using the `Start-SolutionUpdate` cmdlet:
+
+```powershell
+Get-SolutionUpdate | where State -eq "InstallationFailed" | Start-SolutionUpdate
+```
+
+After calling this cmdlet, the update state transitions directly from `InstallationFailed` to `Installing`.
+
+## Next steps
 
 Learn more about how to [Troubleshoot updates](./update-troubleshooting-23h2.md).
