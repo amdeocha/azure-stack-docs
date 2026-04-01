@@ -14,8 +14,7 @@ ms.subservice: hyperconverged
 
 [!INCLUDE [applies-to](../includes/hci-applies-to-23h2.md)]
 
-> [!IMPORTANT]
-> The procedure described here applies when updating your existing Azure Local version to a newer version.
+[!INCLUDE [WARNING](../includes/hci-applies-to-23h2-cluster-updates.md)]
 
 This article describes how to use Azure Update Manager to find and install available updates on Azure Local. It also describes how to review, track progress, and browse the history of system updates.
 
@@ -82,8 +81,6 @@ To install system updates using Azure Update Manager, follow these steps:
 1. Select **Next**.
 
     [:::image type="content" source="./media/azure-update-manager/select-updates.png" alt-text="Screenshot to specify system updates in Azure Update Manager." lightbox="./media/azure-update-manager/select-updates.png":::](./media/azure-update-manager/select-updates.png#lightbox)
-
-<!--[!INCLUDE[azure-portal-install-updates](../includes/azure-portal-install-updates.md)]-->
 
 1. On the **Review + install** page, verify your update options, and then select **Install**.
 
@@ -157,6 +154,6 @@ Follow these steps to find the solution version of your Azure Local instance:
 
 ## Next steps
 
-Learn to [Understand update phases](./update-phases-23h2.md).
+Learn more about the update phases, see [Understand update phases](./update-phases-23h2.md).
 
 Learn more about how to troubleshoot updates, see [Troubleshoot updates](./update-troubleshooting-23h2.md) and [Azure Local update troubleshooting guides](https://github.com/Azure/AzureLocal-Supportability/tree/main/TSG/Update).
