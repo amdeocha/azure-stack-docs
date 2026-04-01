@@ -17,9 +17,7 @@ This article describes how to troubleshoot simplified machine provisioning. You 
 
 - Run diagnostic tests.
 - Collect a support package.
-- Collect logs from your Azure Subscription.
-
-
+- Collect logs from your Azure subscription.
 
 ## Run diagnostic tests from the Configurator app
 
@@ -54,7 +52,7 @@ The logs are stored in the following locations:
 
 ## USB boot loop issue with maintenance environment
 
-**Problem:** The USB Boot enters an infinite USB boot sequence if the BIOS Settings `Boot USB Devices First` is set on the machine.
+**Problem:** The USB boot enters an infinite USB boot sequence if the BIOS Settings `Boot USB Devices First` is set on the machine.
 
 **Cause:**
 

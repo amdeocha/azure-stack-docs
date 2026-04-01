@@ -145,8 +145,6 @@ items:
         href: deploy/deployment-install-os.md
       - name: 3B. Install and register via simplified machine provisioning
         href: deploy/simplified-machine-provisioning.md
-      - name: Troubleshoot simplified machine provisioning
-        href: deploy/troubleshoot-simplified-machine-provisioning.md
     - name: 4. Set up subscription permissions
       href: deploy/deployment-arc-register-server-permissions.md
     - name: 5. Choose a registration method
@@ -616,6 +614,8 @@ items:
       href: manage/troubleshoot-deployment-configurator-app.md
     - name: Troubleshoot deployment validation issues
       href: manage/troubleshoot-deployment.md
+    - name: Troubleshoot simplified machine provisioning
+      href: deploy/troubleshoot-simplified-machine-provisioning.md
     - name: Use the Support tool for infrastructure issues
       href: manage/remediate-support-tool-infrastructure.md
     - name: Use the Diagnostic Support tool
