@@ -46,6 +46,7 @@ For Azure Local, Azure Update Manager is supported only in the regions where Azu
 ## Install system updates
 
 > [!IMPORTANT]
+>
 > - Microsoft only supports updates applied from the **Azure Local** resource page or via the **Azure Update Manager > Resources > Azure Local**.
 > - Use of 3rd party tools to install updates isn't supported.
 > - When you update to solution version 2601 or later, the infrastructure logical network appears in Azure. For more information, see [Infrastructure logical network as a component of Azure Local VM management](../manage/azure-arc-vm-management-overview.md#components-of-azure-local-vm-management).
