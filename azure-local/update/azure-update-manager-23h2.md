@@ -5,7 +5,7 @@ author: ronmiab
 ms.author: robess
 ms.topic: how-to
 ms.reviewer: mindydiep
-ms.date: 03/25/2026
+ms.date: 04/01/2026
 ms.subservice: hyperconverged
 #customer intent: As a Senior Content Developer, I want provide customers with information and guidance on using Azure Update Manager to manage and keep their Azure Local instances up to date.
 ---
@@ -14,7 +14,8 @@ ms.subservice: hyperconverged
 
 [!INCLUDE [applies-to](../includes/hci-applies-to-23h2.md)]
 
-[!INCLUDE [IMPORTANT](../includes/hci-applies-to-23h2-cluster-updates.md)]
+> [!IMPORTANT]
+> The procedure described here applies when updating your existing Azure Local version to a newer version.
 
 This article describes how to use Azure Update Manager to find and install available updates on Azure Local. It also describes how to review, track progress, and browse the history of system updates.
 
@@ -114,7 +115,6 @@ To install updates on a single system from the resource page, follow these steps
 1. On the **Review + install** page, verify your update deployment options, and then select **Install**.
 
     [:::image type="content" source="./media/azure-update-manager/review-plus-install-single-system.png" alt-text="Screenshot to review and install updates for a single system in Azure Update Manager." lightbox="./media/azure-update-manager/review-plus-install-single-system.png":::](./media/azure-update-manager/review-plus-install-single-system.png#lightbox)
-
 
     You should see a notification that confirms the installation of updates. If you don’t see the notification, select the **notification icon** in the top right taskbar.
 
