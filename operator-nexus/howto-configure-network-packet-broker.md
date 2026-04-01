@@ -168,7 +168,7 @@ Error codes can be categorised into those arising either from initial validation
 | --------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 | Network tap creation failed as the api request is not valid                                   | Fix the request following the error message and retry the operation.         |
 | REPUT on network tap failed as the tap resource is in Enabled Administrative state            | Disable the tap resource and retry the operation.                            |
-| Network tap creation failed as the tap resource registration with Azure ARM failed            | Retry the operation, then contact support if the error persists                |
+| Network tap creation failed as the tap resource registration with Azure ARM failed            | Retry the operation. If the error persists, contact Microsoft support               |
 | REPUT on network tap failed as the tap resource is in Accepted Configuration state            | Re-put request is not allowed as Configuration State is Accepted.            |
 | Network tap creation failed as the Administrative state is Enabled in the request payload     | Fix the request payload and retry the operation.                             |
 | Network tap creation failed as the network fabric resource is in Administrative locked state. | Remove the lock on fabric before proceeding with the tap creation operation. |
@@ -178,7 +178,7 @@ Error codes can be categorised into those arising either from initial validation
 | Error Message                                                                                      | User Action                                                          |
 | --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
 | Network tap deletion failed as the Administrative state is Enabled in the request                   | Fix the request payload and retry the operation.                     |
-| Network tap patch failed as the internal request to get the associated Network tap resource failed. | Retry the operation, then contact support if the error persists        |
+| Network tap patch failed as the internal request to get the associated Network tap resource failed. | Retry the operation. If the error persists, contact Microsoft support       |
 | Network tap patch failed as the request payload did not satisfy the patch schema                    | Fix the request following the error message and retry the operation. |
 | Network tap DOWNGRADE patch failed as the request payload did not satisfy the patch schema          | Fix the request following the error message and retry the operation. |
 | Network tap patch failed as the api request is not valid                                            | Fix the request following the error message and retry the operation. |
@@ -188,6 +188,11 @@ Error codes can be categorised into those arising either from initial validation
 | Error Message                                                                                | User Action                                                                  |
 | --------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 | Network tap deletion failed as the network fabric resource is in Administrative locked state. | Remove the lock on fabric before proceeding with the tap deletion operation. |
+**ErrorCode: ResourcePostActionFailed**
+
+| Error Message                                                                | User Action                                                                        |
+| ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Network tap POST action failed as the action is not supported for Network tap | Check if the POST action is allowed on the tap resource for the given api-version. |
 
 
 ### Comprehensive Validation Errors
@@ -238,7 +243,7 @@ Error codes can be categorised into those arising either from initial validation
 | Network tap admin state update failed as the network fabric resource is in Administrative locked state.                                                                     | Remove the lock on fabric before proceeding with the operation.                                                                             |
 | Network tap admin state update failed due to its InternalOperationalState                                                                                                   | Network Fabric is blocked for any operation , wait for upgrade to finish and retry, contact support if error persists.                      |
 | Network tap resync failed as the tap resource is not available in Azure.                                                                                                    | Make sure the Network tap resource exists.                                                                                                  |
-| Network tap resync failed as the tap resource is in invalid state                                                                                                           | ProvState should be Succeeded, AdminState should be Enabled and ConfigState should be Accepted                                              |
+| Network tap resync failed as the tap resource is in invalid state                                                                                                           | ProvisioningState should be Succeeded, AdminState should be Enabled and ConfigState should be Accepted                                              |
 | Network tap resync failed as the referenced Network tap destination resource is not available.                                                                              | Make sure the destination resource associated with the network tap exists.                                                                  |
 | Network tap resync failed as the Internal Network destination resource is not in Admin enabled state or ProvisioningState is not succeeded or config state is not succeded. | Please fix the states and retry the operation.                                                                                              |
 | Network tap resync failed as the referenced L3 ISD destination resource is not available.                                                                                   | Make sure the L3 ISD destination resource associated with the network tap exists.                                                           |
@@ -264,18 +269,14 @@ Error codes can be categorised into those arising either from initial validation
 | Network tap rule resync failed as the destination neighbor group is not in successful state.                                                                                | Make sure the destination neighborgroup resource is successfully provisioned.                                                               |
 | Network tap rule resync failed as the destination NNI resource is not available.                                                                                            | Make sure the destination networktonetworkinterconnects resource exists.                                                                    |
 | Network tap rule resync failed as the destination NNI resource is not in successful state.                                                                                  | Make sure the the provisioningState and configurationState of the destination networktonetworkinterconnects resource should be Succeeded.   |
-| Network tap rule resync failed as the internal request to get the destination neighbor group resource got throttled                                                         | Wait and retry the operation.                                                                                                               |
-| Network tap rule resync failed as the internal request to get the destination NNI resource got throttled                                                                    | Wait and retry the operation.                                                                                                               |
 | Network tap rule resync failed as the network fabric configuration state is in PendingCommit                                                                                | Only fabric commit operations are allowed, other operations are not allowed.                                                                |
 | Network tap rule resync failed as the associated network fabric resource is not available.                                                                                  | Make sure the network fabric resource is available in Azure.                                                                                |
 | Network tap rule resync failed as one of the fabric device resource is not available.                                                                                       | Make sure the network device resource is available in Azure.                                                                                |
-| Network tap post action failed as the internal request to get the tap resource failed                                                                                       | Retry the operation, then contact support if the error persists                                                                               |
 | Network tap post action failed as the post action is not supported for network tap resource.                                                                                | Support post actions on network tap : UpdateAdministrativeState and Resync                                                                  |
 | Network tap UpdateAdminState post action failed as the requested admin state is not valid                                                                                   | Valid Administrative states for Network tap : Enable and Disable                                                                            |
 | Network tap UpdateAdminState Enable post action failed as the tap state is not valid for this action.                                                                       | For Enable Admin state the tap resource should be in Disabled Admin State, Succeeded ProvisionState and Config state should not be Accepted |
 | Network tap resync post action failed as the tap state is not valid for this action.                                                                                        | For Resync the tap resource should be in Enabled Admin State, Succeeded ProvisionState and Accepted Config state                            |
-| Network tap post action failed as the internal request to get the associated NPB resource failed                                                                            | Retry the operation, then contact support if the error persists                                                                               |
-| Network tap post action failed as the internal request to get the associated Network fabric resource failed                                                                 | Retry the operation, then contact support if the error persists                                                                               |
+
 
 **ErrorCode: ResourceLocked**
 
@@ -293,29 +294,27 @@ Error codes can be categorised into those arising either from initial validation
 | Network tap creation failed as the referenced destination resource is of invalid type. | Make sure the destination resource type is one of the following : [IsolationDomain, Direct] and retry the operation. |
 | Network tap patch failed as the referenced destination resource is of invalid type.    | Make sure the destination resource type is one of the following : [IsolationDomain, Direct] and retry the operation. |
 
-**ErrorCode: ResourcePostActionFailed**
-
-| Error Message                                                                | User Action                                                                        |
-| ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| Network tap POST action failed as the action is not supported for Network tap | Check if the POST action is allowed on the tap resource for the given api-version. |
 
 ### Other Errors
 **ErrorCode: Internal Server Error**
 
 | Error Message                                                                                                | User Action                                                                   |
 | ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| Network tap creation failed due to some internal service error.                                               | Retry the operation, then contact support if the error persists                 |
-| Network tap patch failed due to some internal service error.                                                  | Retry the operation, then contact support if the error persists                 |
-| Network tap delete failed due to some internal service error.                                                 | Retry the operation, then contact support if the error persists                 |
-| Network tap admin state update failed due to some internal service error.                                     | Retry the operation, then contact support if the error persists                 |
-| Network tap resync failed due to some internal service error.                                                 | Retry the operation, then contact support if the error persists                 |
-| Network tap rule creation failed due to some internal service error.                                          | Retry the operation, then contact support if the error persists                 |
-| Network tap rule patch failed due to some internal service error.                                             | Retry the operation, then contact support if the error persists                 |
-| Network tap rule delete failed due to some internal service error.                                            | Retry the operation, then contact support if the error persists                 |
-| Network tap rule resync failed due to some internal service error.                                            | Retry the operation, then contact support if the error persists                 |
+| Network tap creation failed due to some internal service error.                                               | Retry the operation. If the error persists, contact Microsoft support                |
+| Network tap patch failed due to some internal service error.                                                  | Retry the operation. If the error persists, contact Microsoft support                |
+| Network tap delete failed due to some internal service error.                                                 | Retry the operation. If the error persists, contact Microsoft support                |
+| Network tap admin state update failed due to some internal service error.                                     | Retry the operation. If the error persists, contact Microsoft support                |
+| Network tap resync failed due to some internal service error.                                                 | Retry the operation. If the error persists, contact Microsoft support                |
+| Network tap rule creation failed due to some internal service error.                                          | Retry the operation. If the error persists, contact Microsoft support                |
+| Network tap rule patch failed due to some internal service error.                                             | Retry the operation. If the error persists, contact Microsoft support                |
+| Network tap rule delete failed due to some internal service error.                                            | Retry the operation. If the error persists, contact Microsoft support                |
+| Network tap rule resync failed due to some internal service error.                                            | Retry the operation. If the error persists, contact Microsoft support                |
 | Network tap creation failed as the Network Fabric resource associated with the NPB resource is not available. | Make sure the Network Fabric resource associated with the network tap exists. |
-| Network tap deletion failed as the internal request to get the associated NPB resource failed                 | Retry the operation, then contact support if the error persists                 |
-| Network tap deletion failed as the internal request to get the associated Network Fabric resource failed      | Retry the operation, then contact support if the error persists                 |
+| Network tap deletion failed as the internal request to get the associated NPB resource failed                 | Retry the operation. If the error persists, contact Microsoft support                |
+| Network tap deletion failed as the internal request to get the associated Network Fabric resource failed      | Retry the operation. If the error persists, contact Microsoft support                |
+| Network tap post action failed as the internal request to get the tap resource failed                                                                                       | Retry the operation. If the error persists, contact Microsoft support                                                                              |
+| Network tap post action failed as the internal request to get the associated NPB resource failed                                                                            | Retry the operation. If the error persists, contact Microsoft support                                                                              |
+| Network tap post action failed as the internal request to get the associated Network fabric resource failed                                                                 | Retry the operation. If the error persists, contact Microsoft support                                                                              |
 
 **ErrorCode: TooManyRequests**
 
@@ -348,6 +347,8 @@ Error codes can be categorised into those arising either from initial validation
 | Network tap resync failed as the internal request to get the referenced tap rule resource got throttled.                              | Wait and retry the operation. |
 | Network tap resync failed as the internal request to get the referenced NPB resource got throttled.                                   | Wait and retry the operation. |
 | Network tap resync failed as the internal request to get the associated fabric resource got throttled.                                | Wait and retry the operation. |
+| Network tap rule resync failed as the internal request to get the destination neighbor group resource got throttled                                                         | Wait and retry the operation.                                                                                                               |
+| Network tap rule resync failed as the internal request to get the destination NNI resource got throttled                                                                    | Wait and retry the operation.                                                                                                               |
 
 
 
