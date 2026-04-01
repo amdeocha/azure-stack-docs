@@ -63,14 +63,14 @@ To install system updates using Azure Update Manager, follow these steps:
 
 1. Select one or more systems where **Updates available** and the systems are **Connected** to the internet from the list, then select **Install now**.
 
-    [:::image type="content" source="./media/azure-update-manager/install-update.png" alt-text="Screenshot to install system updates in Azure Update Manager." lightbox="./media/azure-update-manager/install-update.png":::](media/azure-update-manager/install-update.png#lightbox)
+    :::image type="content" source="media/azure-update-manager/install-update.png" alt-text="Screenshot to install system updates in Azure Update Manager." lightbox="media/azure-update-manager/install-update.png":::
 
 1. On the **Check readiness** page, review the list of readiness checks and their results.
 
     - You can select the links under **Details** to view more details and individual system results. For information on the check types, see [About readiness checks](#about-readiness-checks).
     - For failed readiness checks, review the details and remediation messages via the links under **Details**. To further troubleshoot, see [Troubleshoot updates](./update-troubleshooting-23h2.md) before proceeding.
 
-    [:::image type="content" source="./media/azure-update-manager/check-readiness.png" alt-text="Screenshot on the check readiness of updates in Azure Update Manager." lightbox="./media/azure-update-manager/check-readiness.png":::](media/azure-update-manager/check-readiness.png#lightbox)
+    :::image type="content" source="media/azure-update-manager/check-readiness.png" alt-text="Screenshot on the check readiness of updates in Azure Update Manager." lightbox="media/azure-update-manager/check-readiness.png":::
 
 1. Select **Next**.
 
@@ -81,15 +81,15 @@ To install system updates using Azure Update Manager, follow these steps:
 
 1. Select **Next**.
 
-    [:::image type="content" source="./media/azure-update-manager/select-updates.png" alt-text="Screenshot to specify system updates in Azure Update Manager." lightbox="./media/azure-update-manager/select-updates.png":::](media/azure-update-manager/select-updates.png#lightbox)
+    :::image type="content" source="media/azure-update-manager/select-updates.png" alt-text="Screenshot to specify system updates in Azure Update Manager." lightbox="media/azure-update-manager/select-updates.png":::
 
 1. On the **Review + install** page, verify your update options, and then select **Install**.
 
-    [:::image type="content" source="./media/azure-update-manager/review-plus-install-1.png" alt-text="Screenshot to review and install updates for multiple systems in Azure Update Manager." lightbox="./media/azure-update-manager/review-plus-install-1.png":::](media/azure-update-manager/review-plus-install-1.png#lightbox)
+    :::image type="content" source="media/azure-update-manager/review-plus-install-1.png" alt-text="Screenshot to review and install updates for multiple systems in Azure Update Manager." lightbox="media/azure-update-manager/review-plus-install-1.png":::
 
     You should see a notification that confirms the installation of updates. If you don’t see the notification, select the **notification icon** in the top right taskbar.
 
-    [:::image type="content" source="./media/azure-update-manager/installation-notification.png" alt-text="Screenshot of the update installation notification in Azure Update Manager." lightbox="./media/azure-update-manager/installation-notification.png":::](media/azure-update-manager/installation-notification.png#lightbox)
+    :::image type="content" source="media/azure-update-manager/installation-notification.png" alt-text="Screenshot of the update installation notification in Azure Update Manager." lightbox="media/azure-update-manager/installation-notification.png":::
 
 # [Azure Local resource page](#tab/azurelocalresourcepage)
 
@@ -103,7 +103,7 @@ To install updates on a single system from the resource page, follow these steps
 
 1. Select the system name from the list to open the Azure Local resource page. By default, the latest eligible update is selected to be installed. You can change the selection, and then select **Install now**.
 
-    [:::image type="content" source="./media/azure-update-manager/update-single-cluster.png" alt-text="Screenshot of a one-time system update in Azure Update Manager.":::](./media/azure-update-manager/update-single-cluster.png#lightbox)
+    :::image type="content" source="media/azure-update-manager/update-single-cluster.png" alt-text="Screenshot of a one-time system update in Azure Update Manager." lightbox="media/azure-update-manager/update-single-cluster.png":::
 
 1. On the **Check readiness** page, review the list of readiness checks and their results.
     - You can select the links under **Details** to view more details and individual system results. For information on the check types, see [About readiness checks](azure-update-manager-23h2.md#about-readiness-checks).
@@ -112,11 +112,11 @@ To install updates on a single system from the resource page, follow these steps
 
 1. On the **Review + install** page, verify your update deployment options, and then select **Install**.
 
-    [:::image type="content" source="./media/azure-update-manager/review-plus-install-single-system.png" alt-text="Screenshot to review and install updates for a single system in Azure Update Manager." lightbox="./media/azure-update-manager/review-plus-install-single-system.png":::](./media/azure-update-manager/review-plus-install-single-system.png#lightbox)
+    :::image type="content" source="media/azure-update-manager/review-plus-install-single-system.png" alt-text="Screenshot to review and install updates for a single system in Azure Update Manager." lightbox="media/azure-update-manager/review-plus-install-single-system.png":::
 
     You should see a notification that confirms the installation of updates. If you don’t see the notification, select the **notification icon** in the top right taskbar.
 
-    [:::image type="content" source="./media/azure-update-manager/installation-notification.png" alt-text="Screenshot of the update installation notification on the Azure Local resource page.":::](media/azure-update-manager/installation-notification.png#lightbox)
+    :::image type="content" source="media/azure-update-manager/installation-notification.png" alt-text="Screenshot of the update installation notification on the Azure Local resource page." lightbox="media/azure-update-manager/installation-notification.png":::
 
 ---
 
@@ -137,7 +137,7 @@ To view the progress of your update installation, and completion results, follow
     - Select an **In progress** update to monitor a current updates progress.
     - Select a **Failed to update** or **Successfully updated** update to review historical results.
 
-    [:::image type="content" source="./media/azure-update-manager/update-progress.png" alt-text="Screenshot to view progress about system updates in Azure Update Manager." lightbox="./media/azure-update-manager/update-progress.png":::](media/azure-update-manager/update-progress.png#lightbox)
+    :::image type="content" source="media/azure-update-manager/update-progress.png" alt-text="Screenshot to view progress about system updates in Azure Update Manager." lightbox="media/azure-update-manager/update-progress.png":::
 
 ## Install hardware updates
 
@@ -151,7 +151,7 @@ Follow these steps to find the solution version of your Azure Local instance:
 1. In the right pane, go to the **Properties** tab and then to **Updates**.
 1. Identify the solution version for your Azure Local instance.
 
-    :::image type="content" source="./media/azure-update-manager/get-solution-version-1.png" alt-text="Azure Local resource Overview page in Azure portal showing the Properties tab selected on the right pane with the Updates section displaying the solution version number 12.2505.1001.23." lightbox="./media/azure-update-manager/get-solution-version-1.png":::
+    :::image type="content" source="media/azure-update-manager/get-solution-version-1.png" alt-text="Azure Local resource Overview page in Azure portal showing the Properties tab selected on the right pane with the Updates section displaying the solution version number 12.2505.1001.23." lightbox="media/azure-update-manager/get-solution-version-1.png":::
 
 ## Next steps
 
