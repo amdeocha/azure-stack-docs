@@ -1,6 +1,6 @@
 ---
-title: How to usage guide for Customer Managed Key Vault
-description: Howto usage guide for Customer Managed Key Vault
+title: How-to usage guide for Customer Managed Key Vault
+description: How-to usage guide for Customer Managed Key Vault
 ms.service: azure-operator-nexus
 ms.custom: template-how-to
 ms.topic: how-to
@@ -39,9 +39,10 @@ Once this has been achieved, future Password Rotation operations duplicate custo
 
 It's assumed that the customer has created a Customer Managed Key Vault, a User Assigned Managed Identity, and has given the User Assigned Managed Identity the `Operator Nexus Key Vault Writer Service Role (Preview)` permission for the Customer Managed Key Vault
 
-- Associate the User assigned Managed Identity with the Network Fabric.
+1. Associate the User assigned Managed Identity with the Network Fabric.
 
-> **Note** that you must retain the existing System Assigned Managed Identity and any pre-existing User Assigned Managed Identities.  These may be identified by using the `JSON View` link for the Network Fabric from the Azure portal and selecting the `2026-01-15-preview` ARM API version from the dropdown.  The existing configuration will look something like this:
+> [!Note]
+> Note that you must retain the existing System Assigned Managed Identity and any pre-existing User Assigned Managed Identities.  These may be identified by using the `JSON View` link for the Network Fabric from the Azure portal and selecting the `2026-01-15-preview` ARM API version from the dropdown.  The existing configuration will look something like this:
  
 
 ```
@@ -82,7 +83,7 @@ It's assumed that the customer has created a Customer Managed Key Vault, a User 
 
 ```
 
-Now use the following `az` command to associate the new User Assigned Managed Identity with the Network Fabric.
+2. Now use the following `az` command to associate the new User Assigned Managed Identity with the Network Fabric.
 
 ```bash
 
@@ -108,7 +109,7 @@ $ az networkfabric fabric update \
 
  
 
-- Configure the Customer Key Vault to the Network Fabric by first creating a configuration JSON body that looks like this:
+3. Configure the Customer Key Vault to the Network Fabric by first creating a configuration JSON body that looks like this:
 
 ```json
 
@@ -138,7 +139,7 @@ $ az networkfabric fabric update \
 
  
 
-- Now use an `az rest` request to update the Network Fabric configuration:
+4. Now use an `az rest` request to update the Network Fabric configuration:
 
  
 
@@ -149,8 +150,8 @@ $ az rest --method patch --uri https://management.azure.com//subscriptions/<my-s
 ```
 
  
-
-> As future update to the `az` CLI will allow this update to be used using syntax similar to:
+> [!Note]
+> A future update to the `az` CLI will allow this update to be used using syntax similar to:
 
 > 
 
@@ -158,7 +159,7 @@ $ az rest --method patch --uri https://management.azure.com//subscriptions/<my-s
 
  
 
-- Now use the normal _lock and commit_ process to make the new configuration active
+5. Now use the normal _lock and commit_ process to make the new configuration active
 
  
 
@@ -172,7 +173,7 @@ $ az networkfabric fabric commit-configuration --resource-group <my-nf-rg> --res
 
  
 
-- The next password rotation will cause the new secrets to be duplicated to the Customer Managed Key Vault:
+6. The next password rotation will cause the new secrets to be duplicated to the Customer Managed Key Vault:
 
  
 
@@ -184,31 +185,23 @@ $ az networkfabric fabric rotate-password --resource-group <my-nf-rg> --resource
 
  
 
-### Removing Secret Archive Settings Configuration
+### Remove Secret Archive Settings Configuration
 
 Removing Secret Archive Settings configuration will means that future Password Rotations **do not** copy secrets to the Customer Managed Key Vault and after a Password Rotation, **all** secret references in the Network Fabric and Network Device configuration will reference the Key Vault in the NetworkFabric Controller Managed Resource Group.
 
  
 
-1. The customer use `az rest...` and the `2026-01-15-preview` ARM API to remove Customer Key Vault settings; in the ARM API these settings are known as the `Secret Archive Settings`.The customer should set the `Secret Archive Settings` to `null`.
+1. The customer should use `az rest...` and the `2026-01-15-preview` ARM API to remove Customer Key Vault settings; in the ARM API these settings are known as the `Secret Archive Settings`.The customer should set the `Secret Archive Settings` to `null`.
 
  
+ ```json
+  {
+    "properties": {
+     "secretArchiveSettings": null
+    }
+   }
+ ```
 
-```json
-
-{
-
-  "properties": {
-
-    "secretArchiveSettings": null
-
-  }
-
-}
-
-```
-
- 
 
 2. The `Secret Archive Settings` removal must then be committed by locking the Network Fabric and committing the configuration.
 3. The customer removes the `Operator Nexus Key Vault Writer Service Role (Preview)` permissions for the Customer Managed Key Vault from the User Assigned Managed Identity.
