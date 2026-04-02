@@ -1,6 +1,6 @@
 ---
-title: How to enable System Assigned Managed Identity (SAMI) for the Network Fabric Controller
-description: Learn about how to enable System Assigned Managed Identity (SAMI) for the Network Fabric Controller
+title: How to enable System-Assigned Managed Identity (SAMI) for the Network Fabric Controller in Azure Operator Nexus
+description: Learn about how to enable System Assigned Managed Identity (SAMI) for the Network Fabric Controller in Azure Operator Nexus
 author: RaghvendraMandawale
 ms.author: rmandawale
 ms.date: 03/30/2026
@@ -9,12 +9,12 @@ ms.service: azure-operator-nexus
 ms.custom: template-how-to
 ---
 
-# Network Fabric Controller Resource System Assigned Managed Identity (SAMI) Enablement Guide
+# How to enable System-Assigned Managed Identity (SAMI) for the Network Fabric Controller in Azure Operator Nexus
 
 This guide describes how to enable and validate System Assigned Managed Identity (SAMI) for the Network Fabric Controller resource for both new resources and existing resources.
 
 
-## Scope and Identity Rules
+## Scope and identity rules
 
 ### Supported identity on Network Fabric Controller resource
 - Supported: `SystemAssigned`
@@ -26,12 +26,12 @@ This guide describes how to enable and validate System Assigned Managed Identity
 
 ## Prerequisites
 
-1. Azure CLI logged in to the target subscription.
-2. `managednetworkfabric` CLI extension installed and up to date.
-3. Network Fabric Controller resource is in a healthy state before update operations:
-- `provisioningState = Succeeded`
-4. API version guidance:
-- Use `2025-07-15` or newer when you need latest identity visibility and action payload compatibility.
+- Azure CLI logged in to the target subscription.
+- `managednetworkfabric` CLI extension installed and up to date.
+- Network Fabric Controller resource is in a healthy state before update operations:
+  - `provisioningState = Succeeded`
+- API version guidance:
+  - Use `2025-07-15` or newer when you need latest identity visibility and action payload compatibility.
 
 ## For New Resources: Create Network Fabric Controller Resource with SAMI
 
@@ -75,7 +75,7 @@ This guide shows the minimum arguments relevant to SAMI enablement, not the comp
 }
 ```
 
-## For Existing Resources: Add SAMI to Existing Network Fabric Controller Resource
+## For existing resources: Add SAMI to an existing Network Fabric Controller resource
 
 ### Option A: Direct CLI update
 
@@ -114,7 +114,7 @@ After:
 }
 ```
 
-### Option B: SAMI Association via Support Personnel
+### Option B: SAMI association via support personnel
 
 If you are unable to use the direct CLI update (Option A) or require SAMI association to be performed through an automated support channel, contact support personnel. Provide the following details:
 - Network Fabric Controller resource subscription ID
@@ -139,7 +139,7 @@ az networkfabric controller show \
 - `identity.principalId` is populated
 - `provisioningState == "Succeeded"`
 
-## Quick Decision Table
+## Quick decision table
 
 | Current identity | Requested operation | Valid | Result |
 |---|---|---|---|
@@ -148,33 +148,34 @@ az networkfabric controller show \
 | SystemAssigned | add UAMI | No | rejected |
 | any | set `None` | No | rejected |
 
-## Common Errors and Fixes
+## Common errors and fixes
 
 ### Error: identity type is invalid
 - Symptom: update fails when `UserAssigned` or `None` semantics are attempted for the Network Fabric Controller resource.
 - Fix: rerun with `--mi-system-assigned` only.
 
 
-> **Important:** If identity type `None` is submitted, the Managed Service Identity Resource Provider may remove the SAMI context before the Nexus Network Fabric Resource Provider can block the request. This leads to token acquisition failures in Network Fabric Controller resource managed platform flows. Re-associate SAMI as soon as possible if this occurs.
+> [!IMPORTANT]
+> If identity type `None` is submitted, the Managed Service Identity Resource Provider may remove the SAMI context before the Nexus Network Fabric Resource Provider can block the request. This leads to token acquisition failures in Network Fabric Controller resource managed platform flows. Re-associate SAMI as soon as possible if this occurs.
 
 ### Error: resource not in a safe state
 - Symptom: update/action fails due to lifecycle state checks.
 - Fix: ensure the Network Fabric Controller resource is fully provisioned (`Succeeded`) before identity association.
 
-## Supplementary Operational Notes
+## Supplementary operational notes
 
-1. For existing-resource execution at scale, capture existing external connectivity details before actions. Specifically, record all ER circuit details and the ER circuit-to-connection map. Ensure ER Circuit Auth Key Hashes are populated before triggering the identity operation to avoid unintended ER circuit recreation.
-2. If your internal runbook includes pre-check actions (for example ER-related metadata stabilization), complete those first.
-3. Use latest API versions to reduce payload and visibility mismatches.
+- For existing-resource execution at scale, capture existing external connectivity details before actions. Specifically, record all ER circuit details and the ER circuit-to-connection map. Ensure ER Circuit Auth Key Hashes are populated before triggering the identity operation to avoid unintended ER circuit recreation.
+- If your internal runbook includes pre-check actions (for example ER-related metadata stabilization), complete those first.
+- Use latest API versions to reduce payload and visibility mismatches.
 
-## Post-change Checklist
+## Post-change checklist
 
-1. GET confirms `identity.type = SystemAssigned`.
-2. `principalId` exists.
-3. The Network Fabric Controller resource remains `Succeeded`.
-4. Downstream flows that require trusted identity access continue to function.
+- GET confirms `identity.type = SystemAssigned`.
+- `principalId` exists.
+- The Network Fabric Controller resource remains `Succeeded`.
+- Downstream flows that require trusted identity access continue to function.
 
-## Frequently Asked Questions
+## Frequently asked questions
 
 **Q: Why is UAMI not supported for the Network Fabric Controller resource?**
 A: The Network Fabric Controller resource uses SAMI as the required identity bound to its resource lifecycle. UAMI is not in scope for these managed flows.
