@@ -1,6 +1,6 @@
 ---
-title: How to enable System Assigned Managed Identity (SAMI) for the Network Fabric resource
-description: Learn about how to System Assigned Managed Identity (SAMI) for the Network Fabric resource
+title: How to enable system-assigned managed identity (SAMI) for the Network Fabric resource in Azure Operator Nexus
+description: Learn about how to enable system-assigned managed identity (SAMI) for the Network Fabric resource in Azure Operator Nexus
 author: RaghvendraMandawale
 ms.author: rmandawale
 ms.date: 03/30/2026
@@ -9,7 +9,7 @@ ms.service: azure-operator-nexus
 ms.custom: template-how-to
 ---
 
-# Network Fabric Resource System Assigned Managed Identity (SAMI) Enablement Guide
+# How to enable system-assigned managed identity (SAMI) for the Network Fabric resource in Azure Operator Nexus
 
 This guide explains how to enable System Assigned Managed Identity (SAMI) for the Network Fabric resource, including new-resource and existing-resource paths, identity transition rules, lock/commit considerations, and role requirements.
 
@@ -27,7 +27,8 @@ This guide explains how to enable System Assigned Managed Identity (SAMI) for th
 - If SAMI is accidentally disassociated (for example via an incorrect `None` PATCH), re-associate SAMI as soon as possible.
 - For updates where UAMI already exists and SAMI must be added, provide both identities (`SystemAssigned,UserAssigned`) in effective payload terms.
 
-> **Important:** Preserving SAMI is required to prevent token acquisition failures in Network Fabric operational flows. If SAMI is removed or identity is set to `None`, re-associate SAMI immediately.
+> [!IMPORTANT]
+> Preserving SAMI is required to prevent token acquisition failures in Network Fabric operational flows. If SAMI is removed or identity is set to `None`, re-associate SAMI immediately.
 
 ## Prerequisites
 
@@ -52,8 +53,8 @@ az networkfabric fabric create \
   --mi-system-assigned
 ```
 
-For the full create command argument set, refer to the public documentation:
-> See [Create a Network Fabric](https://learn.microsoft.com/azure/operator-nexus/howto-configure-network-fabric#create-a-network-fabric) for the complete create-command arguments.
+> [!NOTE]
+> For the full create command argument set, refer to the public documentation: [Create a Network Fabric](https://learn.microsoft.com/azure/operator-nexus/howto-configure-network-fabric#create-a-network-fabric) 
 
 This guide shows the minimum arguments relevant to SAMI enablement, not the complete set of arguments for resource creation.
 
@@ -79,7 +80,8 @@ az networkfabric fabric create \
 | `--mi-user-assigned` | Attach UAMI resource ID(s). | `/subscriptions/.../userAssignedIdentities/uami1` |
 
 
-> **BYoS note:** When UAMI is used for storage access (Bring Your Own Storage), also include `--storage-account-config` to link the UAMI to the storage account identity:
+> [!NOTE]
+> When UAMI is used for storage access (Bring Your Own Storage), also include `--storage-account-config` to link the UAMI to the storage account identity:
 > ```bash
 > --storage-account-config "{storageAccountId:'<storage-account-resource-id>',storageAccountIdentity:{identityType:'UserAssignedIdentity',userAssignedIdentityResourceId:'<uami-resource-id>'}}"
 > ```
@@ -102,7 +104,8 @@ az networkfabric fabric create \
 | `--mi-user-assigned` | Attach UAMI with SAMI retained. | `/subscriptions/.../uami1` |
 
 
-> **BYoS note:** When UAMI is configured for storage access in a SAMI+UAMI topology, include `--storage-account-config` as described in the UAMI-only new-resource section above.
+> [!NOTE]
+> When UAMI is configured for storage access in a SAMI+UAMI topology, include `--storage-account-config` as described in the UAMI-only new-resource section above.
 
 ## For Existing Resources
 
@@ -227,7 +230,8 @@ Provide the following details to support personnel:
 1. Subscription ID
 2. Network Fabric resource ID
 
-> **Note:** Managed Identity Operator role assignment might be required during this operation when identity assignment requires `Microsoft.ManagedIdentity/userAssignedIdentities/assign/action` on attached user-assigned managed identities.
+> [!NOTE]
+> Managed Identity Operator role assignment might be required during this operation when identity assignment requires `Microsoft.ManagedIdentity/userAssignedIdentities/assign/action` on attached user-assigned managed identities.
 
 ## Managed Identity Operator (MIO) Permission Matrix
 
