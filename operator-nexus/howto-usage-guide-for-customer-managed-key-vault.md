@@ -187,7 +187,7 @@ $ az networkfabric fabric rotate-password --resource-group <my-nf-rg> --resource
 
 ### Remove Secret Archive Settings Configuration
 
-Removing Secret Archive Settings configuration will means that future Password Rotations **do not** copy secrets to the Customer Managed Key Vault and after a Password Rotation, **all** secret references in the Network Fabric and Network Device configuration will reference the Key Vault in the NetworkFabric Controller Managed Resource Group.
+Removing Secret Archive Settings configuration will mean that future Password Rotations **do not** copy secrets to the Customer Managed Key Vault and after a Password Rotation, **all** secret references in the Network Fabric and Network Device configuration will reference the Key Vault in the NetworkFabric Controller Managed Resource Group.
 
  
 
