@@ -1977,7 +1977,7 @@
     },
     {
       "source_path": "azure-local/update/update-opt-enable.md",
-      "redirect_url": "/azure/azure-local/update/import-discover-updates-offline-23h2.md",
+      "redirect_url": "/azure/azure-local/update/import-discover-updates-offline-23h2",
       "redirect_document_id": false
     }
   ]
