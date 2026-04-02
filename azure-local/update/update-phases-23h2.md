@@ -104,14 +104,14 @@ Each time you run `Start-SolutionUpdate`, with or without `-PrepareOnly`, you cr
 Get-SolutionUpdate -Id <UpdateResourceId> | Get-SolutionUpdateRun | % Progress | % Steps
 ```
 
-When a preparation run fails, the `UpdateRun` `State` property is set to `Failed` and the Progress step tree contains error details at the step that encountered the problem.
+When a preparation run fails, the `UpdateRun` `State` property is set to `Failed`, and the Progress step tree contains error details at the step that encountered the problem.
 
 ## Installation phase
 
 The update automatically enters the installation phase when:
 
-- Preparation completes. The update finishes the preparation phase and reaches a ready state for installation.
-- Installation is triggered directly. You run `Start-SolutionUpdate` without the `-PrepareOnly` parameter.
+- **Preparation completes**. The update finishes the preparation phase and reaches a ready state for installation.
+- **Installation is triggered directly**. You run `Start-SolutionUpdate` without the `-PrepareOnly` parameter.
 
 ### Start installation
 
@@ -122,7 +122,7 @@ To start a full update that includes both preparation and installation, use:
 Get-SolutionUpdate -Id <UpdateResourceId> | Start-SolutionUpdate
 ```
 
-When the installation begins, the **Update state** changes to **Installing** and a new `UpdateRun` is created. This `UpdateRun` represents the progress of the installation and replaces the `UpdateRun` that previously represented preparation.
+When the installation begins, the **Update state** changes to **Installing**, and a new `UpdateRun` is created. This `UpdateRun` represents the progress of the installation and replaces the `UpdateRun` that previously represented preparation.
 
 ### Installation progress
 
@@ -147,7 +147,7 @@ Because the `UpdateRun` object has a complex structure, we recommend you monitor
 
 :::image type="content" source="media/update-phases-23h2/update-run-structure.png" alt-text="Screenshot of the UpdateRun structure." lightbox="media/update-phases-23h2/update-run-structure.png":::
 
-If you need to monitor the update by using PowerShell, directly monitor the state of the underlying action plan.
+To monitor the update in PowerShell, monitor the state of the underlying action plan directly.
 
 > [!NOTE]
 > Use the `Start-MonitoringActionplanInstanceToComplete` cmdlet only after the system installs the 2503 update. Before 2503, using this cmdlet to monitor update progress can cause failures in the orchestration.
@@ -171,7 +171,7 @@ The update moves through these states during installation:
 | Installed | The update finished installing successfully. |
 | InstallationFailed | One or more steps failed. |
 
-### Diagnose and resume after installation failure
+### Troubleshoot installation failures
 
 When installation fails, review the failure details in the Azure portal or by using the `Get-SolutionUpdateRun` cmdlet. For troubleshooting guidance, see [Troubleshoot updates](update-troubleshooting-23h2.md).
 
