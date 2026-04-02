@@ -159,10 +159,8 @@ az networkfabric tap update-admin-state \
 * NPB NNIs are disabled until a TAP rule is created and enabled.
 
 ## Common errors for NPB
-Error codes can be categorised into those arising either from initial validation, or those arising from later comprehensive validation.
 
-### Initial Validation Errors
-**ErrorCode: ResourceCreationValidateFailed**
+### ErrorCode: ResourceCreationValidateFailed
 
 | Error Message                                                                                | User Action                                                                  |
 | --------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
@@ -173,7 +171,7 @@ Error codes can be categorised into those arising either from initial validation
 | Network tap creation failed as the Administrative state is Enabled in the request payload     | Fix the request payload and retry the operation.                             |
 | Network tap creation failed as the network fabric resource is in Administrative locked state. | Remove the lock on fabric before proceeding with the tap creation operation. |
 
-**ErrorCode: ResourcePatchValidateFailed**
+### ErrorCode: ResourcePatchValidateFailed
 
 | Error Message                                                                                      | User Action                                                          |
 | --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
@@ -183,20 +181,20 @@ Error codes can be categorised into those arising either from initial validation
 | Network tap DOWNGRADE patch failed as the request payload did not satisfy the patch schema          | Fix the request following the error message and retry the operation. |
 | Network tap patch failed as the api request is not valid                                            | Fix the request following the error message and retry the operation. |
 
-**ErrorCode: ResourceDeletionValidateFailed**
+### ErrorCode: ResourceDeletionValidateFailed
 
 | Error Message  | User Action                                                                  |
 | -------------------------------- | -------------------------------------------- |
 | Network tap deletion failed as the network fabric resource is in Administrative locked state. | Remove the lock on fabric before proceeding with the tap deletion operation. |
 
-**ErrorCode: ResourcePostActionFailed**
+### ErrorCode: ResourcePostActionFailed
 
 | Error Message                                                                | User Action                                                                        |
 | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
 | Network tap POST action failed as the action is not supported for Network tap | Check if the POST action is allowed on the tap resource for the given api-version. |
 
 
-### Comprehensive Validation Errors
+### Other Error Codes
 | ErrorCode                             | Error Message                                                                                                                 | User Action                                                                                                                |
 | ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | NFNPBIsdConfigError                   | Failed to ProcessNPBConfig due to: \<err> for device: \<device>                                                               | Make sure L3 ISD payload is free from validation errors.                                                                   |
@@ -213,7 +211,7 @@ Error codes can be categorised into those arising either from initial validation
 | GNMI GET failed \<err>                | GNMI GET failed: \<err>                                                                                                       | Failure in retrieving configuration from the device. Please check if device is connected to azure or reach out to support. |
 
 
-**ErrorCode: BadRequest**
+### ErrorCode: BadRequest
 
 | Error Message                                                                                                                                                              | User Action                                                                                                                                 |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -279,7 +277,7 @@ Error codes can be categorised into those arising either from initial validation
 | Network tap resync post action failed as the tap state is not valid for this action.                                                                                        | For Resync the tap resource should be in Enabled Admin State, Succeeded ProvisionState and Accepted Config state                            |
 
 
-**ErrorCode: ResourceLocked**
+### ErrorCode: ResourceLocked
 
 | Error Message                                                                                     | User Action                                                                       |
 | -------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
@@ -288,16 +286,14 @@ Error codes can be categorised into those arising either from initial validation
 | Network tap rule delete failed as the network fabric resource is in Administrative locked state.   | Remove the lock on fabric before proceeding with the tap rule delete operation.   |
 | Network tap rule resync failed as the network fabric resource is in Administrative locked state.   | Remove the lock on fabric before proceeding with the tap rule resync operation.   |
 
-**ErrorCode: InvalidInput**
+### ErrorCode: InvalidInput*
 
 | Error Message                                                                          | User Action                                                                                                          |
 | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | Network tap creation failed as the referenced destination resource is of invalid type. | Make sure the destination resource type is one of the following : [IsolationDomain, Direct] and retry the operation. |
 | Network tap patch failed as the referenced destination resource is of invalid type.    | Make sure the destination resource type is one of the following : [IsolationDomain, Direct] and retry the operation. |
 
-
-### Other Errors
-**ErrorCode: Internal Server Error**
+### ErrorCode: Internal Server Error
 
 | Error Message                                                                                                | User Action                                                                   |
 | ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
@@ -317,7 +313,7 @@ Error codes can be categorised into those arising either from initial validation
 | Network tap post action failed as the internal request to get the associated NPB resource failed                                                                            | Retry the operation. If the error persists, contact Microsoft support                                                                              |
 | Network tap post action failed as the internal request to get the associated Network fabric resource failed                                                                 | Retry the operation. If the error persists, contact Microsoft support                                                                              |
 
-**ErrorCode: TooManyRequests**
+### ErrorCode: TooManyRequests
 
 | Error Message                                                                                                                        | User Action                   |
 | ------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
