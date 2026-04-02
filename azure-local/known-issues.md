@@ -44,7 +44,7 @@ The following table lists the fixed issues in this release:
 |Feature  |Issue    |Comments |
 |---------|---------|---------|
 | Deployment <!--37166210--> | Fixed issue in environment validator that blocked deployment when an overlapping IP space with ARB was found. | |
-| Update <!--37292238--> | Fixed issue that causes update to fail in some scenarios because of a timeout when updating Defender Antivirus. | |
+| Update <!--37292238--> | Fixed issue that caused update to fail in some scenarios because of a timeout when updating Defender Antivirus. | |
 | Update <!--37151259--> | Fixed issue with an update health check related to storage health that would incorrectly prevent update to start. | | 
 | Azure Local VMs <!--36356595--> | Fixed issue where infrastructure logical network details didn't display DNS server and VM switch information.  | |
 | Azure Local VMs <!--36958790--> | Fixed issue where the L4* GPU wasn't functional.  | |
