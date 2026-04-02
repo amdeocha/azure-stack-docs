@@ -31,11 +31,11 @@ Each stage produces an `UpdateRun` resource that records step-by-step progress, 
 
 1. Trigger preparation (optional)
 
-    Start the preparation phase independently by running `Start-SolutionUpdate -PrepareOnly`. This step downloads and validates update content and runs health checks without starting installation. Use it to pre‑stage updates or validate cluster readiness before a maintenance window.
+    Start the preparation phase independently by running `Start-SolutionUpdate -PrepareOnly`. This step downloads and validates update content and runs health checks without starting installation. Use it to pre-stage updates or validate cluster readiness before a maintenance window.
 
 1. Meet prerequisites
 
-    Before preparation, the update might be in an `AdditionalContentRequired` state. This state indicates the update package requires hardware vendor content. This applies to Solution Builder Extension (SBE) updates and combined Solution plus SBE updates. The installed SBE package from the hardware vendor doesn't support automatic download of that content.
+    Before preparation, the update might be in an `AdditionalContentRequired` state. This state indicates the update package requires hardware vendor content. This requirement applies to Solution Builder Extension (SBE) updates and combined Solution plus SBE updates. The installed SBE package from the hardware vendor doesn't support automatic download of that content.
 
     If the update is in the `AdditionalContentRequired` state, you must import the content before you can begin preparation or installation. For more information, see [Update via PowerShell](update-via-powershell-23h2.md).
 
@@ -70,19 +70,19 @@ If validation or extraction fails, the `UpdateRun` records the error and the Upd
 
 ### Health check
 
-Before installation, pre-update health checks run on the cluster. These checks validate that the cluster is in a healthy state. They also identify any issues that could interfere with a successful installation.
+Before installation, the cluster runs pre-update health checks. These checks validate that the cluster is in a healthy state. They also identify any issues that could interfere with a successful installation.
 
-Each health check has an assigned severity:
+Each health check has an assigned severity level:
 
 | Severity | Effect |
 | --- | --- |
 | **Critical** | Blocks the update. You must remediate these issues before installation can proceed. |
-| **Warning** | Blocks the update by default. You can override these issues with `Start-SolutionUpdate -IgnoreWarnings`. |
+| **Warning** | Blocks the update by default. You can override these issues by using `Start-SolutionUpdate -IgnoreWarnings`. |
 | **Informational** | Advisory only. Doesn't block installation. |
 
-If the update was started in **prepare-only** mode, the Update transitions to the `ReadyToInstall` state on health check success. If critical or warning failures are detected (when `-IgnoreWarnings` isn't specified), the status becomes `HealthCheckFailed`.
+If you start the update in **prepare-only** mode, the Update changes to the `ReadyToInstall` state when the health checks pass. If the health checks find critical or warning issues (and you don't specify `-IgnoreWarnings`), the status becomes `HealthCheckFailed`.
 
-You can inspect health check results on the update object using:
+You can inspect health check results on the update object by using:
 
 ```powershell
 # View health check results
@@ -91,11 +91,13 @@ Where-Object { ($_.Status -ne "Success") -and ($_.Severity -ne "Informational") 
 Format-List Title, Status, Severity, Description, Remediation
 ```
 
-For help with troubleshooting health check failures, see [Troubleshoot updates](update-troubleshooting-23h2.md).
+For help troubleshooting health check failures, see [Troubleshoot updates](update-troubleshooting-23h2.md).
 
 ## Monitor preparation using Get-SolutionUpdateRun
 
-Every call to `Start-SolutionUpdate` (with or without `-PrepareOnly`) creates an `UpdateRun` resource. You can retrieve the specific step details of preparation using:
+Monitor the preparation phase using the `Get-SolutionUpdateRun` cmdlet.
+
+Each time you run `Start-SolutionUpdate`, with or without `-PrepareOnly`, you create an `UpdateRun` resource. To retrieve the preparation step details, use:
 
 ```powershell
 # Get the most recent update run for an update
@@ -106,7 +108,10 @@ When a preparation run fails, the `UpdateRun` `State` property is set to `Failed
 
 ## Installation phase
 
-After preparation completes, or when `Start-SolutionUpdate` is called without `-PrepareOnly`, the update enters the installation phase.
+The update automatically enters the installation phase when:
+
+- Preparation completes. The update finishes the preparation phase and reaches a ready state for installation.
+- Installation is triggered directly. You run `Start-SolutionUpdate` without the `-PrepareOnly` parameter.
 
 ### Start installation
 
@@ -117,11 +122,11 @@ To start a full update that includes both preparation and installation, use:
 Get-SolutionUpdate -Id <UpdateResourceId> | Start-SolutionUpdate
 ```
 
-When the installation begins, the **Update state** transitions to **Installing** and a new `UpdateRun` is created that represents the progress of the installation, replacing the `UpdateRun` that previously represented preparation.
+When the installation begins, the **Update state** changes to **Installing** and a new `UpdateRun` is created. This `UpdateRun` represents the progress of the installation and replaces the `UpdateRun` that previously represented preparation.
 
-### `UpdateRun` installation progress
+### Installation progress
 
-During installation, the `UpdateRun`'s `Progress` property contains the full action plan execution tree. This is a hierarchical structure of `Step` objects where each step represents a stage, role, or individual task in the update.
+During installation, the `UpdateRun` `Progress` property contains the full action plan execution tree. This property is a hierarchical structure of `Step` objects where each step represents a stage, role, or individual task in the update.
 
 Each step in the progress tree exposes the following properties:
 
@@ -138,14 +143,14 @@ Each step in the progress tree exposes the following properties:
 
 ### Monitor installation progress
 
-Due to the complex structure of the `UpdateRun` object, monitor update installation status via the Azure portal.
+Because the `UpdateRun` object has a complex structure, we recommend you monitor update installation status through the Azure portal.
 
 :::image type="content" source="media/update-phases-23h2/update-run-structure.png" alt-text="Screenshot of the UpdateRun structure." lightbox="media/update-phases-23h2/update-run-structure.png":::
 
-If you need to monitor the update using PowerShell, directly monitor the state of the underlying action plan.
+If you need to monitor the update by using PowerShell, directly monitor the state of the underlying action plan.
 
 > [!NOTE]
-> The `Start-MonitoringActionplanInstanceToComplete` cmdlet should only be used after the 2503 update is installed on the system. Before 2503, using this cmdlet to monitor update progress can introduce failures in the orchestration.
+> Use the `Start-MonitoringActionplanInstanceToComplete` cmdlet only after the system installs the 2503 update. Before 2503, using this cmdlet to monitor update progress can cause failures in the orchestration.
 
 ```powershell
 # Get the action plan instance ID from the update run, then monitor
@@ -154,11 +159,11 @@ $id = ($run.ResourceId -split '/')[-1]
 Start-MonitoringActionplanInstanceToComplete -actionPlanInstanceID $id
 ```
 
-This provides real-time console output that refreshes automatically. Press **Ctrl+C** to exit the monitor without stopping the update.
+This command provides real-time console output that refreshes automatically. Press **Ctrl+C** to exit the monitor without stopping the update.
 
-### Installation state transitions
+### Installation state changes
 
-The Update moves through these states during installation:
+The update moves through these states during installation:
 
 | State | Meaning |
 | --- | --- |
@@ -168,9 +173,9 @@ The Update moves through these states during installation:
 
 ### Diagnose and resume after installation failure
 
-When installation fails, review the failure details in the Azure portal or via `Get-SolutionUpdateRun`. For troubleshooting guidance, see [Troubleshoot updates](update-troubleshooting-23h2.md).
+When installation fails, review the failure details in the Azure portal or by using the `Get-SolutionUpdateRun` cmdlet. For troubleshooting guidance, see [Troubleshoot updates](update-troubleshooting-23h2.md).
 
-After you review and mitigate the failure, or determine it's transient, resume the update from the Azure portal or using the `Start-SolutionUpdate` cmdlet:
+After you review and mitigate the failure, or determine it's transient, resume the update from the Azure portal or by using the `Start-SolutionUpdate` cmdlet:
 
 ```powershell
 Get-SolutionUpdate | where State -eq "InstallationFailed" | Start-SolutionUpdate
