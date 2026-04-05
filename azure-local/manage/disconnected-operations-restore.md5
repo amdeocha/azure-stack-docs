@@ -75,7 +75,7 @@ To trigger and monitor the restore, follow these steps:
 
     Here's an example output:
 
-    :::image type="content" source="media/disconnected-operations/back-up-restore/Wait-ApplianceRestore.png" alt-text="Screenshot of Wait-ApplianceRestore command output." lightbox=" ./media/disconnected-operations/back-up-restore/Wait-ApplianceRestore.png":::
+    :::image type="content" source="media/disconnected-operations/back-up-restore/wait-appliancerestore.png" alt-text="Screenshot of Wait-ApplianceRestore command output." lightbox=" ./media/disconnected-operations/back-up-restore/wait-appliancerestore.png":::
 
 1. Restore Completion - After a few hours, the Restore operation will complete, the Status can be checked using the below command
 
@@ -85,7 +85,7 @@ To trigger and monitor the restore, follow these steps:
 
     Here's an example output:
 
-    :::image type="content" source="media/disconnected-operations/back-up-restore/Get-ApplianceRestore.png" alt-text="Screenshot of the Get-ApplianceRestore command output." lightbox=" ./media/disconnected-operations/back-up-restore/Get-ApplianceRestore.png":::
+    :::image type="content" source="media/disconnected-operations/back-up-restore/get-appliancerestore.png" alt-text="Screenshot of the Get-ApplianceRestore command output." lightbox=" ./media/disconnected-operations/back-up-restore/get-appliancerestore.png":::
 
 
 ## Important – Post restore Environment Mismatch
