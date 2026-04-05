@@ -4,7 +4,7 @@ description: This article provides guidance on the Support Diagnostic Tool for A
 author: alkohli
 ms.author: alkohli
 ms.topic: how-to
-ms.date: 05/08/2025
+ms.date: 04/05/2026
 ms.subservice: hyperconverged
 ---
 
@@ -55,7 +55,7 @@ Update-Module -Name Microsoft.AzureStack.HCI.CSSTools
 ```
 
 >[!NOTE]
->When you import the module, it attempts to automatically update from PowerShell gallery. You can also update manually using methods below.
+>When you import the module, it attempts to automatically update from PowerShell gallery. You can also update manually using the following methods.
 
 Ensure that you have the latest module loaded into the current runspace by removing and importing the module.
 
@@ -65,7 +65,7 @@ Import-Module -Name Microsoft.AzureStack.HCI.CSSTools
 ```
 
 >[!NOTE]
->Ensure all machines within Azure Local have been updated to use the same version. Remove existing PSSessions to ensure the correct module version is loaded into the remote runspace.
+>Ensure all machines within Azure Local are updated to use the same version. Remove existing PSSessions to ensure the correct module version is loaded into the remote runspace.
 
 ## Use the Azure Local Support Diagnostic Tool
 
@@ -122,7 +122,7 @@ Invoke-AzsSupportDiagnosticCheck -Component <Component>
 
 To troubleshoot Azure Local, run the following commands:
 
-### For deployment issues
+### Deployment issues
 
 To generate a detailed report about your deployment, including successfully executed steps, skipped steps, and error details, run the following command:
 
@@ -130,13 +130,13 @@ To generate a detailed report about your deployment, including successfully exec
 Get-AzsSupportEceDeploymentDetails
 ```
 
-### For update or upgrade issues
+### Update or upgrade issues
 
 ```powershell
 Get-AzsSupportEceUpdateDetails
 ```
 
-### For storage issues
+### Storage issues
 
 ```powershell
 Start-AzsSupportStorageDiagnostic
@@ -144,7 +144,7 @@ Start-AzsSupportStorageDiagnostic
 
 For complete guidance on troubleshooting storage related issues, refer to [Troubleshooting-Storage-With-Support-Diagnostics-Tool](https://github.com/Azure/AzureLocal-Supportability/blob/main/TSG/Storage/Troubleshooting-Storage-With-Support-Diagnostics-Tool.md).
 
-### For registration issues
+### Registration issues
 
 ```powershell
 Invoke-AzsSupportDiagnosticCheck -Component Registration
@@ -202,7 +202,7 @@ Successfully created archive C:\temp\6c5a4685-6e32-4b68-aeec-05475f8d6c6f\log-co
 Data collection done . Please upload the file to the Microsoft Workspace.
 ```
 
-### For base Azure Local system issues
+### Base Azure Local system issues
 
 ```powershell
 Invoke-AzsSupportDiagnosticCheck -Component BaseSystem
@@ -245,7 +245,7 @@ Afterwards, a comprehensive overview of the different components that are requir
 
 To collect data, refer to the following two example scenarios:
 
-### For automatic data collection
+### Automatic data collection
 
 ```powershell
 New-AzsSupportDataBundle -Component OS
@@ -253,7 +253,7 @@ New-AzsSupportDataBundle -Component OS
 Data collection done C:\temp\Azs.Support\XXXXXXX\SupportDataBundle-XX-XX_XX-XX-XXXX.zip . Please upload the file to the Microsoft Workspace
 ```
 
-### For manual data collection
+### Manual data collection
 
 ```powershell
 $ClusterCommands = @()
