@@ -80,7 +80,7 @@ The following table compares the workloads and benefits of Azure Local and Windo
 | Extended Security Updates (ESUs) for Windows Server | Included | Purchased separately and applied via Azure Arc or Multiple Activation Keys (MAKs) manually applied to every server |
 | VMware migration method | [Azure Migrate](../migrate/migrate-vmware-migrate.md) | - [System Center VMM](/system-center/vmm/vm-convert-vmware)<br> - [VM Conversion (preview)](/windows-server/manage/windows-admin-center/use/migrate-vmware-to-hyper-v) |
 
-<sup>1</sup>AKS enabled by Azure Arc architecture on Windows Server is being retired in stages between March 2026 and March 2028. For more information, see [Announcing the retirement of AKS enabled by Azure Arc on Windows Server](../../AKS-Arc/aks-windows-server-retirement.md).
+<sup>1</sup>AKS enabled by Azure Arc architecture on Windows Server is being retired in stages between March 2026 and March 2028. For more information, see [Announcing the retirement of AKS enabled by Azure Arc on Windows Server](../../aksarc/aks-windows-server-retirement.md).
 
 ## Compare technical features
 
