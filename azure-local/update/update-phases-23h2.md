@@ -29,15 +29,18 @@ Each stage produces an `UpdateRun` resource that records step-by-step progress, 
 
 ## Preparation workflow
 
-1. Trigger preparation (optional)
-
-    Start the preparation phase independently by running `Start-SolutionUpdate -PrepareOnly`. This step downloads and validates update content and runs health checks without starting installation. Use it to pre-stage updates or validate cluster readiness before a maintenance window.
-
 1. Meet prerequisites
 
     Before preparation, the update might be in an `AdditionalContentRequired` state. This state indicates the update package requires hardware vendor content. This requirement applies to Solution Builder Extension (SBE) updates and combined Solution plus SBE updates. The installed SBE package from the hardware vendor doesn't support automatic download of that content.
 
     If the update is in the `AdditionalContentRequired` state, you must import the content before you can begin preparation or installation. For more information, see [Update via PowerShell](update-via-powershell-23h2.md).
+
+1. Trigger update (optional)
+
+    The preparation phase is triggered as part of starting every update; however, you have the option to independently run the preparation without also triggering the installation phase. For more information, see the [Installation phase](./update-phases-23h2.md#installation-phase).
+
+    - To only perform the [Preparation Phase](./update-phases-23h2.md#preparation-phase), start the update by running `Start-SolutionUpdate -PrepareOnly`. This step downloads and validates update content and runs health checks without starting the installation. Use it to pre-stage updates or validate cluster readiness before a maintenance window.
+    - To perform both the [Preparation Phase](./update-phases-23h2.md#preparation-phase) and the [Installation phase](./update-phases-23h2.md#installation-phase), start the update by running `Start-SolutionUpdate`.
 
 1. Run preparation phases
 
@@ -54,7 +57,7 @@ During this phase, the Update object transitions to the `Downloading` state. On 
 
 #### SBE download connector (if applicable)
 
-Some SBE and solution updates require extra content from the hardware vendor. If the SBE provides a download connector, the Update Service uses it to handle part of the download:
+Any update that includes an SBE update requires extra content from the hardware vendor. If the SBE provides a download connector, the Update Service uses it to handle part of the download:
 
 - The Update Service checks whether the installed SBE supports a download connector.
 - If supported, an Orchestrator action plan invokes the SBE download action to retrieve hardware vendor packages such as firmware and drivers.
@@ -80,7 +83,7 @@ Each health check has an assigned severity level:
 | **Warning** | Blocks the update by default. You can override these issues by using `Start-SolutionUpdate -IgnoreWarnings`. |
 | **Informational** | Advisory only. Doesn't block installation. |
 
-If you start the update in **prepare-only** mode, the Update changes to the `ReadyToInstall` state when the health checks pass. If the health checks find critical or warning issues (and you don't specify `-IgnoreWarnings`), the status becomes `HealthCheckFailed`.
+If you start the update in `-PrepareOnly` mode, the Update changes to the `ReadyToInstall` state when the health checks pass. If the health checks find critical or warning issues (and you don't specify `-IgnoreWarnings`), the status becomes `HealthCheckFailed`.
 
 You can inspect health check results on the update object by using:
 
@@ -108,10 +111,12 @@ When a preparation run fails, the `UpdateRun` `State` property is set to `Failed
 
 ## Installation phase
 
-The update automatically enters the installation phase when:
+The update is able to enter the installation phase when you run `Start-SolutionUpdate` without the `-PrepareOnly` parameter.
 
-- **Preparation completes**. The update finishes the preparation phase and reaches a ready state for installation.
-- **Installation is triggered directly**. You run `Start-SolutionUpdate` without the `-PrepareOnly` parameter.
+When you start the update this way, installation begins:
+
+- **Immediately** - if you have recently executed the preparation phase and the update was already in the `ReadyToInstall` state.
+- **After preparation completes** - if the the update wasn't already prepared and is only in the `Ready` state.
 
 ### Start installation
 
