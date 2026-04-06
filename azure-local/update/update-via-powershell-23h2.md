@@ -538,7 +538,7 @@ To resume an update that failed earlier because update readiness checks are in a
 Get-SolutionUpdate -Id <ResourceId>  | Start-SolutionUpdate -IgnoreWarnings    
 ```
 
-For help troubleshooting other update run problems, see [Troubleshoot updates](./update-troubleshooting-23h2.md).
+For help with troubleshooting other update run problems, see [Troubleshoot updates](./update-troubleshooting-23h2.md).
 
 ## Step 8: Verify the installation
 
