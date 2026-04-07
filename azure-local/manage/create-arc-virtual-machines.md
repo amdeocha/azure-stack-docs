@@ -90,7 +90,7 @@ To create a VM on your Azure Local instance, follow these steps.
 
 > [!NOTE]
 > - Two DVD drives are created and used in Azure Local VMs during VM provisioning. The ISO files used during provisioning are removed after you successfully create the VM. However, you might see the empty drives visible for the VM.
-> - To delete these drives in a Windows VM, use Device Manager to uninstall the drives. Depending on the flavor of Linux that you use, you can also delete them for Linux VMs.
+    > - To delete these drives in a Windows VM, use Device Manager to uninstall the drives. Depending on the flavor of Linux that you use, you can also delete them for Linux VMs.
 >
 > - When creating a VM resource that requires referring to another resource (disk, NIC, image), you need to pass the full resource ID if that resource is in a different resource group than the targeted one.
 
