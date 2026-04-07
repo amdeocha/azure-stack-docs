@@ -216,11 +216,11 @@
           href: how-to-validate-cables.md
         - name: Creating Access Control Lists (ACLs)
           href: howto-create-access-control-list.md
-        - name: Apply ACLs to Resources
+        - name: Apply ACLs to resources
           href: howto-apply-access-control-list.md
-        - name: Updating ACL on Resources
+        - name: Updating ACL on resources
           href: howto-update-access-control-list.md
-        - name: Delete ACLs associated with Resources
+        - name: Delete ACLs associated with resources
           href: howto-delete-access-control-list.md
         - name: How to Configure Diagnostic Settings and Monitor Configuration Differences in Nexus Network Fabric
           href: howto-configure-diagnostic-settings-monitor-configuration-differences.md
