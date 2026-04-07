@@ -5,7 +5,7 @@ author: rbhupatiraju
 ms.author: rbhupatiraju
 ms.service: azure-operator-nexus
 ms.topic: how-to
-ms.date: 04/23/2024
+ms.date: 04/07/2026
 ms.custom: template-how-to, devx-track-azurecli
 ---
 
@@ -55,7 +55,7 @@ az networkfabric fabric update  --resource-group "<resource-group-name>" --resou
 |------------------|------------------------------------------------|
 |`--control-plane-acls` | Apply a control plane ACL by specifying its resource ID. This parameter only applies to ACLs applied to the network fabric. |
 
-#### Apply ingress and egress ACLs to an NNI or L3 External Network
+#### Apply ingress and egress ACLs to an NNI or L3 external network
 Use the following command to apply both an ingress ACL and an egress ACL to an NNI:
 
 ```azurecli
@@ -73,7 +73,7 @@ az networkfabric externalnetwork update --resource-group "<resource-group-name>"
 
 
 
-#### Apply only an ingress ACL to an NNI or L3 External Network
+#### Apply only an ingress ACL to an NNI or L3 external network
 Use the following command to apply an ingress ACL to an NNI:
 
 ```azurecli
@@ -89,13 +89,13 @@ az networkfabric externalnetwork update --resource-group "<resource-group-name>"
 |-------------------|--------------------------------------------------|
 | `--ingress-acl-id` | Apply the ACL as ingress by specifying its resource ID.  |
 
-#### Apply only an egress ACL to an NNI or L3 External Network
+#### Apply only an egress ACL to an NNI or L3 external network
 Use the following command to apply an ingress ACL to an NNI:
 
 ```azurecli
 az networkfabric nni update --resource-group "example-rg" --resource-name "<nni-name>" --fabric "<fabric-name>" --egress-acl-id "<egress-acl-resource-id>"
 ```
-Use the following command to applu an egress ACL to an L3 external network:
+Use the following command to apply an egress ACL to an L3 external network:
 ```azurecli
 az networkfabric externalnetwork update --resource-group "<resource-group-name>" --resource-name "<externalNetwork-name>" --l3domain "<l3domain-name>"  --peering-option "OptionA" --option-a-properties egress-acl-id="<egress-acl-resource-id>"
 ```
