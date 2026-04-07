@@ -178,7 +178,6 @@
     ".openpublishing.redirection.aks.json",
     ".openpublishing.redirection.aks-edge.json",
     ".openpublishing.redirection.azure-local.json",
-    ".openpublishing.redirection.hub-hotfixes.json",
-    ".openpublishing.redirection.operator-nexus.json"
+    ".openpublishing.redirection.hub-hotfixes.json"
   ]
 }
