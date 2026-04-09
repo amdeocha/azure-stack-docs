@@ -25,7 +25,7 @@ The solution includes a validated reference architecture with certified hardware
 
 Organizations choose Microsoft 365 Local for several key reasons:
 
-- Modernize existing on‑premises Exchange Server, SharePoint Server, or Skype for Business Server deployments by migrating them onto Microsoft’s Sovereign Private Cloud — enhancing sovereignty controls, security posture, and operational consistency while retaining full data residency.
+- Modernize existing on-premises Exchange Server, SharePoint Server, or Skype for Business Server deployments by migrating to a Sovereign Private Cloud that enhances security posture and operational consistency while retaining full data residency.
 - Support disaster recovery and business continuity by maintaining Microsoft 365 Local on‑premises as a fallback environment — enabling organizations to operate in the public cloud under normal conditions with the option to continue locally during crisis scenarios.
 - Support disaster recovery and business continuity by using Microsoft 365 Local as a fallback environment, enabling organizations to operate in the public cloud with the option to continue locally during crisis scenarios.
 - Gain the agility and simplicity of cloud management within your own data center by implementing Sovereign Private Cloud with Azure-consistent management.
