@@ -35,7 +35,7 @@ Before initiating the Network Fabric runtime upgrade, Users have the option to v
 
 Starting with the 2604.1 release, an opt‑in enforcement mechanism is available to mandate pre‑upgrade validations. This enforcement is enabled through a support ticket and is governed by a fabric instance–level persistent feature flag.
 
-Validation results are stored in the customer managed storage account attached to Network fabric resource at <fabricname>/UpgradeValidations/fabric_prechecks_{timestamp}.json.
+Validation results are stored in the customer managed storage account attached to Network fabric resource at fabricname/UpgradeValidations/fabric_prechecks_{timestamp}.json.
 
 When the feature flag is enabled, any pre‑upgrade validation failure will block the upgrade until the identified issues are remediated.
 
