@@ -1,6 +1,6 @@
 ---
-title: Restore for Disconnected Operations for Azure Local
-description: Learn how to Restore an Azure Local environments running disconnected. Configure parameters and trigger restore.
+title: Restore Azure Local Disconnected Environments
+description: Learn how to restore an Azure Local environment running in disconnected mode. Configure restore parameters and trigger a restore operation.
 author: ronmiab
 ms.author: robess
 ms.date: 04/03/2026
@@ -19,27 +19,27 @@ This article explains the restore process for disconnected operations for Azure 
 For more information, see [Disconnected operations for Azure Local](/azure/azure-local/manage/disconnected-operations-overview?view=azloc-2602&preserve-view=true).
 
 > [!IMPORTANT]
-> The restore operation support restoring the backup to the same version of Azure local disconnected environment.
+> The restore operation supports restoring the backup to the same version of Azure local disconnected environment.
 
 ## Overview
 
-The backup feature currently backs up the control plane VM data only. Associated workloads or configured clusters aren't included in the backup. The restore functionality will restore the control plane data from the backup. So, ensure that the same version of Azure local disconnected is configured where the backup will be restored onto.
+The backup feature currently backs up only the control plane VM data. It doesn't include associated workloads or configured clusters. The restore functionality restores the control plane data from the backup. So, ensure that you configure the same version of Azure local disconnected where you restore the backup.
 
 ## Why backup and restore operations?
 
-Backup capability is critical because the Azure Local with disconnected operations virtual machine (VM) acts as the control plane. It stores authoritative metadata for subscriptions, resource groups, policies, and connected Azure Local resources. Any corruption or loss of this control plane disrupts the entire environment. Regular backups protect against catastrophic failures, infrastructure loss, or misconfigurations by capturing the control plane state at specific points in time. The restore functionality helps to get back the environment to the state which was at the time of backup.
+Backup capability is critical because the Azure Local with disconnected operations virtual machine (VM) acts as the control plane. It stores authoritative metadata for subscriptions, resource groups, policies, and connected Azure Local resources. Any corruption or loss of this control plane disrupts the entire environment. Regular backups protect against catastrophic failures, infrastructure loss, or misconfigurations by capturing the control plane state at specific points in time. The restore functionality helps you get back the environment to the state which was at the time of backup.
 
 ## Prerequisites
 
 Before you restore your system, complete these prerequisites:
 
-- **Environment Setup:** Ensure that you have a fresh Azure local Disconnected environment that has been setup and the version is same as the backup version as Cross version restores are not supported.
+- **Operator access:** Ensure your identity has the required OperatorRP RBAC role in the Operator subscription.
+
+- **Environment Setup:** Ensure that you have a fresh Azure local Disconnected environment that you set up and that the version matches the backup version. Cross version restores aren't supported.
 
 - **Root Certificate:** For the Restore VM, ensure that the same Root Certificate - Certificate Authority is used for the new VM Creation to ensure the trust.
 
-- **Operator access:** Ensure your identity has the required OperatorRP RBAC role in the Operator subscription.
-
-- **Server Message Block (SMB) share:** The SMB share where backup file to be restored is stored, is accessible from the new environment.
+- **Server Message Block (SMB) share:** The SMB share where the backup file to restore is stored is accessible from the new environment.
 
 - **Decryption key:** The Decryption key that was stored externally is available and need to be provided during the restore process. 
 
@@ -67,7 +67,7 @@ To trigger and monitor the restore, follow these steps:
 
     :::image type="content" source="media/disconnected-operations/back-up-restore/trigger-restore.png" alt-text="Screenshot of the Start-ApplianceRestore command output." lightbox=" ./media/disconnected-operations/back-up-restore/trigger-restore.png":::
 
-1. Track the restore status until it Completes, where status refreshes every 30 seconds.
+1. Track the restore status until it completes, where status refreshes every 30 seconds.
 
     ```powershell
     Wait-ApplianceRestore
@@ -77,8 +77,8 @@ To trigger and monitor the restore, follow these steps:
 
     :::image type="content" source="media/disconnected-operations/back-up-restore/wait-appliancerestore.png" alt-text="Screenshot of Wait-ApplianceRestore command output." lightbox=" ./media/disconnected-operations/back-up-restore/wait-appliancerestore.png":::
 
-1. Restore Completion - After a few hours, the Restore operation will complete, the Status can be checked using the below command
-
+1. Restore Completion - After a few hours, the restore operation completes. You can check the status by using the following command:
+   
     ```powershell
     Get-ApplianceRestore 
     ```
