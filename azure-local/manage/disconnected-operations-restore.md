@@ -41,7 +41,7 @@ Before you restore your system, complete these prerequisites:
 
 - **Server Message Block (SMB) share:** The SMB share where the backup file to restore is stored is accessible from the new environment.
 
-- **Decryption key:** The Decryption key that was stored externally is available and need to be provided during the restore process. 
+- **Decryption key:** The decryption key that you stored externally is available and you need to provide it during the restore process. 
 
 - **Import restore module (required):** Before running any restore cmdlets, import the restore module from your Operations Module by using its full path:
 
