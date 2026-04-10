@@ -35,6 +35,8 @@ Before initiating the Network Fabric runtime upgrade, Users have the option to v
 
 Starting with the 2604.1 release, an opt‑in enforcement mechanism is available to mandate pre‑upgrade validations. This enforcement is enabled through a support ticket and is governed by a fabric instance–level persistent feature flag.
 
+Validation results are stored in the customer managed storage account attached to Network fabric resource at <fabricname>/UpgradeValidations/fabric_prechecks_{timestamp}.json.
+
 When the feature flag is enabled, any pre‑upgrade validation failure will block the upgrade until the identified issues are remediated.
 
 ### Recommended guidance for feature flag (enabled) workflow
@@ -52,7 +54,7 @@ When the feature flag is enabled, any pre‑upgrade validation failure will bloc
 #### User guidance
 - Users must run the complete set of pre‑upgrade validation checks prior to initiating the fabric runtime upgrade.
 
-| Check | Expectation | Automated feature flag workflow  | Post-upgrade check applicable? | Impacted runtime upgrade step (if pre-validation fails) |
+| Check | Expectation | Automated feature flag workflow  | [Post-upgrade](https://learn.microsoft.com/en-us/azure/operator-nexus/howto-upgrade-nexus-fabric?branch=main&branchFallbackFrom=pr-en-us-20479#post-upgrade-validation-steps) check applicable? | Impacted runtime upgrade step (if pre-validation fails) |
 | --- | --- | --- | --- | --- |
 | Check the NFC provisioning state. | Provisioning state must be **Succeeded**. | Yes | No | The Network Fabric upgrade start step fails. |
 | Check the administrative lock status of the Network Fabric resource. | The state must be **Unlocked**. For more: [Azure Operator Nexus: Use the administrative lock or unlock for Network Fabric](./howto-set-administrative-lock-or-unlock-for-network-fabric.md). | Yes | No | The Network Fabric upgrade start step fails. |
