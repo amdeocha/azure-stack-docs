@@ -1,5 +1,5 @@
 ---
-title: Backup for Disconnected Operations for Azure Local
+title: Backup Azure Local Disconnected Environments
 description: Learn how to back up Azure Local environments running disconnected. Configure parameters and trigger backups.
 author: ronmiab
 ms.author: robess
