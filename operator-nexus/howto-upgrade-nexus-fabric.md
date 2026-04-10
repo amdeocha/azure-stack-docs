@@ -41,7 +41,8 @@ When the feature flag is enabled, any pre‑upgrade validation failure will bloc
 
 ### Recommended guidance for feature flag (enabled) workflow
 - Pre‑upgrade validations are enforced during the fabric runtime upgrade start.
-- Users are expected to run incremental validation checks only, as applicable.
+- Users are expected to run incremental validation checks only, as applicable. Please refer to the table below to see 
+the list of incremental validation checks. 
 
 #### User guidance
 - Run targeted incremental validation checks only for areas not covered by the automated pre‑upgrade checks.
@@ -49,7 +50,7 @@ When the feature flag is enabled, any pre‑upgrade validation failure will bloc
 
 ### Recommended guidance for default workflow (feature flag disabled)
 - The fabric upgrade start API does not block or interrupt the upgrade due to missing pre‑upgrade validations.
-- No enhanced validations are performed; user‑initiated validations remain the primary validation mechanism.
+- User‑initiated validations (manual or automated) remain the primary validation mechanism.
 
 #### User guidance
 - Users must run the complete set of pre‑upgrade validation checks prior to initiating the fabric runtime upgrade.
